@@ -1,0 +1,9 @@
+{
+    "git": {
+      "deploymentEnabled": {
+        "noor": false,
+        "sami": false,
+        "urwah": false
+      }
+    }
+  }
