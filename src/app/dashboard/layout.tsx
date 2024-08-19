@@ -33,6 +33,7 @@ import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Sidebar from "@/components/layout/Sidebar"
 import Header from "@/components/layout/Header"
+import Sidebar2 from "@/components/layout/Sidebar2"
 
 export default function DashboardLayout({
     children, // will be a page or nested layout
@@ -119,8 +120,13 @@ export default function DashboardLayout({
           </SheetContent>
         </Sheet>
         <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-          <Sidebar />
-            {children}
+          <Sidebar2 />
+          <div className="flex flex-col">
+          <Header />
+          <div className="mt-32">
+          {children}
+          </div>
+        </div>
         </div>
       </>
     )
