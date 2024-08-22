@@ -103,7 +103,7 @@ export default function Options({ formik, options, setOptions }: any) {
 
 
             {option1 && <Option1 formik={formik} options={options} setOptions={setOptions} setOption1={setOption1} />}
-            {option2 && <p>option2</p>}
+            {option2 && <Option2 formik={formik} options={options} setOptions={setOptions} setOption2={setOption2} />}
             {option3 && <p>option3</p>}
             {option4 && <p>option4</p>}
         </div>
@@ -141,13 +141,25 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
     }
 
     function handleAnswerImageChange(e: any, index: number) {
-        const newAns = [...ans];
-        newAns[index].img = e.target.value;
-        setAns(newAns);
+        const newAns: any = [...ans];
+        // newAns[index].img = e.target.value;
+        // setAns(newAns);
 
         // Update formik values
-        formik.setFieldValue(`option1_ans_img_${index}`, e.target.value);
-        addAnswerField()
+        formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
+
+
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                newAns[index].img = reader.result
+                setAns(newAns);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // addAnswerField()
     }
 
     function addAnswerField() {
@@ -201,10 +213,137 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
 
                             />
 
-                            {/* <Input id="option1_question_image" name="option1_ans_image" type="file"
+                            <Input id="option1_question_image" name="option1_ans_image" type="file"
                                 onChange={(e) => handleAnswerImageChange(e, index)}
 
-                            /> */}
+                            />
+
+                        </div>
+
+
+                    ))}
+                </div>
+
+
+
+
+            </div>
+
+
+
+
+
+
+            <Button type='button' onClick={handleFinished}>Finished</Button>
+        </div>
+    )
+}
+
+function Option2({ formik, options, setOptions, setOption2 }: any) {
+    console.log(formik)
+
+    const [items, setItems] = useState([0, 1, 2, 3])
+
+    const [ans, setAns] = useState([
+        {
+            ans: '',
+            img: '',
+        }
+    ]);
+
+    const [question, setQuestion] = useState("");
+
+    function handleAnswer(e: any) {
+        formik.values.option1_ans = e.target.value
+    }
+
+    function handleAnswerChange(e: any, index: number) {
+        const newAns = [...ans];
+        newAns[index].ans = e.target.value;
+        setAns(newAns);
+
+        // Update formik values
+        formik.setFieldValue(`option1_ans_${index}`, e.target.value);
+        addAnswerField()
+    }
+
+    function handleAnswerImageChange(e: any, index: number) {
+        const newAns: any = [...ans];
+        // newAns[index].img = e.target.value;
+        // setAns(newAns);
+
+        // Update formik values
+        formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
+
+
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                newAns[index].img = reader.result
+                setAns(newAns);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // addAnswerField()
+    }
+
+    function addAnswerField() {
+        // Check if the last answer is not empty
+        if (ans[ans.length - 1].ans.trim() !== '') {
+            setAns([...ans, { ans: '', img: '' }]);
+        }
+    }
+
+    const handleFinished = () => {
+        setOptions((prev: any) => prev.concat({
+            type: '2',
+            question: question,
+            answers: ans
+        }))
+
+        setAns([
+            {
+                ans: '',
+                img: ''
+            }
+        ])
+        setQuestion("")
+        setOption2(false)
+        console.log(options)
+    }
+
+    const controls = useDragControls()
+
+    return (
+        <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
+            <h3>Multiple choice question</h3>
+
+            <div id="option1_question" className="w-60">
+                <Label htmlFor="option1_question">Ask</Label>
+                <Input id="option1_question" name="option1_question" type="text"
+                    onChange={(e) => setQuestion(e.target.value)}
+                    value={question}
+                />
+            </div>
+
+            <div id="option1_ans" className="w-60">
+                <Label htmlFor="option1_ans">Answers</Label>
+                <div className='space-y-2'>
+                    
+                    {ans.map((ans, index: any) => (
+                        <div>
+                            <Input id="option1_question" name="option1_ans" type="text"
+                                onChange={(e) => handleAnswerChange(e, index)}
+                                value={formik.values.option1_ans}
+
+                            />
+
+                            <Input id="option1_question_image" name="option1_ans_image" type="file"
+                                onChange={(e) => handleAnswerImageChange(e, index)}
+
+                            />
 
                         </div>
 

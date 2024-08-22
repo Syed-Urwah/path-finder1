@@ -26,12 +26,25 @@ export default function page() {
         ]
     }]) as any;
 
+    const [mainImage, setImage] = useState<any>(null)
+
+
+    function handleImageChange(e: any) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    }
 
     const formik = useFormik({
         initialValues: {
             product_name: "",
             description: "",
-            image: "",
+            image: "" as any,
         },
         onSubmit: (values) => {
             console.log([values, options])
@@ -63,18 +76,35 @@ export default function page() {
                     <div id="image" className="w-60">
                         <Label htmlFor="picture">
                             Image (5:3)
-                            <div className="w-full bg-gray-300 h-32 flex rounded-sm">
-                                <Image
-                                    src={ImagePlaceHolder}
-                                    alt="image-placeholder"
-                                    width={50}
-                                    className="mx-auto my-auto"
-                                />
-                            </div>
+                            {
+                                mainImage ?
+                                    <div
+                                        style={{
+                                            width: '100px',
+                                            height: '100px',
+                                            backgroundImage: `url(${mainImage})`,
+                                            backgroundSize: 'cover',
+                                            backgroundPosition: 'center',
+                                        }}
+
+                                    >
+                                        {/* Any other content can go inside this div */}
+                                    </div>
+                                    :
+                                    <div className="w-full bg-gray-300 h-32 flex rounded-sm">
+                                        <Image
+                                            src={ImagePlaceHolder}
+                                            alt="image-placeholder"
+                                            width={50}
+                                            className="mx-auto my-auto"
+                                        />
+                                    </div>
+                            }
+
                         </Label>
 
                         <Input id="picture" type="file" name="image" className="hidden"
-                            onChange={formik.handleChange}
+                            onChange={handleImageChange}
                             value={formik.values.image} />
                     </div>
                     <div id="options" className="w-60">
@@ -85,8 +115,11 @@ export default function page() {
                                     <div id="left">
                                         <p className="font-bold text-sm">{option.question}</p>
                                         <div id="answers" className="flex flex-wrap gap-2">
-                                            {option.answers.map((answer: any) => {
-                                                return <p className="bg-gray-400 rounded-sm px-2">{answer.ans}</p>
+                                            {option.answers.map((answer: any, index: number) => {
+                                                const isLast = index === option.answers.length - 1;
+                                                if (!isLast) {
+                                                    return <p className="bg-gray-400 rounded-sm px-2">{answer.ans}</p>
+                                                }
                                             })}
 
                                         </div>
@@ -106,8 +139,26 @@ export default function page() {
                 </form>
 
                 <div id="right" className="w-[500px]">
-                    {formik.values.image && <img src={formik.values.image} width={100} height={100} alt="product-image" />}
+                    {mainImage &&
+                    <div
+                    className="bg-gray-600"
+                    style={{
+                        width: '100%',
+                        height: '288px',
+                        backgroundImage: `url(${mainImage})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat'
+                    }}
 
+                >
+                    {/* Any other content can go inside this div */}
+                </div>
+                
+                    }
+
+                    <h2>{formik.values.product_name}</h2>
+                    <p>{formik.values.description}</p>
                     <iframe src="http://localhost:3000/api/test" width={100}></iframe>
                 </div>
             </div>
