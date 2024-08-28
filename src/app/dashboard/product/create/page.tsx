@@ -132,62 +132,89 @@ export default function Page() {
                 </CardContent>
             </Card>
 
-            {/* New Container with Thick Black Border */}
-            <div className="w-[500px] h-[570px] border-4 border-black bg-white mx-4 flex flex-col rounded-xl">
-
-                <div className="flex flex-col p-4 gap-8">
-                    <div>
-                        <AspectRatio ratio={16 / 9} className="w-full h-full">
-                            <Image
-                                src="/images/img1.jpg"
-                                alt="Your Image Description"
-                                className="rounded-md object-cover"
-                                layout="fill"
+            {/* New Additional Container with Gray Background and White Inner Container */}
+            <div className="w-[500px] h-[800px] border-4 border-black bg-gray-300 mx-4 flex flex-col rounded-xl p-4">
+                <div className="bg-white p-4 rounded-lg">
+                    <AspectRatio ratio={16 / 9} className="w-full h-full">
+                        <Image
+                            src="/images/img1.jpg"
+                            alt="Your Image Description"
+                            className="rounded-md object-cover"
+                            layout="fill"
+                        />
+                    </AspectRatio>
+                    <div className="flex flex-col mt-4 space-y-2">
+                        <p className="text-lg font-semibold font-sans text-base">{formik.values.product_name || "Name"}</p>
+                        <p className="text-sm text-gray-600 font-sans text-base">{formik.values.description || "Description"}</p>
+                    </div>
+                </div>
+                <div className="flex justify-between gap-3 mt-4">
+                    <div className="grid w-full max-w-sm items-center gap-1.5 transition-colors duration-300 hover:bg-gray-200 p-2 rounded-md">
+                        <Label className="font-sans text-base">meters</Label>
+                        <div className="flex justify-between items-center">
+                            <span className="text-sm">0</span>
+                            <Input
+                                type="number"
+                                id="meters"
+                                min="0"
+                                max="1000"
+                                className="w-[50px] text-center border rounded-sm"
                             />
-                        </AspectRatio>
-                        <div className=" flex flex-col ">
-                            <p className="text-lg font-semibold ">{formik.values.product_name || "Name"}</p>
-                            <p className="text-sm text-gray-600 ">{formik.values.description || "Description"}</p>
+                            <span className="text-sm">1000</span>
                         </div>
                     </div>
-                    <div className="flex justify-between gap-3">
-                        <div className="grid w-full max-w-sm items-center gap-1.5">
+                    {/*<div className="grid w-full max-w-sm items-center gap-1.5">
                             <Label>Picture</Label>
                             <Input id="picture" type="text"/>
+                        </div>*/}
+
+                    <div className="grid w-full max-w-sm items-center">
+                        <div className="flex justify-between mb-1">
+                            <span className="text-sm">1</span>
+                            <span className="text-sm">1000</span>
                         </div>
-                        <div className="grid w-full max-w-sm items-center">
-                            <div className="flex justify-between mb-1">
-                                <span className="text-sm">1</span>
-                                <span className="text-sm">1000</span>
-                            </div>
-                            <Slider defaultValue={[1]} max={1000} step={1}/>
+                        <Slider defaultValue={[1]} max={1000} step={1}/>
+                    </div>
+                </div>
+                <div className="mt-4">
+                    <h2 className="text-lg font-semibold mb-2">Choose Height:</h2>
+                    <RadioGroup defaultValue="option-one">
+                        <div className="flex justify-between items-center space-x-2">
+                            <Label className="font-sans font-normal text-base" htmlFor="option-one">5CM</Label>
+                            <RadioGroupItem value="option-one" id="option-one"/>
                         </div>
+                        <div className="flex justify-between items-center space-x-2">
+                            <Label className="font-sans font-normal text-base" htmlFor="option-two">6CM</Label>
+                            <RadioGroupItem value="option-two" id="option-two"/>
+                        </div>
+                        <div className="flex justify-between items-center space-x-2">
+                            <Label className="font-sans font-normal text-base" htmlFor="option-three">7CM</Label>
+                            <RadioGroupItem value="option-three" id="option-three"/>
+                        </div>
+                        <div className="flex justify-between items-center space-x-2">
+                            <Label className="font-sans font-normal text-base" htmlFor="option-four">8CM</Label>
+                            <RadioGroupItem value="option-four" id="option-four"/>
+                        </div>
+                    </RadioGroup>
+                </div>
 
-
-                        {/*<div>*/}
-                        {/*    */}
-                        {/*</div>*/}
+                <div className="mt-4">
+                    <h2 className="text-lg font-semibold mb-2">Select the prices that fit your budget:</h2>
+                    <div className="flex justify-between items-center space-x-2 mb-2">
+                        <Label className="font-sans font-normal text-base" >Under $50</Label>
+                        <Checkbox value="checkbox1" id="checkbox1"/>
                     </div>
-
-                    <div>
-
-                        <RadioGroup defaultValue="option-one">
-                            <div className="flex justify-between items-center space-x-2">
-                                <Label htmlFor="option-one">Option One</Label>
-                                <RadioGroupItem value="option-one" id="option-one"/>
-                            </div>
-                            <div className="flex justify-between items-center space-x-2">
-                                <Label htmlFor="option-two">Option Two</Label>
-                                <RadioGroupItem value="option-two" id="option-two"/>
-                            </div>
-                        </RadioGroup>
+                    <div className="flex justify-between items-center space-x-2 mb-2">
+                        <Label className="font-sans font-normal text-base" >$100 - $200</Label>
+                        <Checkbox value="checkbox2" id="checkbox2"/>
                     </div>
-                    <div className="flex justify-between items-center" >
-                        <Label htmlFor="checkbox1" >Checkbox 1</Label>
-                        <Checkbox id="checkbox1"/>
+                    <div className="flex justify-between items-center space-x-2 mb-2">
+                        <Label className="font-sans font-normal text-base" >$200 - $500</Label>
+                        <Checkbox value="checkbox3" id="checkbox3"/>
                     </div>
                 </div>
             </div>
         </div>
     );
 }
+
