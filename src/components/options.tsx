@@ -6,7 +6,23 @@ import { Plus } from 'lucide-react'
 import Image from 'next/image'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
+import { Switch } from "@/components/ui/switch"
+import { FaEllipsisV } from 'react-icons/fa'; 
+
+
+//import { Toggle } from './ui/toggle'
 import { Reorder, useDragControls } from 'framer-motion'
+
+//////
+
+//import { Bold } from "lucide-react"
+//import { Toggle } from "@/components/ui/toggle"
+//import { Menu, MenuItem } from './ui/dropdown-menu'; 
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,  DropdownMenuLabel,
+    DropdownMenuSeparator, DropdownMenuItem } from './ui/dropdown-menu';
+////////
+
+
 
 export default function Options({ formik, options, setOptions }: any) {
 
@@ -16,6 +32,8 @@ export default function Options({ formik, options, setOptions }: any) {
     const [option2, setOption2] = useState(false);
     const [option3, setOption3] = useState(false);
     const [option4, setOption4] = useState(false);
+    
+    
 
     console.log(formik)
 
@@ -104,18 +122,17 @@ export default function Options({ formik, options, setOptions }: any) {
 
             {option1 && <Option1 formik={formik} options={options} setOptions={setOptions} setOption1={setOption1} />}
             {option2 && <Option2 formik={formik} options={options} setOptions={setOptions} setOption2={setOption2} />}
-            {option3 && <p>option3</p>}
-            {option4 && <p>option4</p>}
+            {option3 && <Option3 formik={formik} options={options} setOptions={setOptions} setOption3={setOption3} />}
+            {option4 && <Option4 formik={formik} options={options} setOptions={setOptions} setOption4={setOption4} />}
+            
+            
         </div>
     )
 }
 
 
-
 function Option1({ formik, options, setOptions, setOption1 }: any) {
-    console.log(formik)
-
-    const [items, setItems] = useState([0, 1, 2, 3])
+    const [items, setItems] = useState([0, 1, 2, 3]);
 
     const [ans, setAns] = useState([
         {
@@ -126,46 +143,23 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
 
     const [question, setQuestion] = useState("");
 
-    function handleAnswer(e: any) {
-        formik.values.option1_ans = e.target.value
-    }
-
     function handleAnswerChange(e: any, index: number) {
         const newAns = [...ans];
         newAns[index].ans = e.target.value;
         setAns(newAns);
-
-        // Update formik values
         formik.setFieldValue(`option1_ans_${index}`, e.target.value);
-        addAnswerField()
     }
 
     function handleAnswerImageChange(e: any, index: number) {
         const newAns: any = [...ans];
-        // newAns[index].img = e.target.value;
-        // setAns(newAns);
-
-        // Update formik values
-        formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
-
-
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                newAns[index].img = reader.result
+                newAns[index].img = reader.result;
                 setAns(newAns);
             };
             reader.readAsDataURL(file);
-        }
-
-        // addAnswerField()
-    }
-
-    function addAnswerField() {
-        // Check if the last answer is not empty
-        if (ans[ans.length - 1].ans.trim() !== '') {
-            setAns([...ans, { ans: '', img: '' }]);
         }
     }
 
@@ -173,77 +167,81 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
         setOptions((prev: any) => prev.concat({
             type: '1',
             question: question,
-            answers: ans
-        }))
-
-        setAns([
-            {
-                ans: '',
-                img: ''
-            }
-        ])
-        setQuestion("")
-        setOption1(false)
-        console.log(options)
-    }
-
-    const controls = useDragControls()
+            answers: ans,
+        }));
+        setAns([{ ans: '', img: '' }]);
+        setQuestion("");
+        setOption1(false);
+    };
 
     return (
         <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
             <h3>Multiple choice question</h3>
 
-            <div id="option1_question" className="w-60">
+            <div id="option1_question" className="w-60 flex items-center">
                 <Label htmlFor="option1_question">Ask</Label>
-                <Input id="option1_question" name="option1_question" type="text"
+                <Input
+                    id="option1_question"
+                    name="option1_question"
+                    type="text"
                     onChange={(e) => setQuestion(e.target.value)}
                     value={question}
+                    className="ml-2 flex-grow"
                 />
+                {
+
+                   <DropdownMenu>
+    <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+    <DropdownMenuContent>
+        <DropdownMenuLabel>Add description</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+        <div className="flex items-center space-x-2">
+                <Switch id="hide-option" />
+                <Label htmlFor="hide-option">Create variant</Label>
+            </div>
+            </DropdownMenuItem>
+        <DropdownMenuItem>
+            <div className="flex items-center space-x-2">
+                <Switch id="hide-option" />
+                <Label htmlFor="hide-option">Don't show option in config</Label>
+            </div>
+        </DropdownMenuItem>
+        <DropdownMenuItem>To delete</DropdownMenuItem>
+    </DropdownMenuContent>
+                   </DropdownMenu>
+
+                }
             </div>
 
             <div id="option1_ans" className="w-60">
                 <Label htmlFor="option1_ans">Answers</Label>
                 <div className='space-y-2'>
-                    
                     {ans.map((ans, index: any) => (
-                        <div>
-                            <Input id="option1_question" name="option1_ans" type="text"
+                        <div key={index}>
+                            <Input
+                                id={`option1_ans_${index}`}
+                                name={`option1_ans_${index}`}
+                                type="text"
                                 onChange={(e) => handleAnswerChange(e, index)}
-                                value={formik.values.option1_ans}
-
+                                value={formik.values[`option1_ans_${index}`] || ''}
                             />
-
-                            <Input id="option1_question_image" name="option1_ans_image" type="file"
+                            <Input
+                                id={`option1_ans_img_${index}`}
+                                name={`option1_ans_img_${index}`}
+                                type="file"
                                 onChange={(e) => handleAnswerImageChange(e, index)}
-
                             />
-
                         </div>
-
-
                     ))}
                 </div>
-
-
-
-
             </div>
-
-
-
-
-
 
             <Button type='button' onClick={handleFinished}>Finished</Button>
         </div>
-    )
+    );
 }
-
 function Option2({ formik, options, setOptions, setOption2 }: any) {
-    console.log(formik)
-
-    const [items, setItems] = useState([0, 1, 2, 3])
-
     const [ans, setAns] = useState([
         {
             ans: '',
@@ -253,46 +251,23 @@ function Option2({ formik, options, setOptions, setOption2 }: any) {
 
     const [question, setQuestion] = useState("");
 
-    function handleAnswer(e: any) {
-        formik.values.option1_ans = e.target.value
-    }
-
     function handleAnswerChange(e: any, index: number) {
         const newAns = [...ans];
         newAns[index].ans = e.target.value;
         setAns(newAns);
-
-        // Update formik values
-        formik.setFieldValue(`option1_ans_${index}`, e.target.value);
-        addAnswerField()
+        formik.setFieldValue(`option2_ans_${index}`, e.target.value);
     }
 
     function handleAnswerImageChange(e: any, index: number) {
         const newAns: any = [...ans];
-        // newAns[index].img = e.target.value;
-        // setAns(newAns);
-
-        // Update formik values
-        formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
-
-
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                newAns[index].img = reader.result
+                newAns[index].img = reader.result;
                 setAns(newAns);
             };
             reader.readAsDataURL(file);
-        }
-
-        // addAnswerField()
-    }
-
-    function addAnswerField() {
-        // Check if the last answer is not empty
-        if (ans[ans.length - 1].ans.trim() !== '') {
-            setAns([...ans, { ans: '', img: '' }]);
         }
     }
 
@@ -300,69 +275,351 @@ function Option2({ formik, options, setOptions, setOption2 }: any) {
         setOptions((prev: any) => prev.concat({
             type: '2',
             question: question,
-            answers: ans
-        }))
-
-        setAns([
-            {
-                ans: '',
-                img: ''
-            }
-        ])
-        setQuestion("")
-        setOption2(false)
-        console.log(options)
-    }
-
-    const controls = useDragControls()
+            answers: ans,
+        }));
+        setAns([{ ans: '', img: '' }]);
+        setQuestion("");
+        setOption2(false);
+    };
 
     return (
         <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
             <h3>Multiple choice question</h3>
 
-            <div id="option1_question" className="w-60">
-                <Label htmlFor="option1_question">Ask</Label>
-                <Input id="option1_question" name="option1_question" type="text"
+            <div id="option2_question" className="w-60 flex items-center">
+                <Label htmlFor="option2_question">Ask</Label>
+                <Input
+                    id="option2_question"
+                    name="option2_question"
+                    type="text"
                     onChange={(e) => setQuestion(e.target.value)}
                     value={question}
+                    className="ml-2 flex-grow"
                 />
+                <DropdownMenu>
+  <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>Add description</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    
+        <DropdownMenuItem>
+        <div className="flex items-center space-x-2">
+                <Switch id="hide-option" />
+                <Label htmlFor="hide-option">Don't show option in config</Label>
+            </div>
+            </DropdownMenuItem>
+    <DropdownMenuItem>To delete</DropdownMenuItem>
+    
+  </DropdownMenuContent>
+                </DropdownMenu>
             </div>
 
-            <div id="option1_ans" className="w-60">
-                <Label htmlFor="option1_ans">Answers</Label>
+            <div id="option2_ans" className="w-60">
+                <Label htmlFor="option2_ans">Answers</Label>
                 <div className='space-y-2'>
-                    
                     {ans.map((ans, index: any) => (
-                        <div>
-                            <Input id="option1_question" name="option1_ans" type="text"
+                        <div key={index}>
+                            <Input
+                                id={`option2_ans_${index}`}
+                                name={`option2_ans_${index}`}
+                                type="text"
                                 onChange={(e) => handleAnswerChange(e, index)}
-                                value={formik.values.option1_ans}
-
+                                value={formik.values[`option2_ans_${index}`] || ''}
                             />
-
-                            <Input id="option1_question_image" name="option1_ans_image" type="file"
+                            <Input
+                                id={`option2_ans_img_${index}`}
+                                name={`option2_ans_img_${index}`}
+                                type="file"
                                 onChange={(e) => handleAnswerImageChange(e, index)}
-
                             />
-
                         </div>
-
-
                     ))}
                 </div>
-
-
-
-
             </div>
-
-
-
-
-
 
             <Button type='button' onClick={handleFinished}>Finished</Button>
         </div>
-    )
+    );
+}
+function Option3({ formik, options, setOptions, setOption3 }: any) {
+    const [smallestSize, setSmallestSize] = useState('');
+    const [largestSize, setLargestSize] = useState('');
+    const [stepSize, setStepSize] = useState('');
+
+    function handleFinished() {
+        setOptions((prev: any) => prev.concat({
+            type: '3',
+            question: formik.values.option3_question,
+            smallestSize: smallestSize,
+            largestSize: largestSize,
+            stepSize: stepSize
+        }));
+
+        setOption3(false);
+    }
+
+    return (
+        <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
+            <h3>Number Question</h3>
+
+            <div id="option3_question" className="w-60 flex items-center">
+                <Label htmlFor="option3_question">Ask</Label>
+                <Input
+                    id="option3_question"
+                    name="option3_question"
+                    type="text"
+                    onChange={(e) => formik.setFieldValue('option3_question', e.target.value)}
+                    value={formik.values.option3_question || ''}
+                    className="ml-2 flex-grow"
+                />
+                <DropdownMenu>
+  <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>Add description</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+            <div className="flex items-center space-x-2">
+                <Switch id="hide-option" />
+                <Label htmlFor="hide-option">Don't show option in config</Label>
+            </div>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+            <div className="flex items-center space-x-2">
+                <Switch id="hide-option" />
+                <Label htmlFor="hide-option">Price linear growth</Label>
+            </div>
+        </DropdownMenuItem>
+    
+    <DropdownMenuItem>To delete</DropdownMenuItem>
+    
+  </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
+
+            <div id="option3_smallestSize" className="w-60">
+                <Label htmlFor="option3_smallestSize">Smallest Size</Label>
+                <Input
+                    id="option3_smallestSize"
+                    name="option3_smallestSize"
+                    type="number"
+                    onChange={(e) => setSmallestSize(e.target.value)}
+                    value={smallestSize}
+                />
+            </div>
+
+            <div id="option3_largestSize" className="w-60">
+                <Label htmlFor="option3_largestSize">Largest Size</Label>
+                <Input
+                    id="option3_largestSize"
+                    name="option3_largestSize"
+                    type="number"
+                    onChange={(e) => setLargestSize(e.target.value)}
+                    value={largestSize}
+                />
+            </div>
+
+            <div id="option3_stepSize" className="w-60">
+                <Label htmlFor="option3_stepSize">Step Size</Label>
+                <Input
+                    id="option3_stepSize"
+                    name="option3_stepSize"
+                    type="number"
+                    onChange={(e) => setStepSize(e.target.value)}
+                    value={stepSize}
+                />
+            </div>
+
+            <Button type='button' onClick={handleFinished}>Finished</Button>
+        </div>
+    );
+}
+// function Option4({ formik, options, setOptions, setOption4 }: any) {
+//     const [ask, setAsk] = useState("");
+//     const [toggle1, setToggle1] = useState(false);
+//     const [toggle2, setToggle2] = useState(false);
+
+//     const handleDelete = () => {
+//         setOption4(false);
+//     };
+
+//     const handleFinished = () => {
+//         setOptions((prev: any) => prev.concat({
+//             type: '4',
+//             ask: ask,
+//             toggle1: toggle1,
+//             toggle2: toggle2,
+//         }));
+//         setAsk("");
+//         setToggle1(false);
+//         setToggle2(false);
+//         setOption4(false);
+//     };
+
+//     return (
+//         <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
+//             <div className="flex justify-between items-center">
+//                 <h3>Cross-sell Product</h3>
+//                 <button onClick={handleDelete} className="text-gray-500 hover:text-black">
+//                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
+//                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+//                     </svg>
+//                 </button>
+//             </div>
+
+//             <div id="option4_ask" className="w-60 flex items-center">
+//                 <Label htmlFor="option4_ask">Ask</Label>
+//                 <Input
+//                     id="option4_ask"
+//                     name="option4_ask"
+//                     type="text"
+//                     onChange={(e) => setAsk(e.target.value)}
+//                     value={ask}
+//                     className="ml-2 flex-grow"
+//                 />
+//                 <DropdownMenu>
+//   <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+//   <DropdownMenuContent>
+   
+//     <DropdownMenuItem>To delete</DropdownMenuItem>
+    
+//   </DropdownMenuContent>
+//                 </DropdownMenu>
+//             </div>
+
+//             <div id="option4_toggle" className="w-60 space-y-2">
+//                 <Label>Options</Label>
+//                 <div className="space-y-2">
+//                     {/* <Toggle 
+//                         id="toggle1" 
+//                         name="toggle1" 
+//                         onChange={() => setToggle1(!toggle1)}
+//                     >
+//                         <span className="mr-2 text-gray-500">T</span>
+//                         <Toggle.Button className={`toggle-${toggle1 ? 'on' : 'off'}`} />
+//                     </Toggle>
+//                    <Toggle 
+//                         id="toggle2" 
+//                         name="toggle2" 
+//                         onChange={() => setToggle2(!toggle2)}
+//                     >
+//                         <span className="mr-2 text-gray-500">M</span>
+//                         <Toggle.Button className={`toggle-${toggle2 ? 'on' : 'off'}`} />
+//                     </Toggle>  */
+
+//                     }
+//                 </div>
+//                 <div className="flex items-center space-x-2">
+//                 <Switch id="1" />
+//                 <Label htmlFor="a">Completing this cross-sell group is mandatory</Label>
+//                 </div>
+//                 <div className="flex items-center space-x-2">
+//                 <Switch id="2" />
+//                 <Label htmlFor="b">Completing multiple cross-sells is possible</Label>
+//                 </div>
+//             </div>
+
+//             <Button type='button' onClick={handleFinished}>Finished</Button>
+//         </div>
+//     )
+// }
+function Option4({ formik, options, setOptions, setOption4 }: any) {
+    const [ask, setAsk] = useState("");
+    const [toggle1, setToggle1] = useState(false);
+    const [toggle2, setToggle2] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const handleDelete = () => {
+        setOption4(false);
+    };
+
+    const handleFinished = () => {
+        setOptions((prev: any) => prev.concat({
+            type: '4',
+            ask: ask,
+            toggle1: toggle1,
+            toggle2: toggle2,
+        }));
+        setAsk("");
+        setToggle1(false);
+        setToggle2(false);
+        setOption4(false);
+    };
+
+    return (
+        <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
+            <div className="flex justify-between items-center">
+                <h3>Cross-sell Product</h3>
+                <button onClick={handleDelete} className="text-gray-500 hover:text-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div id="option4_ask" className="w-60 flex items-center">
+                <Label htmlFor="option4_ask">Ask</Label>
+                <Input
+                    id="option4_ask"
+                    name="option4_ask"
+                    type="text"
+                    onChange={(e) => setAsk(e.target.value)}
+                    value={ask}
+                    className="ml-2 flex-grow"
+                />
+                <DropdownMenu>
+                    <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem>To delete</DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
+
+            {/* New option with dropdown */}
+            <div className="w-60 flex items-center cursor-pointer" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                <span className="flex-grow">Products</span>
+                {/* <span className="text-gray-500">></span> */}
+                <span className="text-gray-500">{'>'}</span>
+
+            </div>
+            {dropdownOpen && (
+                <DropdownMenu>
+                <DropdownMenuTrigger>abc</DropdownMenuTrigger>
+                </DropdownMenu>
+            )}
+
+            <div id="option4_toggle" className="w-60 space-y-2">
+                <Label>Options</Label>
+                <div className="space-y-2">
+                    {/* <Toggle 
+                        id="toggle1" 
+                        name="toggle1" 
+                        onChange={() => setToggle1(!toggle1)}
+                    >
+                        <span className="mr-2 text-gray-500">T</span>
+                        <Toggle.Button className={`toggle-${toggle1 ? 'on' : 'off'}`} />
+                    </Toggle>
+                   <Toggle 
+                        id="toggle2" 
+                        name="toggle2" 
+                        onChange={() => setToggle2(!toggle2)}
+                    >
+                        <span className="mr-2 text-gray-500">M</span>
+                        <Toggle.Button className={`toggle-${toggle2 ? 'on' : 'off'}`} />
+                    </Toggle>  */
+                    }
+                </div>
+                <div className="flex items-center space-x-2">
+                    <Switch id="1" />
+                    <Label htmlFor="a">Completing this cross-sell group is mandatory</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                    <Switch id="2" />
+                    <Label htmlFor="b">Completing multiple cross-sells is possible</Label>
+                </div>
+            </div>
+
+            <Button type='button' onClick={handleFinished}>Finished</Button>
+        </div>
+    );
 }
 
