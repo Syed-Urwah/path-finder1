@@ -91,34 +91,7 @@ export default function Page() {
                                 value={formik.values.image}
                             />
                         </div>
-                        <div className="mb-4">
-                            <Label htmlFor="options">Options</Label>
-                            {options.length > 0 &&
-                                options.map((option, index) => (
-                                    <div
-                                        key={index}
-                                        className="bg-gray-200 py-2 px-2 flex items-center justify-between rounded-md mb-2"
-                                    >
-                                        <div>
-                                            <p className="font-bold text-sm">{option.question}</p>
-                                            <div className="flex flex-wrap gap-2">
-                                                {option.answers.map((answer, idx) => (
-                                                    <p
-                                                        key={idx}
-                                                        className="bg-gray-400 rounded-sm px-2"
-                                                    >
-                                                        {answer.ans}
-                                                    </p>
-                                                ))}
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <Pencil />
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
+                        
 
                         <Options formik={formik} options={options} setOptions={setOptions} />
 
