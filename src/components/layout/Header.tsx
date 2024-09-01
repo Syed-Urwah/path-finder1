@@ -70,7 +70,7 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ]
 
-export default function Header() {
+export default function Header({setToogleSidebar}: any) {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -80,11 +80,11 @@ export default function Header() {
   return (
     <>
     
-    <header className="bg-white rounded-2xl flex justify-between m-4 p-4 drop-shadow-md fixed z-40" style={{ width: 'calc(100vw - 310px)' }}>
+    <header className="bg-white rounded-2xl flex justify-between m-4 p-4 drop-shadow-md fixed z-40" style={{ width: 'calc(100vw - 114px)' }}>
       <div id="left" className="flex items-center">
         <NavigationMenu className="z-50">
           <NavigationMenuList>
-            <Menu />
+            <Menu onClick={()=>setToogleSidebar(true)}/>
             <NavigationMenuItem>
               <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
               <NavigationMenuContent>

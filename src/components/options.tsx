@@ -7,6 +7,15 @@ import Image from 'next/image'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
 import { Reorder, useDragControls } from 'framer-motion'
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select"
 
 export default function Options({ formik, options, setOptions }: any) {
 
@@ -14,7 +23,7 @@ export default function Options({ formik, options, setOptions }: any) {
     const [optionsOpen, setOptionOpen] = useState(false)
     const [option1, setOption1] = useState(false);
     const [option2, setOption2] = useState(false);
-    const [option3, setOption3] = useState(false);
+    const [option3, setOption3] = useState<any>(false);
     const [option4, setOption4] = useState(false);
 
     console.log(formik)
@@ -104,8 +113,8 @@ export default function Options({ formik, options, setOptions }: any) {
 
             {option1 && <Option1 formik={formik} options={options} setOptions={setOptions} setOption1={setOption1} />}
             {option2 && <Option2 formik={formik} options={options} setOptions={setOptions} setOption2={setOption2} />}
-            {option3 && <p>option3</p>}
-            {option4 && <p>option4</p>}
+            {option3 && <Option3 formik={formik} options={options} setOptions={setOptions} setOption3={setOption3} />}
+            {option4 && <Option4 formik={formik} options={options} setOptions={setOptions} setOption4={setOption4} />}
         </div>
     )
 }
@@ -136,7 +145,7 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
         setAns(newAns);
 
         // Update formik values
-        formik.setFieldValue(`option1_ans_${index}`, e.target.value);
+        // formik.setFieldValue(`option1_ans_${index}`, e.target.value);
         addAnswerField()
     }
 
@@ -146,7 +155,7 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
         // setAns(newAns);
 
         // Update formik values
-        formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
+        // formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
 
 
         const file = e.target.files[0];
@@ -204,7 +213,7 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
             <div id="option1_ans" className="w-60">
                 <Label htmlFor="option1_ans">Answers</Label>
                 <div className='space-y-2'>
-                    
+
                     {ans.map((ans, index: any) => (
                         <div>
                             <Input id="option1_question" name="option1_ans" type="text"
@@ -263,7 +272,7 @@ function Option2({ formik, options, setOptions, setOption2 }: any) {
         setAns(newAns);
 
         // Update formik values
-        formik.setFieldValue(`option1_ans_${index}`, e.target.value);
+        // formik.setFieldValue(`option1_ans_${index}`, e.target.value);
         addAnswerField()
     }
 
@@ -273,7 +282,7 @@ function Option2({ formik, options, setOptions, setOption2 }: any) {
         // setAns(newAns);
 
         // Update formik values
-        formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
+        // formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
 
 
         const file = e.target.files[0];
@@ -331,7 +340,7 @@ function Option2({ formik, options, setOptions, setOption2 }: any) {
             <div id="option1_ans" className="w-60">
                 <Label htmlFor="option1_ans">Answers</Label>
                 <div className='space-y-2'>
-                    
+
                     {ans.map((ans, index: any) => (
                         <div>
                             <Input id="option1_question" name="option1_ans" type="text"
@@ -345,6 +354,310 @@ function Option2({ formik, options, setOptions, setOption2 }: any) {
 
                             />
 
+                        </div>
+
+
+                    ))}
+                </div>
+
+
+
+
+            </div>
+
+
+
+
+
+
+            <Button type='button' onClick={handleFinished}>Finished</Button>
+        </div>
+    )
+}
+
+function Option3({ formik, options, setOptions, setOption3 }: any) {
+    console.log(formik)
+
+    const [items, setItems] = useState([0, 1, 2, 3])
+
+    const [ans, setAns] = useState([
+        {
+            label: "Smallest possible answer",
+            ans: '',
+            img: null,
+        },
+        {
+            label: "Biggest possible answer",
+            ans: '',
+            img: null,
+        },
+        {
+            label: "Step size",
+            ans: '',
+            img: null,
+        }
+    ]);
+
+    const [question, setQuestion] = useState("");
+
+    function handleAnswer(e: any) {
+        formik.values.option1_ans = e.target.value
+    }
+
+    function handleAnswerChange(e: any, index: number) {
+        const newAns = [...ans];
+        newAns[index].ans = e.target.value;
+        setAns(newAns);
+
+        // Update formik values
+        // formik.setFieldValue(`option1_ans_${index}`, e.target.value);
+        // addAnswerField()
+    }
+
+    function handleAnswerImageChange(e: any, index: number) {
+        const newAns: any = [...ans];
+        // newAns[index].img = e.target.value;
+        // setAns(newAns);
+
+        // Update formik values
+        formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
+
+
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                newAns[index].img = reader.result
+                setAns(newAns);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // addAnswerField()
+    }
+
+
+
+    const handleFinished = () => {
+        setOptions((prev: any) => prev.concat({
+            type: '3',
+            question: question,
+            answers: ans
+        }))
+
+        setAns([
+            {
+                label: "Smallest possible answer",
+                ans: '',
+                img: null,
+            },
+            {
+                label: "Biggest possible answer",
+                ans: '',
+                img: null,
+            },
+            {
+                label: "Step size",
+                ans: '',
+                img: null,
+            }
+        ])
+        setQuestion("")
+        setOption3(false)
+        console.log(options)
+    }
+
+    const controls = useDragControls()
+
+    return (
+        <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
+            <h3>Number question</h3>
+
+            <div id="option1_question" className="w-60">
+                <Label htmlFor="option1_question">Ask</Label>
+                <Input id="option1_question" name="option1_question" type="text"
+                    onChange={(e) => setQuestion(e.target.value)}
+                    value={question}
+                />
+            </div>
+
+            <div id="option1_ans" className="w-60">
+                <div className='space-y-2'>
+
+                    {ans.map((ans, index: any) => (
+                        <div>
+                            <Label>{ans.label}</Label>
+                            <Input id="option1_question" name="option1_ans" type="number"
+                                onChange={(e) => handleAnswerChange(e, index)}
+                                value={formik.values.option1_ans}
+
+                            />
+
+
+                        </div>
+
+
+                    ))}
+                </div>
+
+
+
+
+            </div>
+
+
+
+
+
+
+            <Button type='button' onClick={handleFinished}>Finished</Button>
+        </div>
+    )
+}
+
+function Option4({ formik, options, setOptions, setOption4 }: any) {
+    console.log(formik)
+
+    const [items, setItems] = useState([0, 1, 2, 3])
+
+    const [products, setProducts] = useState([
+        {
+            id: 1,
+            name: 'product1'
+        },
+        {
+            id: 2,
+            name: 'product2'
+        },
+        {
+            id: 3,
+            name: 'product3'
+        },
+    ])
+
+    const [ans, setAns] = useState([
+        {
+            product_id: '',
+            product_name: '',
+            img: null,
+        }
+    ]);
+
+    const [question, setQuestion] = useState("");
+
+    function handleAnswer(e: any) {
+        formik.values.option1_ans = e.target.value
+    }
+
+    function handleAnswerChange(e: any, index: number): any {
+        console.log(e)
+        console.log(ans)
+        const selectedProduct: any = products.find(product => product.name == e);
+        console.log(selectedProduct)
+        // return;
+        const newAns = [...ans];
+        newAns[index].product_id = selectedProduct?.id;
+        newAns[index].product_name = e;
+        setAns(newAns);
+
+        // Update formik values
+        addAnswerField()
+    }
+
+    function handleAnswerImageChange(e: any, index: number) {
+        const newAns: any = [...ans];
+        // newAns[index].img = e.target.value;
+        // setAns(newAns);
+
+        // Update formik values
+        // formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
+
+
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                newAns[index].img = reader.result
+                setAns(newAns);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // addAnswerField()
+    }
+
+    function addAnswerField() {
+        // Check if the last answer is not empty
+        if (ans[ans.length - 1].product_id !== '') {
+            setAns([...ans, { product_id: '', product_name: '', img: null }]);
+        }
+    }
+
+    const handleFinished = () => {
+        setOptions((prev: any) => prev.concat({
+            type: '4',
+            question: question,
+            answers: ans
+        }))
+
+        setAns([
+            {
+                product_id: '',
+                product_name: '',
+                img: null
+            }
+        ])
+        setQuestion("")
+        setOption4(false)
+        console.log(options)
+    }
+
+    const controls = useDragControls()
+
+    return (
+        <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
+            <h3>Cross-sell group</h3>
+
+            <div id="option1_question" className="w-60">
+                <Label htmlFor="option1_question">Ask</Label>
+                <Input id="option1_question" name="option1_question" type="text"
+                    onChange={(e) => setQuestion(e.target.value)}
+                    value={question}
+                />
+            </div>
+
+            <div id="option1_ans" className="w-60">
+                <Label htmlFor="option1_ans">Answers</Label>
+                <div className='space-y-2'>
+
+                    {ans.map((ans, index: any) => (
+                        <div>
+                            {/* <Input id="option1_question" name="option1_ans" type="text"
+                                onChange={(e) => handleAnswerChange(e, index)}
+                                value={formik.values.option1_ans}
+
+                            /> */}
+
+
+
+                            <Select onValueChange={(e) => handleAnswerChange(e, index)} defaultValue={ans.product_name}>
+                                <SelectTrigger className="w-[180px]">
+                                    <SelectValue placeholder="Select a fruit" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectLabel>Fruits</SelectLabel>
+                                        {products.map((product: any)=>{
+                                           return <SelectItem 
+                                            value={product.name}>{product.name}</SelectItem>
+                                        })}
+                                        <SelectItem value="banana">Banana</SelectItem>
+                                        <SelectItem value="blueberry">Blueberry</SelectItem>
+                                        <SelectItem value="grapes">Grapes</SelectItem>
+                                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
                         </div>
 
 

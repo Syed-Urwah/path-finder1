@@ -43,7 +43,7 @@ import { motion } from 'framer-motion';
 export default function Sidebar2() {
     return (
         <div className="hidden border-r bg-muted/40 md:block bg-white w-[68px]">
-            <div className="flex h-full max-h-screen flex-col gap-10 ">
+            <div className="flex fixed h-full max-h-screen flex-col gap-10 ">
                 <div className="flex h-14 items-center border-b px-4 lg:h-[60px] py-10 lg:px-6 w-full">
                     <Image src={Logo2} alt="logo" width={30} height={30}/>
                 </div>

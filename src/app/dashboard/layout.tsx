@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import {
   Bell,
@@ -34,15 +36,19 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Sidebar from "@/components/layout/Sidebar"
 import Header from "@/components/layout/Header"
 import Sidebar2 from "@/components/layout/Sidebar2"
+import { useState } from "react"
 
 export default function DashboardLayout({
     children, // will be a page or nested layout
   }: {
     children: React.ReactNode
   }) {
+
+    const [toogleSidebar, setToogleSidebar] = useState(false)
+
     return (
         <>
-        <Sheet open={false}>
+        <Sheet open={toogleSidebar}>
           <SheetTrigger asChild>
             <Button
               variant="outline"
@@ -60,7 +66,7 @@ export default function DashboardLayout({
                 className="flex items-center gap-2 text-lg font-semibold"
               >
                 <Package2 className="h-6 w-6" />
-                <span className="sr-only">Acme Inc</span>
+                <span className="sr-only text-black">Acme Inc</span>
               </Link>
               <Link
                 href="#"
@@ -119,10 +125,10 @@ export default function DashboardLayout({
             </div>
           </SheetContent>
         </Sheet>
-        <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+        <div className="grid min-h-screen w-full md:grid-cols-[68px_1fr] lg:grid-cols-[68px_1fr]">
           <Sidebar2 />
           <div className="flex flex-col">
-          <Header />
+          <Header setToogleSidebar={setToogleSidebar}/>
           <div className="mt-32">
           {children}
           </div>
