@@ -79,80 +79,71 @@ export default function Header() {
 
   return (
     <>
-    
-    <header className="bg-white rounded-2xl flex justify-end m-4 p-4 drop-shadow-md fixed z-40" style={{ width: 'calc(100vw - 310px)' }}>
      
-
-      <div className="flex items-center gap-6">
-        <div id="search" className="flex relative">
-          <Search className="absolute top-2 left-2" />
-          <Input type="text" placeholder="Try to searching..." className="pl-10 rounded-3xl outline-[#d7dee1] " />
-        </div>
-        <Moon />
-        <div id="chat" className="hover:cursor-pointer">
-          <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-            <DropdownMenuTrigger asChild>
-              <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                <MessageSquareMore />
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-fit px-5 py-6" align="end"
-            onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-              <DropdownMenuLabel className="text-xl flex gap-4">
-                <h2>Messages</h2>
-                <span className="bg-[#167eb5] rounded-xl text-white text-xs px-2 py-1 text-center m-auto">5 new</span>
+     <header style={{ height: '80px' }} className="bg-white flex justify-between items-center p-4 drop-shadow-md fixed z-40 w-[1550px] mx-auto">
+      
+        <div className="flex items-center gap-6 mx-auto">
+          <div id="search" className="flex relative">
+            <Search className="absolute top-2 left-2" />
+            <Input type="text" placeholder="Try to searching..." className="pl-10 rounded-3xl outline-[#d7dee1] w-full max-w-xs" />
+          </div>
+          <Moon />
+          <div id="chat" className="hover:cursor-pointer">
+            <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+              <DropdownMenuTrigger asChild>
+                <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                  <MessageSquareMore />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-fit px-5 py-6" align="end"
+                onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                <DropdownMenuLabel className="text-xl flex gap-4">
+                  <h2>Messages</h2>
+                  <span className="bg-[#167eb5] rounded-xl text-white text-xs px-2 py-1 text-center m-auto">5 new</span>
                 </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup className="w-fit">
-                <DropdownMenuItem className="flex gap-4 items-center">
-                  
-                    <Image src={ProfileImage} alt="profile" width={50} className="rounded-full"/>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup className="w-fit">
+                  <DropdownMenuItem className="flex gap-4 items-center">
+                    <Image src={ProfileImage} alt="profile" width={50} className="rounded-full" />
                     <div>
                       <h2 className="text-sm">Syed Urwah</h2>
                       <p className="text-xs">Congrats him</p>
                     </div>
                     <p className="pl-4">9:08AM</p>
-                  
-                  
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex gap-4 items-center">
-                  
-                    <Image src={ProfileImage} alt="profile" width={50} className="rounded-full"/>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex gap-4 items-center">
+                    <Image src={ProfileImage} alt="profile" width={50} className="rounded-full" />
                     <div>
                       <h2 className="text-sm">Syed Urwah</h2>
                       <p className="text-xs">Congrats him</p>
                     </div>
                     <p className="pl-4">9:08AM</p>
-                  
-                  
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex gap-4 items-center">
-                  
-                    <Image src={ProfileImage} alt="profile" width={50} className="rounded-full"/>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex gap-4 items-center">
+                    <Image src={ProfileImage} alt="profile" width={50} className="rounded-full" />
                     <div>
                       <h2 className="text-sm">Syed Urwah</h2>
                       <p className="text-xs">Congrats him</p>
                     </div>
                     <p className="pl-4">9:08AM</p>
-                  
-                  
-                </DropdownMenuItem>
-                
-              </DropdownMenuGroup>
-              
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-
-        <div id="profile" className="flex items-center gap-2">
-          <Image src={ProfileImage} alt="profile" width={60} className="rounded-full"/>
-          <div id="name">
-            <h2>Mike Nielsen</h2>
-            <p>admin</p>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
-      </div>
-    </header>
+
+        {/* Profile section */}
+        <div className="flex items-center gap-4">
+          <div id="profile" className="flex items-center gap-2">
+            <Image src={ProfileImage} alt="profile" width={60} className="rounded-full" />
+            <div id="name" className="whitespace-nowrap overflow-hidden overflow-ellipsis">
+              <h2 className="text-sm font-medium">Mike Nielsen</h2>
+              <p className="text-xs text-gray-500">admin</p>
+            </div>
+          </div>
+        </div>
+      </header>
     </>
   )
 }

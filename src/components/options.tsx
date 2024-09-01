@@ -22,8 +22,6 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,  DropdownMenuLa
     DropdownMenuSeparator, DropdownMenuItem } from './ui/dropdown-menu';
 ////////
 
-
-
 export default function Options({ formik, options, setOptions }: any) {
 
     // const [options, setOptions] = useState([]) as any;
@@ -129,8 +127,6 @@ export default function Options({ formik, options, setOptions }: any) {
         </div>
     )
 }
-
-
 function Option1({ formik, options, setOptions, setOption1 }: any) {
     const [items, setItems] = useState([0, 1, 2, 3]);
 
@@ -177,7 +173,7 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
     return (
         <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
             <h3>Multiple choice question</h3>
-
+           
             <div id="option1_question" className="w-60 flex items-center">
                 <Label htmlFor="option1_question">Ask</Label>
                 <Input
@@ -214,9 +210,12 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
                 }
             </div>
 
+           
+
             <div id="option1_ans" className="w-60">
                 <Label htmlFor="option1_ans">Answers</Label>
-                <div className='space-y-2'>
+                
+                {/* <div className='space-y-2'>
                     {ans.map((ans, index: any) => (
                         <div key={index}>
                             <Input
@@ -234,7 +233,51 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
                             />
                         </div>
                     ))}
+                </div> */}
+               
+
+                {/* Grid Column */}
+            <div className="grid grid-cols-4 gap-4">
+               <div>1</div>
+               {/* Input Field Container */}
+               <div className='space-y-2 col-span-2'>
+        {ans.map((ans, index: any) => (
+            <div key={index}>
+                <Input
+                    id={`option1_ans_${index}`}
+                    name={`option1_ans_${index}`}
+                    type="text"
+                    onChange={(e) => handleAnswerChange(e, index)}
+                    value={formik.values[`option1_ans_${index}`] || ''}
+                    className="w-full" // Makes the input field take full width of its container
+                />
+            </div>
+        ))}
+               </div>
+               {/* Image Input Container with Icon */}
+               <div className='space-y-2 flex items-center justify-center'>
+    {ans.map((ans, index: any) => (
+        <div key={index} className="flex items-center space-x-2">
+            <label htmlFor={`option1_ans_img_${index}`} className="cursor-pointer">
+                <div className="flex items-center justify-center bg-white p-2 rounded shadow">
+                    <span role="img" aria-label="Add Image">📷</span> {/* Image Icon */}
                 </div>
+            </label>
+            <Input
+                id={`option1_ans_img_${index}`}
+                name={`option1_ans_img_${index}`}
+                type="file"
+                onChange={(e) => handleAnswerImageChange(e, index)}
+                className="hidden" // Hides the file input field
+            />
+        </div>
+    ))}
+               </div>
+               <div>9</div>
+               <div>9</div>
+            </div>
+
+
             </div>
 
             <Button type='button' onClick={handleFinished}>Finished</Button>
