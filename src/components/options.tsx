@@ -10,12 +10,11 @@ import {
     Plus,
     Trash
   } from "lucide-react"
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,  DropdownMenuLabel,
-    DropdownMenuSeparator, DropdownMenuItem,
-DropdownMenuGroup
-
-
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,  DropdownMenuLabel,DropdownMenuSeparator, DropdownMenuItem,DropdownMenuGroup
 } from './ui/dropdown-menu';
+import {
+    FormControl
+} from "@/components/ui/form"
 
 import {
     Select,
@@ -199,18 +198,18 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
                         <DropdownMenuContent>
                             <DropdownMenuLabel>Add description</DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>
-                            <div className="flex items-center space-x-2">
-                                    <Switch id="hide-option" />
+                            <DropdownMenuLabel>
+                                <div className="flex items-center space-x-2">
+                                    <Switch id="hide-option1" />
                                     <Label htmlFor="hide-option">Create variant</Label>
                                 </div>
-                                </DropdownMenuItem>
-                            <DropdownMenuItem>
+                                </DropdownMenuLabel>
+                            <DropdownMenuLabel>
                                 <div className="flex items-center space-x-2">
-                                    <Switch id="hide-option" />
+                                    <Switch id="hide-option2" />
                                     <Label htmlFor="hide-option">Don't show option in config</Label>
                                 </div>
-                            </DropdownMenuItem>
+                            </DropdownMenuLabel>
                             <DropdownMenuItem className='text-red-500'>
                             <Trash className="mr-2 h-4 w-4" />
                             <span>abc</span>
@@ -371,12 +370,12 @@ function Option2({ formik, options, setOptions, setOption2 }: any) {
     <DropdownMenuLabel>Add description</DropdownMenuLabel>
     <DropdownMenuSeparator />
     
-        <DropdownMenuItem>
+        <DropdownMenuLabel>
         <div className="flex items-center space-x-2">
-                <Switch id="hide-option" />
+                <Switch id="hide-option3" />
                 <Label htmlFor="hide-option">Don't show option in config</Label>
             </div>
-            </DropdownMenuItem>
+            </DropdownMenuLabel>
     <DropdownMenuItem>To delete</DropdownMenuItem>
     
   </DropdownMenuContent>
@@ -442,22 +441,22 @@ function Option3({ formik, options, setOptions, setOption3 }: any) {
                     className="ml-2 flex-grow"
                 />
                 <DropdownMenu>
-  <DropdownMenuTrigger>Open</DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuLabel>Add description</DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem>
-            <div className="flex items-center space-x-2">
-                <Switch id="hide-option" />
-                <Label htmlFor="hide-option">Don't show option in config</Label>
-            </div>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-            <div className="flex items-center space-x-2">
-                <Switch id="hide-option" />
-                <Label htmlFor="hide-option">Price linear growth</Label>
-            </div>
-        </DropdownMenuItem>
+              <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>Add description</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>
+                        <div className="flex items-center space-x-2">
+                            <Switch id="hide-option4" />
+                            <Label htmlFor="hide-option">Don't show option in config</Label>
+                        </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuLabel>
+                        <div className="flex items-center space-x-2">
+                            <Switch id="hide-option5" />
+                            <Label htmlFor="hide-option">Price linear growth</Label>
+                        </div>
+                    </DropdownMenuLabel>
     
     <DropdownMenuItem>To delete</DropdownMenuItem>
     
@@ -531,10 +530,10 @@ function Option4({ formik, options, setOptions, setOption4 }: any) {
                 <div className="flex justify-between items-center">
                     <h3>Cross-sell Product</h3>
                 </div>
-                <div className="grid grid-cols-12  items-center justify-center gap-1">
-                    
+                <div className="grid grid-cols-12  items-center justify-center gap-1 mb-6">
+
                     <div className="col-span-8">
-                    <Label htmlFor="option4_ask ">Ask</Label>
+                        <Label htmlFor="option4_ask ">Ask</Label>
                         <Input
                             id="option4_ask"
                             name="option4_ask"
@@ -546,59 +545,111 @@ function Option4({ formik, options, setOptions, setOption4 }: any) {
                     <div className="col-span-1">
                         <DropdownMenu>
                             <DropdownMenuTrigger>
-                                <div className="z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-end items-end hover:cursor-pointer" data-slot="trigger" aria-haspopup="true" aria-expanded="false" id="react-aria275040590-:rbt:">
-                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" style={{ width: '24px', height: '24px' }}>
-                                        <path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+                                <div
+                                    className="z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-end items-end hover:cursor-pointer"
+                                    data-slot="trigger" aria-haspopup="true" aria-expanded="false"
+                                    id="react-aria275040590-:rbt:">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                         data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical"
+                                         role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512"
+                                         style={{width: '24px', height: '24px'}}>
+                                        <path fill="currentColor"
+                                              d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
                                     </svg>
                                 </div>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="text-red-500">
-                                <DropdownMenuItem><Trash  className="mr-2 h-4 w-4"/><span>To Dalete</span></DropdownMenuItem>
+                                <DropdownMenuItem><Trash
+                                    className="mr-2 h-4 w-4"/><span>To Dalete</span></DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
+                </div>
+
+                <Label>Products</Label>
+                <div className="grid grid-cols-12 mb-4   items-center justify-center gap-1">
+                    <div className="col-span-1 ">
+                        <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            data-prefix="fas"
+                            data-icon="grip-vertical"
+                            className="svg-inline--fa fa-grip-vertical w-6 h-6"
+                            role="img"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 320 512"
+                        >
+                            <path fill="currentColor"
+                                  d="M40 352l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zm192 0l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 320c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 192l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 160c-22.1 0-40-17.9-40-40L0 72C0 49.9 17.9 32 40 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40z"></path>
+                        </svg>
+                    </div>
+
+                    <div className="col-span-8">
+                        <Input
+                            id="option4_ask"
+                            name="option4_ask"
+                            type="text"
+                            onChange={(e) => setAsk(e.target.value)}
+                            value={ask}
+                        />
+                    </div>
+
+                    <div className="col-span-1">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <div
+                                    className="z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-start items-center hover:cursor-pointer"
+                                    data-slot="trigger" aria-haspopup="true" aria-expanded="false"
+                                    id="react-aria275040590-:rbt:">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                         data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical"
+                                         role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512"
+                                         style={{width: '24px', height: '24px'}}>
+                                        <path fill="currentColor"
+                                              d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+                                    </svg>
+                                </div>
+
+
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="w-56">
+                                <DropdownMenuGroup>
+                                    <DropdownMenuItem>
+                                        <BarChart3 className="mr-2 h-4 w-4"/>
+                                        <span>abc</span>
+                                    </DropdownMenuItem>
+                                </DropdownMenuGroup>
+                                <DropdownMenuSeparator/>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
                 </div>
                 <div className="grid grid-cols-12">
-                <Label className="mt-4" >Products</Label>
-                    <div className="col-span-10">
-                    {/* <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        {/* <FormControl>
-                        <SelectTrigger>
-                            <SelectValue placeholder="Select a verified email to display" />
-                        </SelectTrigger>
-                        </FormControl> */}
-                        {/* <SelectContent>
-                        <SelectItem value="m@example.com">m@example.com</SelectItem>
-                        <SelectItem value="m@google.com">m@google.com</SelectItem>
-                        <SelectItem value="m@support.com">m@support.com</SelectItem>
-                        </SelectContent>
-                    </Select> */} */
+                    <div className="col-span-10 ">
 
+                        <Select>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select Product"/>
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="1">Product 1</SelectItem>
+                                <SelectItem value="2">Product 2</SelectItem>
+                                <SelectItem value="3">Product 3</SelectItem>
+                            </SelectContent>
+                        </Select>
                     </div>
                 </div>
             </div>
 
-            {/* New option with dropdown */}
-            <div className="w-60 flex items-center cursor-pointer" onClick={() => setDropdownOpen(!dropdownOpen)}>
-                <span className="flex-grow"></span>
-                {/* <span className="text-gray-500">></span> */}
-                <span className="text-gray-500">{'>'}</span>
 
-            </div>
-            {dropdownOpen && (
-                <DropdownMenu>
-                <DropdownMenuTrigger>abc</DropdownMenuTrigger>
-                </DropdownMenu>
-            )}
-
-            <div id="option4_toggle" className="w-60 space-y-2">
+            <div id="option4_toggle" className="w-full space-y-2">
                 <Label>Options</Label>
                 <div className="flex items-center space-x-2">
-                    <Switch id="1" />
+                    <Switch id="1"/>
                     <Label htmlFor="a">Completing this cross-sell group is mandatory</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                    <Switch id="2" />
+                    <Switch id="2"/>
                     <Label htmlFor="b">Completing multiple cross-sells is possible</Label>
                 </div>
             </div>
