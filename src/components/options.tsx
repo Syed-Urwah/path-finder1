@@ -2,29 +2,37 @@
 
 import React, { useState } from 'react'
 import { Button } from './ui/button'
-import { Plus } from 'lucide-react'
-import Image from 'next/image'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
-import { Reorder, useDragControls } from 'framer-motion'
+import { Switch } from "@/components/ui/switch"
+import {
+    BarChart3,
+    Plus,
+    Trash
+} from "lucide-react"
+import {
+    DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuGroup
+} from './ui/dropdown-menu';
+import {
+    FormControl
+} from "@/components/ui/form"
+
 import {
     Select,
     SelectContent,
-    SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
-  } from "@/components/ui/select"
+} from "@/components/ui/select"
 
 export default function Options({ formik, options, setOptions }: any) {
-
-    // const [options, setOptions] = useState([]) as any;
     const [optionsOpen, setOptionOpen] = useState(false)
     const [option1, setOption1] = useState(false);
     const [option2, setOption2] = useState(false);
-    const [option3, setOption3] = useState<any>(false);
+    const [option3, setOption3] = useState(false);
     const [option4, setOption4] = useState(false);
+
+
 
     console.log(formik)
 
@@ -115,16 +123,13 @@ export default function Options({ formik, options, setOptions }: any) {
             {option2 && <Option2 formik={formik} options={options} setOptions={setOptions} setOption2={setOption2} />}
             {option3 && <Option3 formik={formik} options={options} setOptions={setOptions} setOption3={setOption3} />}
             {option4 && <Option4 formik={formik} options={options} setOptions={setOptions} setOption4={setOption4} />}
+
+
         </div>
     )
 }
-
-
-
 function Option1({ formik, options, setOptions, setOption1 }: any) {
-    console.log(formik)
-
-    const [items, setItems] = useState([0, 1, 2, 3])
+    const [items, setItems] = useState([0, 1, 2, 3]);
 
     const [ans, setAns] = useState([
         {
@@ -135,46 +140,23 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
 
     const [question, setQuestion] = useState("");
 
-    function handleAnswer(e: any) {
-        formik.values.option1_ans = e.target.value
-    }
-
     function handleAnswerChange(e: any, index: number) {
         const newAns = [...ans];
         newAns[index].ans = e.target.value;
         setAns(newAns);
-
-        // Update formik values
-        // formik.setFieldValue(`option1_ans_${index}`, e.target.value);
-        addAnswerField()
+        formik.setFieldValue(`option1_ans_${index}`, e.target.value);
     }
 
     function handleAnswerImageChange(e: any, index: number) {
         const newAns: any = [...ans];
-        // newAns[index].img = e.target.value;
-        // setAns(newAns);
-
-        // Update formik values
-        // formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
-
-
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                newAns[index].img = reader.result
+                newAns[index].img = reader.result;
                 setAns(newAns);
             };
             reader.readAsDataURL(file);
-        }
-
-        // addAnswerField()
-    }
-
-    function addAnswerField() {
-        // Check if the last answer is not empty
-        if (ans[ans.length - 1].ans.trim() !== '') {
-            setAns([...ans, { ans: '', img: '' }]);
         }
     }
 
@@ -182,500 +164,728 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
         setOptions((prev: any) => prev.concat({
             type: '1',
             question: question,
-            answers: ans
-        }))
-
-        setAns([
-            {
-                ans: '',
-                img: ''
-            }
-        ])
-        setQuestion("")
-        setOption1(false)
-        console.log(options)
-    }
-
-    const controls = useDragControls()
+            answers: ans,
+        }));
+        setAns([{ ans: '', img: '' }]);
+        setQuestion("");
+        setOption1(false);
+    };
 
     return (
         <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
             <h3>Multiple choice question</h3>
-
-            <div id="option1_question" className="w-60">
+            <div id="option1_question" className="w-full">
                 <Label htmlFor="option1_question">Ask</Label>
-                <Input id="option1_question" name="option1_question" type="text"
-                    onChange={(e) => setQuestion(e.target.value)}
-                    value={question}
-                />
+                <div className="grid grid-cols-12  items-center justify-center gap-1">
+                    <div className="col-span-10">
+                        <Input
+                            id="option1_question"
+                            name="option1_question"
+                            type="text"
+                            onChange={(e) => setQuestion(e.target.value)}
+                            value={question}
+                            className=""
+                        />
+                    </div>
+                    <div className="col-span-1">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger>
+                                <div className="z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-start items-center hover:cursor-pointer" data-slot="trigger" aria-haspopup="true" aria-expanded="false" id="react-aria275040590-:rbt:">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" style={{ width: '24px', height: '24px' }}>
+                                        <path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+                                    </svg>
+                                </div>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuLabel>Add description</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuLabel>
+                                    <div className="flex items-center space-x-2">
+                                        <Switch id="hide-option1" />
+                                        <Label htmlFor="hide-option">Create variant</Label>
+                                    </div>
+                                </DropdownMenuLabel>
+                                <DropdownMenuLabel>
+                                    <div className="flex items-center space-x-2">
+                                        <Switch id="hide-option2" />
+                                        <Label htmlFor="hide-option">Don't show option in config</Label>
+                                    </div>
+                                </DropdownMenuLabel>
+                                <DropdownMenuItem><Trash
+                                    className="mr-2 h-4 w-4" /><span>To Delete</span></DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
+                </div>
             </div>
 
-            <div id="option1_ans" className="w-60">
+
+
+
+
+
+            <div id="option1_ans" className="w-full">
                 <Label htmlFor="option1_ans">Answers</Label>
-                <div className='space-y-2'>
-
-                    {ans.map((ans, index: any) => (
-                        <div>
-                            <Input id="option1_question" name="option1_ans" type="text"
-                                onChange={(e) => handleAnswerChange(e, index)}
-                                value={formik.values.option1_ans}
-
-                            />
-
-                            <Input id="option1_question_image" name="option1_ans_image" type="file"
-                                onChange={(e) => handleAnswerImageChange(e, index)}
-
-                            />
-
-                        </div>
 
 
-                    ))}
+                {/* Grid Column */}
+                <div className="grid grid-cols-12  items-center justify-center gap-1">
+                    <div className="col-span-1 ">
+                        <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            data-prefix="fas"
+                            data-icon="grip-vertical"
+                            className="svg-inline--fa fa-grip-vertical w-6 h-6"
+                            role="img"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 320 512"
+                        >
+                            <path fill="currentColor" d="M40 352l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zm192 0l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 320c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 192l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 160c-22.1 0-40-17.9-40-40L0 72C0 49.9 17.9 32 40 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40z"></path>
+                        </svg>
+                    </div>
+
+                    <div className="col-span-8">
+                        {ans.map((ans, index) => (
+                            <div key={index}>
+                                <Input
+                                    id={`option1_ans_${index}`}
+                                    name={`option1_ans_${index}`}
+                                    type="text"
+                                    onChange={(e) => handleAnswerChange(e, index)}
+                                    value={formik.values[`option1_ans_${index}`] || ''}
+                                    className="w-full" // Makes the input field take full width of its container
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="col-span-2">
+                        {ans.map((ans, index) => (
+                            <div key={index} className="flex items-center space-x-2">
+                                <label htmlFor={`option1_ans_img_${index}`} className="cursor-pointer">
+                                    <img src="/images/image_icon.jpg" alt="New Icon" className="w-20 h-12 rounded-lg bg-gray-100 p-1 hover:bg-gray-200" />
+                                </label>
+                                <Input
+                                    id={`option1_ans_img_${index}`}
+                                    name={`option1_ans_img_${index}`}
+                                    type="file"
+                                    onChange={(e) => handleAnswerImageChange(e, index)}
+                                    className="hidden" // Hides the file input field
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="col-span-1">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <div className="z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-start items-center hover:cursor-pointer" data-slot="trigger" aria-haspopup="true" aria-expanded="false" id="react-aria275040590-:rbt:">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" style={{ width: '24px', height: '24px' }}>
+                                        <path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+                                    </svg>
+                                </div>
+
+
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="w-56">
+                                <DropdownMenuGroup>
+                                    <DropdownMenuItem>
+                                        <BarChart3 className="mr-2 h-4 w-4" />
+                                        <span>abc</span>
+                                    </DropdownMenuItem>
+                                </DropdownMenuGroup>
+                                <DropdownMenuSeparator />
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
                 </div>
 
 
-
-
             </div>
-
-
-
-
-
 
             <Button type='button' onClick={handleFinished}>Finished</Button>
         </div>
-    )
+    );
 }
-
 function Option2({ formik, options, setOptions, setOption2 }: any) {
-    console.log(formik)
-
-    const [items, setItems] = useState([0, 1, 2, 3])
-
     const [ans, setAns] = useState([
         {
             ans: '',
             img: '',
         }
     ]);
-
     const [question, setQuestion] = useState("");
-
-    function handleAnswer(e: any) {
-        formik.values.option1_ans = e.target.value
-    }
-
     function handleAnswerChange(e: any, index: number) {
         const newAns = [...ans];
         newAns[index].ans = e.target.value;
         setAns(newAns);
-
-        // Update formik values
-        // formik.setFieldValue(`option1_ans_${index}`, e.target.value);
-        addAnswerField()
+        formik.setFieldValue(`option2_ans_${index}`, e.target.value);
     }
-
     function handleAnswerImageChange(e: any, index: number) {
         const newAns: any = [...ans];
-        // newAns[index].img = e.target.value;
-        // setAns(newAns);
-
-        // Update formik values
-        // formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
-
-
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                newAns[index].img = reader.result
+                newAns[index].img = reader.result;
                 setAns(newAns);
             };
             reader.readAsDataURL(file);
         }
-
-        // addAnswerField()
     }
-
-    function addAnswerField() {
-        // Check if the last answer is not empty
-        if (ans[ans.length - 1].ans.trim() !== '') {
-            setAns([...ans, { ans: '', img: '' }]);
-        }
-    }
-
     const handleFinished = () => {
         setOptions((prev: any) => prev.concat({
             type: '2',
             question: question,
-            answers: ans
-        }))
-
-        setAns([
-            {
-                ans: '',
-                img: ''
-            }
-        ])
-        setQuestion("")
-        setOption2(false)
-        console.log(options)
-    }
-
-    const controls = useDragControls()
+            answers: ans,
+        }));
+        setAns([{ ans: '', img: '' }]);
+        setQuestion("");
+        setOption2(false);
+    };
 
     return (
         <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
             <h3>Multiple choice question</h3>
-
-            <div id="option1_question" className="w-60">
-                <Label htmlFor="option1_question">Ask</Label>
-                <Input id="option1_question" name="option1_question" type="text"
-                    onChange={(e) => setQuestion(e.target.value)}
-                    value={question}
-                />
-            </div>
-
-            <div id="option1_ans" className="w-60">
-                <Label htmlFor="option1_ans">Answers</Label>
-                <div className='space-y-2'>
-
-                    {ans.map((ans, index: any) => (
-                        <div>
-                            <Input id="option1_question" name="option1_ans" type="text"
-                                onChange={(e) => handleAnswerChange(e, index)}
-                                value={formik.values.option1_ans}
-
-                            />
-
-                            <Input id="option1_question_image" name="option1_ans_image" type="file"
-                                onChange={(e) => handleAnswerImageChange(e, index)}
-
-                            />
-
-                        </div>
-
-
-                    ))}
+            <div id="option2_question" className="w-full">
+                <Label htmlFor="option2_question">Ask</Label>
+                <div className="grid grid-cols-12  items-center justify-center gap-1">
+                    <div className="col-span-10">
+                        <Input
+                            id="option2_question"
+                            name="option2_question"
+                            type="text"
+                            onChange={(e) => setQuestion(e.target.value)}
+                            value={question}
+                            className=""
+                        />
+                    </div>
+                    <div className="col-span-1">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger>
+                                <div className="z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-start items-center hover:cursor-pointer" data-slot="trigger" aria-haspopup="true" aria-expanded="false" id="react-aria275040590-:rbt:">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" style={{ width: '24px', height: '24px' }}>
+                                        <path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+                                    </svg>
+                                </div>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuLabel>Add description</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuLabel>
+                                    <div className="flex items-center space-x-2">
+                                        <Switch id="hide-option1" />
+                                        <Label htmlFor="hide-option">Create variant</Label>
+                                    </div>
+                                </DropdownMenuLabel>
+                                <DropdownMenuLabel>
+                                    <div className="flex items-center space-x-2">
+                                        <Switch id="hide-option2" />
+                                        <Label htmlFor="hide-option">Don't show option in config</Label>
+                                    </div>
+                                </DropdownMenuLabel>
+                                <DropdownMenuItem><Trash
+                                    className="mr-2 h-4 w-4" /><span>To Delete</span></DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
                 </div>
-
-
-
-
             </div>
+            <div id="option2_ans" className="w-full">
+                <Label htmlFor="option2_ans">Answers</Label>
+                    {/* Grid Column */}
+                    <div className="grid grid-cols-12  items-center justify-center gap-1">
+                    <div className="col-span-1 ">
+                        <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            data-prefix="fas"
+                            data-icon="grip-vertical"
+                            className="svg-inline--fa fa-grip-vertical w-6 h-6"
+                            role="img"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 320 512"
+                        >
+                            <path fill="currentColor" d="M40 352l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zm192 0l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 320c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 192l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 160c-22.1 0-40-17.9-40-40L0 72C0 49.9 17.9 32 40 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40z"></path>
+                        </svg>
+                    </div>
+
+                    <div className="col-span-8">
+                        {ans.map((ans, index) => (
+                            <div key={index}>
+                                <Input
+                                    id={`option2_ans_${index}`}
+                                    name={`option2_ans_${index}`}
+                                    type="text"
+                                    onChange={(e) => handleAnswerChange(e, index)}
+                                    value={formik.values[`option2_ans_${index}`] || ''}
+                                    className="w-full" // Makes the input field take full width of its container
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="col-span-2">
+                        {ans.map((ans, index) => (
+                            <div key={index} className="flex items-center space-x-2">
+                                <label htmlFor={`option2_ans_img_${index}`} className="cursor-pointer">
+                                    <img src="/images/image_icon.jpg" alt="New Icon" className="w-20 h-12 rounded-lg bg-gray-100 p-1 hover:bg-gray-200" />
+                                </label>
+                                <Input
+                                    id={`option2_ans_img_${index}`}
+                                    name={`option2_ans_img_${index}`}
+                                    type="file"
+                                    onChange={(e) => handleAnswerImageChange(e, index)}
+                                    className="hidden" // Hides the file input field
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="col-span-1">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <div className="z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-start items-center hover:cursor-pointer" data-slot="trigger" aria-haspopup="true" aria-expanded="false" id="react-aria275040590-:rbt:">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" style={{ width: '24px', height: '24px' }}>
+                                        <path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+                                    </svg>
+                                </div>
 
 
-
-
-
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="w-56">
+                                <DropdownMenuGroup>
+                                    <DropdownMenuItem>
+                                        <BarChart3 className="mr-2 h-4 w-4" />
+                                        <span>abc</span>
+                                    </DropdownMenuItem>
+                                </DropdownMenuGroup>
+                                <DropdownMenuSeparator />
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
+            </div>
+                
+        </div>
 
             <Button type='button' onClick={handleFinished}>Finished</Button>
         </div>
-    )
+    );
 }
-
 function Option3({ formik, options, setOptions, setOption3 }: any) {
-    console.log(formik)
+    const [smallestSize, setSmallestSize] = useState('');
+    const [largestSize, setLargestSize] = useState('');
+    const [stepSize, setStepSize] = useState('');
 
-    const [items, setItems] = useState([0, 1, 2, 3])
-
-    const [ans, setAns] = useState([
-        {
-            label: "Smallest possible answer",
-            ans: '',
-            img: null,
-        },
-        {
-            label: "Biggest possible answer",
-            ans: '',
-            img: null,
-        },
-        {
-            label: "Step size",
-            ans: '',
-            img: null,
-        }
-    ]);
-
-    const [question, setQuestion] = useState("");
-
-    function handleAnswer(e: any) {
-        formik.values.option1_ans = e.target.value
-    }
-
-    function handleAnswerChange(e: any, index: number) {
-        const newAns = [...ans];
-        newAns[index].ans = e.target.value;
-        setAns(newAns);
-
-        // Update formik values
-        // formik.setFieldValue(`option1_ans_${index}`, e.target.value);
-        // addAnswerField()
-    }
-
-    function handleAnswerImageChange(e: any, index: number) {
-        const newAns: any = [...ans];
-        // newAns[index].img = e.target.value;
-        // setAns(newAns);
-
-        // Update formik values
-        formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
-
-
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                newAns[index].img = reader.result
-                setAns(newAns);
-            };
-            reader.readAsDataURL(file);
-        }
-
-        // addAnswerField()
-    }
-
-
-
-    const handleFinished = () => {
+    function handleFinished() {
         setOptions((prev: any) => prev.concat({
             type: '3',
-            question: question,
-            answers: ans
-        }))
+            question: formik.values.option3_question,
+            smallestSize: smallestSize,
+            largestSize: largestSize,
+            stepSize: stepSize
+        }));
 
-        setAns([
-            {
-                label: "Smallest possible answer",
-                ans: '',
-                img: null,
-            },
-            {
-                label: "Biggest possible answer",
-                ans: '',
-                img: null,
-            },
-            {
-                label: "Step size",
-                ans: '',
-                img: null,
-            }
-        ])
-        setQuestion("")
-        setOption3(false)
-        console.log(options)
+        setOption3(false);
     }
-
-    const controls = useDragControls()
 
     return (
-        <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
-            <h3>Number question</h3>
+        // <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
+        //     <h3>Number Question</h3>
 
-            <div id="option1_question" className="w-60">
-                <Label htmlFor="option1_question">Ask</Label>
-                <Input id="option1_question" name="option1_question" type="text"
-                    onChange={(e) => setQuestion(e.target.value)}
-                    value={question}
-                />
-            </div>
+        //     <div id="option3_question" className="w-full">
+        //         <Label htmlFor="option3_question">Ask</Label>
+        //          <Input
+        //             id="option3_question"
+        //             name="option3_question"
+        //             type="text"
+        //             onChange={(e) => formik.setFieldValue('option3_question', e.target.value)}
+        //             value={formik.values.option3_question || ''}
+        //             //className=""
+        //             //className="w-[200px]"
+        //         /> 
+               
+        //         <DropdownMenu>
+        //             <DropdownMenuTrigger>
+        //             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" style={{ width: '24px', height: '24px' }}>
+        //                         <path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+        //                         </svg>
+        //             </DropdownMenuTrigger>
+        //             <DropdownMenuContent>
+        //                 <DropdownMenuLabel>Add description</DropdownMenuLabel>
+        //                 <DropdownMenuSeparator />
+        //                 <DropdownMenuLabel>
+        //                     <div className="flex items-center space-x-2">
+        //                         <Switch id="hide-option4" />
+        //                         <Label htmlFor="hide-option">Don't show option in config</Label>
+        //                     </div>
+        //                 </DropdownMenuLabel>
+        //                 <DropdownMenuLabel>
+        //                     <div className="flex items-center space-x-2">
+        //                         <Switch id="hide-option5" />
+        //                         <Label htmlFor="hide-option">Price linear growth</Label>
+        //                     </div>
+        //                 </DropdownMenuLabel>
 
-            <div id="option1_ans" className="w-60">
-                <div className='space-y-2'>
+        //                 <DropdownMenuItem><Trash
+        //                             className="mr-2 h-4 w-4" /><span>To Delete</span></DropdownMenuItem>
 
-                    {ans.map((ans, index: any) => (
-                        <div>
-                            <Label>{ans.label}</Label>
-                            <Input id="option1_question" name="option1_ans" type="number"
-                                onChange={(e) => handleAnswerChange(e, index)}
-                                value={formik.values.option1_ans}
+        //             </DropdownMenuContent>
+        //         </DropdownMenu>
+        //     </div>
 
-                            />
+        //     <div id="option3_smallestSize" className="w-60">
+        //         <Label htmlFor="option3_smallestSize">Smallest Size</Label>
+        //         <Input
+        //             id="option3_smallestSize"
+        //             name="option3_smallestSize"
+        //             type="number"
+        //             onChange={(e) => setSmallestSize(e.target.value)}
+        //             value={smallestSize}
+        //         />
+        //     </div>
+
+        //     <div id="option3_largestSize" className="w-60">
+        //         <Label htmlFor="option3_largestSize">Largest Size</Label>
+        //         <Input
+        //             id="option3_largestSize"
+        //             name="option3_largestSize"
+        //             type="number"
+        //             onChange={(e) => setLargestSize(e.target.value)}
+        //             value={largestSize}
+        //         />
+        //     </div>
+
+        //     <div id="option3_stepSize" className="w-60">
+        //         <Label htmlFor="option3_stepSize">Step Size</Label>
+        //         <Input
+        //             id="option3_stepSize"
+        //             name="option3_stepSize"
+        //             type="number"
+        //             onChange={(e) => setStepSize(e.target.value)}
+        //             value={stepSize}
+        //         />
+        //     </div>
+
+        //     <Button type='button' onClick={handleFinished}>Finished</Button>
+        // </div>
 
 
+    //     <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
+    // <h3>Number Question</h3>
+
+    // <div id="option3_question" className="w-full flex items-center space-x-2">
+    //     <Label htmlFor="option3_question">Ask</Label>
+    //     <Input
+    //         id="option3_question"
+    //         name="option3_question"
+    //         type="text"
+    //         onChange={(e) => formik.setFieldValue('option3_question', e.target.value)}
+    //         value={formik.values.option3_question || ''}
+    //         className="w-[200px]" // Adjust width as needed
+    //     /> 
+    //     <DropdownMenu>
+    //         <DropdownMenuTrigger>
+    //             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" style={{ width: '24px', height: '24px' }}>
+    //                 <path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+    //             </svg>
+    //         </DropdownMenuTrigger>
+    //         <DropdownMenuContent>
+    //             <DropdownMenuLabel>Add description</DropdownMenuLabel>
+    //             <DropdownMenuSeparator />
+    //             <DropdownMenuLabel>
+    //                 <div className="flex items-center space-x-2">
+    //                     <Switch id="hide-option4" />
+    //                     <Label htmlFor="hide-option">Don't show option in config</Label>
+    //                 </div>
+    //             </DropdownMenuLabel>
+    //             <DropdownMenuLabel>
+    //                 <div className="flex items-center space-x-2">
+    //                     <Switch id="hide-option5" />
+    //                     <Label htmlFor="hide-option">Price linear growth</Label>
+    //                 </div>
+    //             </DropdownMenuLabel>
+    //             <DropdownMenuItem>
+    //                 <Trash className="mr-2 h-4 w-4" /><span>To Delete</span>
+    //             </DropdownMenuItem>
+    //         </DropdownMenuContent>
+    //     </DropdownMenu>
+    // </div>
+
+    // <div id="option3_smallestSize" className="w-60">
+    //     <Label htmlFor="option3_smallestSize">Smallest Size</Label>
+    //     <Input
+    //         id="option3_smallestSize"
+    //         name="option3_smallestSize"
+    //         type="number"
+    //         onChange={(e) => setSmallestSize(e.target.value)}
+    //         value={smallestSize}
+    //     />
+    // </div>
+
+    // <div id="option3_largestSize" className="w-60">
+    //     <Label htmlFor="option3_largestSize">Largest Size</Label>
+    //     <Input
+    //         id="option3_largestSize"
+    //         name="option3_largestSize"
+    //         type="number"
+    //         onChange={(e) => setLargestSize(e.target.value)}
+    //         value={largestSize}
+    //     />
+    // </div>
+
+    // <div id="option3_stepSize" className="w-60">
+    //     <Label htmlFor="option3_stepSize">Step Size</Label>
+    //     <Input
+    //         id="option3_stepSize"
+    //         name="option3_stepSize"
+    //         type="number"
+    //         onChange={(e) => setStepSize(e.target.value)}
+    //         value={stepSize}
+    //     />
+    // </div>
+
+    // <Button type='button' onClick={handleFinished}>Finished</Button>
+    //    </div>
+
+    <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
+    <h3>Number Question</h3>
+
+    <div id="option3_question" className="w-full">
+        <Label htmlFor="option3_question">Ask</Label>
+        
+        <div className="flex items-center space-x-2 mt-2">
+            <Input
+                id="option3_question"
+                name="option3_question"
+                type="text"
+                onChange={(e) => formik.setFieldValue('option3_question', e.target.value)}
+                value={formik.values.option3_question || ''}
+                className="flex-grow"
+            />
+            <DropdownMenu>
+                <DropdownMenuTrigger>
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" style={{ width: '24px', height: '24px' }}>
+                        <path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+                    </svg>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                    <DropdownMenuLabel>Add description</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuLabel>
+                        <div className="flex items-center space-x-2">
+                            <Switch id="hide-option4" />
+                            <Label htmlFor="hide-option">Don't show option in config</Label>
                         </div>
-
-
-                    ))}
-                </div>
-
-
-
-
-            </div>
-
-
-
-
-
-
-            <Button type='button' onClick={handleFinished}>Finished</Button>
+                    </DropdownMenuLabel>
+                    <DropdownMenuLabel>
+                        <div className="flex items-center space-x-2">
+                            <Switch id="hide-option5" />
+                            <Label htmlFor="hide-option">Price linear growth</Label>
+                        </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuItem>
+                        <Trash className="mr-2 h-4 w-4" />
+                        <span>To Delete</span>
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
         </div>
-    )
+    </div>
+
+    <div id="option3_smallestSize" className="w-60">
+        <Label htmlFor="option3_smallestSize">Smallest Size</Label>
+        <Input
+            id="option3_smallestSize"
+            name="option3_smallestSize"
+            type="number"
+            onChange={(e) => setSmallestSize(e.target.value)}
+            value={smallestSize}
+        />
+    </div>
+
+    <div id="option3_largestSize" className="w-60">
+        <Label htmlFor="option3_largestSize">Largest Size</Label>
+        <Input
+            id="option3_largestSize"
+            name="option3_largestSize"
+            type="number"
+            onChange={(e) => setLargestSize(e.target.value)}
+            value={largestSize}
+        />
+    </div>
+
+    <div id="option3_stepSize" className="w-60">
+        <Label htmlFor="option3_stepSize">Step Size</Label>
+        <Input
+            id="option3_stepSize"
+            name="option3_stepSize"
+            type="number"
+            onChange={(e) => setStepSize(e.target.value)}
+            value={stepSize}
+        />
+    </div>
+
+    <Button type='button' onClick={handleFinished}>Finished</Button>
+</div>
+
+    );
 }
-
 function Option4({ formik, options, setOptions, setOption4 }: any) {
-    console.log(formik)
+    const [ask, setAsk] = useState("");
+    const [toggle1, setToggle1] = useState(false);
+    const [toggle2, setToggle2] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const [items, setItems] = useState([0, 1, 2, 3])
-
-    const [products, setProducts] = useState([
-        {
-            id: 1,
-            name: 'product1'
-        },
-        {
-            id: 2,
-            name: 'product2'
-        },
-        {
-            id: 3,
-            name: 'product3'
-        },
-    ])
-
-    const [ans, setAns] = useState([
-        {
-            product_id: '',
-            product_name: '',
-            img: null,
-        }
-    ]);
-
-    const [question, setQuestion] = useState("");
-
-    function handleAnswer(e: any) {
-        formik.values.option1_ans = e.target.value
-    }
-
-    function handleAnswerChange(e: any, index: number): any {
-        console.log(e)
-        console.log(ans)
-        const selectedProduct: any = products.find(product => product.name == e);
-        console.log(selectedProduct)
-        // return;
-        const newAns = [...ans];
-        newAns[index].product_id = selectedProduct?.id;
-        newAns[index].product_name = e;
-        setAns(newAns);
-
-        // Update formik values
-        addAnswerField()
-    }
-
-    function handleAnswerImageChange(e: any, index: number) {
-        const newAns: any = [...ans];
-        // newAns[index].img = e.target.value;
-        // setAns(newAns);
-
-        // Update formik values
-        // formik.setFieldValue(`option1_ans_img_${index}`, e.target.files[0]);
-
-
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                newAns[index].img = reader.result
-                setAns(newAns);
-            };
-            reader.readAsDataURL(file);
-        }
-
-        // addAnswerField()
-    }
-
-    function addAnswerField() {
-        // Check if the last answer is not empty
-        if (ans[ans.length - 1].product_id !== '') {
-            setAns([...ans, { product_id: '', product_name: '', img: null }]);
-        }
-    }
+    const handleDelete = () => {
+        setOption4(false);
+    };
 
     const handleFinished = () => {
         setOptions((prev: any) => prev.concat({
             type: '4',
-            question: question,
-            answers: ans
-        }))
-
-        setAns([
-            {
-                product_id: '',
-                product_name: '',
-                img: null
-            }
-        ])
-        setQuestion("")
-        setOption4(false)
-        console.log(options)
-    }
-
-    const controls = useDragControls()
+            ask: ask,
+            toggle1: toggle1,
+            toggle2: toggle2,
+        }));
+        setAsk("");
+        setToggle1(false);
+        setToggle2(false);
+        setOption4(false);
+    };
 
     return (
         <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
-            <h3>Cross-sell group</h3>
+            <div id="option4_ask" className="w-full ">
+                <div className="flex justify-between items-center">
+                    <h3>Cross-sell Product</h3>
+                </div>
+                <div className="grid grid-cols-12  items-center justify-center gap-1 mb-6">
 
-            <div id="option1_question" className="w-60">
-                <Label htmlFor="option1_question">Ask</Label>
-                <Input id="option1_question" name="option1_question" type="text"
-                    onChange={(e) => setQuestion(e.target.value)}
-                    value={question}
-                />
-            </div>
-
-            <div id="option1_ans" className="w-60">
-                <Label htmlFor="option1_ans">Answers</Label>
-                <div className='space-y-2'>
-
-                    {ans.map((ans, index: any) => (
-                        <div>
-                            {/* <Input id="option1_question" name="option1_ans" type="text"
-                                onChange={(e) => handleAnswerChange(e, index)}
-                                value={formik.values.option1_ans}
-
-                            /> */}
-
-
-
-                            <Select onValueChange={(e) => handleAnswerChange(e, index)} defaultValue={ans.product_name}>
-                                <SelectTrigger className="w-[180px]">
-                                    <SelectValue placeholder="Select a fruit" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
-                                        <SelectLabel>Fruits</SelectLabel>
-                                        {products.map((product: any)=>{
-                                           return <SelectItem 
-                                            value={product.name}>{product.name}</SelectItem>
-                                        })}
-                                        <SelectItem value="banana">Banana</SelectItem>
-                                        <SelectItem value="blueberry">Blueberry</SelectItem>
-                                        <SelectItem value="grapes">Grapes</SelectItem>
-                                        <SelectItem value="pineapple">Pineapple</SelectItem>
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
-                        </div>
-
-
-                    ))}
+                    <div className="col-span-8">
+                        <Label htmlFor="option4_ask ">Ask</Label>
+                        <Input
+                            id="option4_ask"
+                            name="option4_ask"
+                            type="text"
+                            onChange={(e) => setAsk(e.target.value)}
+                            value={ask}
+                        />
+                    </div>
+                    <div className="col-span-1">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger>
+                                <div
+                                    className="z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-end items-end hover:cursor-pointer"
+                                    data-slot="trigger" aria-haspopup="true" aria-expanded="false"
+                                    id="react-aria275040590-:rbt:">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                        data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical"
+                                        role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512"
+                                        style={{ width: '24px', height: '24px' }}>
+                                        <path fill="currentColor"
+                                            d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+                                    </svg>
+                                </div>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="text-red-500">
+                                <DropdownMenuItem><Trash
+                                    className="mr-2 h-4 w-4" /><span>To Delete</span></DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
                 </div>
 
+                <Label>Products</Label>
+                <div className="grid grid-cols-12 mb-4   items-center justify-center gap-1">
+                    <div className="col-span-1 ">
+                        <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            data-prefix="fas"
+                            data-icon="grip-vertical"
+                            className="svg-inline--fa fa-grip-vertical w-6 h-6"
+                            role="img"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 320 512"
+                        >
+                            <path fill="currentColor"
+                                d="M40 352l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zm192 0l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 320c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 192l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 160c-22.1 0-40-17.9-40-40L0 72C0 49.9 17.9 32 40 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40z"></path>
+                        </svg>
+                    </div>
+
+                    <div className="col-span-8">
+                        <Input
+                            id="option4_ask"
+                            name="option4_ask"
+                            type="text"
+                            onChange={(e) => setAsk(e.target.value)}
+                            value={ask}
+                        />
+                    </div>
+
+                    <div className="col-span-1">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <div
+                                    className="z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-start items-center hover:cursor-pointer"
+                                    data-slot="trigger" aria-haspopup="true" aria-expanded="false"
+                                    id="react-aria275040590-:rbt:">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                        data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical"
+                                        role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512"
+                                        style={{ width: '24px', height: '24px' }}>
+                                        <path fill="currentColor"
+                                            d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+                                    </svg>
+                                </div>
 
 
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="w-56">
+                                <DropdownMenuGroup>
+                                    <DropdownMenuItem>
+                                        <BarChart3 className="mr-2 h-4 w-4" />
+                                        <span>abc</span>
+                                    </DropdownMenuItem>
+                                </DropdownMenuGroup>
+                                <DropdownMenuSeparator />
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
+                </div>
+                <div className="grid grid-cols-12">
+                    <div className="col-span-10 ">
 
+                        <Select>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select Product" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="1">Product 1</SelectItem>
+                                <SelectItem value="2">Product 2</SelectItem>
+                                <SelectItem value="3">Product 3</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                </div>
             </div>
 
 
-
-
-
+            <div id="option4_toggle" className="w-full space-y-2">
+                <Label>Options</Label>
+                <div className="flex items-center space-x-2">
+                    <Switch id="1" />
+                    <Label htmlFor="a">Completing this cross-sell group is mandatory</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                    <Switch id="2" />
+                    <Label htmlFor="b">Completing multiple cross-sells is possible</Label>
+                </div>
+            </div>
 
             <Button type='button' onClick={handleFinished}>Finished</Button>
         </div>
-    )
+    );
 }
-

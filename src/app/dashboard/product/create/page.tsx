@@ -31,7 +31,7 @@ export default function Page() {
     }]);
 
     const [mainImage, setMainImage] = useState(null)
-
+    
     const formik = useFormik({
         initialValues: {
             product_name: "",
@@ -127,35 +127,7 @@ export default function Page() {
 
                             />
                         </div>
-                        <div className="mb-4">
-                            <Label htmlFor="options">Options</Label>
-                            {options.length > 0 &&
-                                options.map((option: any, index: any) => (
-                                    <div
-                                        key={index}
-                                        className="bg-gray-200 py-2 px-2 flex items-center justify-between rounded-md mb-2"
-                                    >
-                                        <div>
-                                            <p className="font-bold text-sm">{option.question}</p>
-                                            <div className="flex flex-wrap gap-2">
-                                                {option.answers.map((answer: any, index: any) => {
-                                                    const isLast = index === option.answers.length - 1;
-                                                    if (!isLast) {
-                                                        if (option.type == '4') {
-                                                            return <p className="bg-gray-400 rounded-sm px-2">{answer.product_name}</p>
-                                                        }
-                                                        return <p className="bg-gray-400 rounded-sm px-2">{answer.ans}</p>
-                                                    }
-                                                })}
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <Pencil />
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
+                        
 
                         <Options formik={formik} options={options} setOptions={setOptions} />
 
@@ -170,29 +142,121 @@ export default function Page() {
             </Card>
 
             {/* New Additional Container with Gray Background and White Inner Container */}
-            <div className="w-[500px] h-[800px]  mx-4 flex flex-col  ">
+            <div
+  className="w-[500px] h-[800px] mx-4 flex flex-col overflow-auto"
+  style={{ 
+    scrollbarWidth: 'none', /* For Firefox */
+    msOverflowStyle: 'none', /* For Internet Explorer and Edge */
+    overflow: 'scroll', /* Ensure the content is scrollable */
+  }}
+  >
                 <div className=" border-4 border-black bg-gray-300 p-4 rounded-xl w-[500px] ">
                     <div className="bg-white p-4 rounded-lg">
                         <AspectRatio ratio={16 / 9} className="w-full h-full">
                             {mainImage &&
                                 <Image
-                                    src={mainImage}
+                                    src="/images/image.jpg"
                                     alt="Your Image Description"
                                     className="rounded-md object-cover"
                                     layout="fill"
                                 />
                             }
+                             <Image
+                                    src="/images/image.jpg"
+                                    alt="Your Image Description"
+                                    className="rounded-md object-cover"
+                                    layout="fill"
+                                />
 
                         </AspectRatio>
                         <div className="flex flex-col mt-4 space-y-2">
-                            <p className="text-lg font-semibold font-sans text-base">{formik.values.product_name || "Name"}</p>
-                            <p className="text-sm text-gray-600 font-sans text-base">{formik.values.description || "Description"}</p>
+                            <p className=" font-semibold font-sans text-base">{formik.values.product_name || "Name"}</p>
+                            <p className=" text-gray-600 font-sans text-base">{formik.values.description || "Description"}</p>
                         </div>
                     </div>
-                    {options.map((option: any) => {
+                    {/* {options.map((option: any) => {
                         return <DisplayOptions option={option} />
-                    })}
+                    })} */}
+                
 
+                <div className="flex flex-col gap-4 mt-4">
+                    <div className="flex justify-between ">
+                        <Label className="font-bold text-base">Afmeting</Label>
+                        <span className="bg-gray-400 rounded-lg">Verplicht</span>
+                    </div>
+                    <div className="flex justify-between items-center mb-2">
+                        <Label className="font-sans font-normal text-base">120 x 130</Label>
+                        <div className="flex items-center space-x-2">
+                            <label htmlFor="img" className="cursor-pointer">
+                                <img src="/images/image_icon.jpg" alt="New Icon" className="w-20 h-12 rounded-lg" />
+                            </label>
+                            <Checkbox value="checkbox1" className="h-6 w-6" id="checkbox1"/>
+                        </div>
+                    </div>
+
+                    <div className="flex justify-between items-center  mb-2">
+                        <Label className="font-sans font-normal text-base" >130 x 140</Label>
+                        <Checkbox className=" h-6 w-6" value="checkbox2" id="checkbox2"/>
+                    </div>
+                    <div className="flex justify-between items-center  mb-2">
+                        <Label className="font-sans font-normal text-base" >140 x 150</Label>
+                        <Checkbox value="checkbox3" className="h-6 w-6" id="checkbox3"/>
+                    </div>
+                </div>
+                
+
+
+
+                <div className="flex justify-between mt-4">
+                    <Label className="font-bold text-base">Your Age</Label>
+                    <span className="bg-gray-400 rounded-lg">Verplicht</span>
+                </div>
+                <div className="grid grid-cols-12 mt-4">
+                   <div className="col-span-5">
+                        <Input
+                                type="number"
+                                id="meters"
+                                min="0"
+                                max="1000"
+                                className=" text-center border rounded-sm"
+                            />
+                   </div>
+                   <div className="col-span-1 ml-4 flex items-center">
+                        <span className="text-base text-center ">0</span>
+                   </div>
+                   <div className="col-span-5 ml-1 flex items-center">
+                        <Slider defaultValue={[1]} max={1000} step={1}/>
+                   </div>
+                   <div className="col-span-1 ml-2 flex items-center">
+                        <span className="text-base text-center ">1000</span>
+                   </div>
+                </div>
+
+                <div className="flex flex-col gap-4 mt-4">
+                    
+                    <div className="flex justify-between ">
+                        <Label className="font-bold text-base">What is 2 + 2</Label>
+                        <span className="bg-gray-400 rounded-lg">Verplicht</span>
+                    </div>
+                    <RadioGroup defaultValue="option-one">
+                        <div className="flex justify-between items-center  mb-2">
+                            <Label className="font-sans font-normal text-base" htmlFor="option-one">5CM</Label>
+                            <RadioGroupItem className="h-6 w-6" value="option-one" id="option-one"/>
+                        </div>
+                        <div className="flex justify-between items-center  mb-2">
+                            <Label className="font-sans font-normal text-base" htmlFor="option-two">6CM</Label>
+                            <RadioGroupItem className="h-6 w-6" value="option-two" id="option-two"/>
+                        </div>
+                        <div className="flex justify-between items-center  mb-2">
+                            <Label className="font-sans font-normal text-base" htmlFor="option-three">7CM</Label>
+                            <RadioGroupItem className="h-6 w-6" value="option-three" id="option-three"/>
+                        </div>
+                        <div className="flex justify-between items-center  mb-2">
+                            <Label className="font-sans font-normal text-base" htmlFor="option-four">8CM</Label>
+                            <RadioGroupItem className="h-6 w-6" value="option-four" id="option-four"/>
+                        </div>
+                    </RadioGroup>
+                </div>
                 </div>
             </div>
         </div>
