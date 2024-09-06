@@ -3,7 +3,8 @@
       "deploymentEnabled": {
         "noor": false,
         "sami": false,
-        "urwah": false
+        "urwah": false,
+        "form_design": false
       }
     }
   }

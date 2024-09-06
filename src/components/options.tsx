@@ -111,29 +111,34 @@ export default function Options({ formik, options, setOptions }: any) {
             }
 
 
-            {option1 && <Option1 formik={formik} options={options} setOptions={setOptions} setOption1={setOption1} />}
-            {option2 && <Option2 formik={formik} options={options} setOptions={setOptions} setOption2={setOption2} />}
-            {option3 && <Option3 formik={formik} options={options} setOptions={setOptions} setOption3={setOption3} />}
-            {option4 && <Option4 formik={formik} options={options} setOptions={setOptions} setOption4={setOption4} />}
+            {option1 && <Option1 formik={formik} options={options} setOptions={setOptions} setOption1={setOption1} edit={false} />}
+            {option2 && <Option2 formik={formik} options={options} setOptions={setOptions} setOption2={setOption2} edit={false} />}
+            {option3 && <Option3 formik={formik} options={options} setOptions={setOptions} setOption3={setOption3} edit={false} />}
+            {option4 && <Option4 formik={formik} options={options} setOptions={setOptions} setOption4={setOption4} edit={false} />}
         </div>
     )
 }
 
 
 
-function Option1({ formik, options, setOptions, setOption1 }: any) {
+function Option1({ formik, options, setOptions, setOption1, edit, isEditing, setIsEditing, editIndex, setEditIndex, option }: any) {
     console.log(formik)
+
+    console.log(isEditing)
 
     const [items, setItems] = useState([0, 1, 2, 3])
 
-    const [ans, setAns] = useState([
+    let ansArray = edit ? option.answers : 
+    [
         {
             ans: '',
             img: '',
         }
-    ]);
+    ]
 
-    const [question, setQuestion] = useState("");
+    const [ans, setAns] = useState(ansArray);
+
+    const [question, setQuestion] = useState(edit ? option.question : '');
 
     function handleAnswer(e: any) {
         formik.values.option1_ans = e.target.value
@@ -179,11 +184,27 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
     }
 
     const handleFinished = () => {
-        setOptions((prev: any) => prev.concat({
-            type: '1',
-            question: question,
-            answers: ans
-        }))
+        console.log(isEditing)
+        console.log(editIndex)
+        if (isEditing && editIndex !== null) {
+            const updatedOptions = [...options];
+            updatedOptions[editIndex] = {
+                type: '1',
+                question: question,
+                answers: ans
+            };
+
+            console.log(updatedOptions);
+            setOptions(updatedOptions);
+            setIsEditing(false);
+            setEditIndex(null);
+        } else {
+            setOptions((prev: any) => prev.concat({
+                type: '1',
+                question: question,
+                answers: ans
+            }));
+        }
 
         setAns([
             {
@@ -214,11 +235,11 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
                 <Label htmlFor="option1_ans">Answers</Label>
                 <div className='space-y-2'>
 
-                    {ans.map((ans, index: any) => (
+                    {ans.map((ans: any, index: any) => (
                         <div>
                             <Input id="option1_question" name="option1_ans" type="text"
                                 onChange={(e) => handleAnswerChange(e, index)}
-                                value={formik.values.option1_ans}
+                                value={ans.ans}
 
                             />
 
@@ -248,7 +269,7 @@ function Option1({ formik, options, setOptions, setOption1 }: any) {
     )
 }
 
-function Option2({ formik, options, setOptions, setOption2 }: any) {
+function Option2({ formik, options, setOptions, setOption2, edit, isEditing, setIsEditing, editIndex, setEditIndex, option }: any) {
     console.log(formik)
 
     const [items, setItems] = useState([0, 1, 2, 3])
@@ -375,7 +396,7 @@ function Option2({ formik, options, setOptions, setOption2 }: any) {
     )
 }
 
-function Option3({ formik, options, setOptions, setOption3 }: any) {
+function Option3({ formik, options, setOptions, setOption3, edit, isEditing, setIsEditing, editIndex, setEditIndex, option }: any) {
     console.log(formik)
 
     const [items, setItems] = useState([0, 1, 2, 3])
@@ -515,7 +536,7 @@ function Option3({ formik, options, setOptions, setOption3 }: any) {
     )
 }
 
-function Option4({ formik, options, setOptions, setOption4 }: any) {
+function Option4({ formik, options, setOptions, setOption4, edit, isEditing, setIsEditing, editIndex, setEditIndex, option }: any) {
     console.log(formik)
 
     const [items, setItems] = useState([0, 1, 2, 3])
@@ -679,3 +700,5 @@ function Option4({ formik, options, setOptions, setOption4 }: any) {
     )
 }
 
+
+export {Option1, Option2, Option3, Option4}

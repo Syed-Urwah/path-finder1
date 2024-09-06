@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import ImagePlaceHolder from "@/../public/images/image-placeholder.png";
 import React, { useState } from "react";
 import Image from "next/image";
-import Options from "@/components/options";
+import Options, { Option1, Option2, Option3, Option4 } from "@/components/options";
 import { useFormik } from "formik";
 import { Pencil } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -15,6 +15,15 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export default function Page() {
+
+    const [editIndex, setEditIndex] = useState<number | null>(null);
+    const [isEditing, setIsEditing] = useState(false);
+
+    const [option1, setOption1] = useState(false);
+    const [option2, setOption2] = useState(false);
+    const [option3, setOption3] = useState<any>(false);
+    const [option4, setOption4] = useState(false);
+
     const [options, setOptions] = useState<any>([{
         type: '1',
         question: "question1",
@@ -29,6 +38,16 @@ export default function Page() {
             },
         ]
     }]);
+
+    function handleEditClick(index: any){
+        console.log(index)
+        const optionToEdit = options[index];
+        // setQuestion(optionToEdit.question);
+        // setAns(optionToEdit.answers);
+        setEditIndex(index);
+        setIsEditing(true);
+        // setOption1(true); // Show the form
+    }
 
     const [mainImage, setMainImage] = useState(null)
 
@@ -47,6 +66,26 @@ export default function Page() {
             alert(JSON.stringify(values, null, 2));
         },
     });
+
+    function displayEdit(option: any){
+
+        if(option.type == 1){
+            return <Option1 formik={formik} options={options} option={option} setOptions={setOptions} setOption1={setOption1} edit={true} isEditing={isEditing} setIsEditing={setIsEditing} editIndex={editIndex} setEditIndex={setEditIndex}/>
+        }
+
+        if(option.type == 2){
+            return <Option2 formik={formik} options={options} option={option} setOptions={setOptions} setOption1={setOption1} edit={true} isEditing={isEditing} setIsEditing={setIsEditing} editIndex={editIndex} setEditIndex={setEditIndex}/>
+        }
+
+        if(option.type == 3){
+            return <Option3 formik={formik} options={options} option={option} setOptions={setOptions} setOption1={setOption1} edit={true} isEditing={isEditing} setIsEditing={setIsEditing} editIndex={editIndex} setEditIndex={setEditIndex}/>
+        }
+        if(option.type == 4){
+            return <Option4 formik={formik} options={options} option={option} setOptions={setOptions} setOption1={setOption1} edit={true} isEditing={isEditing} setIsEditing={setIsEditing} editIndex={editIndex} setEditIndex={setEditIndex}/>
+        }
+
+        return <Option1 formik={formik} options={options} option={option} setOptions={setOptions} setOption1={setOption1} edit={true} isEditing={isEditing} setIsEditing={setIsEditing} editIndex={editIndex} setEditIndex={setEditIndex}/>
+    }
 
     return (
         <div className="flex justify-center items-start min-h-screen bg-gray-100 p-4">
@@ -131,6 +170,11 @@ export default function Page() {
                             <Label htmlFor="options">Options</Label>
                             {options.length > 0 &&
                                 options.map((option: any, index: any) => (
+                                   
+                                    (editIndex == index && isEditing) ? displayEdit(option)
+                                    
+                                     :
+
                                     <div
                                         key={index}
                                         className="bg-gray-200 py-2 px-2 flex items-center justify-between rounded-md mb-2"
@@ -149,9 +193,9 @@ export default function Page() {
                                                 })}
                                             </div>
                                         </div>
-                                        <div>
+                                        <button type="button" onClick={()=>handleEditClick(index)}>
                                             <Pencil />
-                                        </div>
+                                        </button>
                                     </div>
                                 ))
                             }
