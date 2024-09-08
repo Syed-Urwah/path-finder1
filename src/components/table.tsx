@@ -35,6 +35,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import axios from "axios"
+import Link from "next/link"
 
 const data: Payment[] = [
   {
@@ -204,8 +206,28 @@ export function DataTableDemo() {
     pageSize: 4, //default page size
   });
 
+  const [products, setProducts] = React.useState([])
+
+  const fetchProducts = async () => {
+
+    try {
+
+
+      const response = await axios.get('http://localhost:8000/api/v1/product');
+
+      console.log('Response:', response.data);
+      setProducts(response.data.data)
+    } catch (error) {
+      console.error('Error posting data:', error);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchProducts()
+  }, [])
+
   const table = useReactTable({
-    data,
+    data: products,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -225,9 +247,11 @@ export function DataTableDemo() {
     },
   })
 
+  console.log(table)
+
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      {/* <div className="flex items-center py-4">
         <Input
           placeholder="Filter emails..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
@@ -262,44 +286,23 @@ export function DataTableDemo() {
               })}
           </DropdownMenuContent>
         </DropdownMenu>
-      </div>
+      </div> */}
       <div className="rounded-md border bg-white z-0">
         <Table className="bg-white">
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-            ))}
+          <TableRow>
+          <TableHead>Product Name</TableHead>
+          <TableHead>Cross Sell</TableHead>
+         
+        </TableRow>
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+            {products.length ? (
+              products.map((product: any) => {
+                return <TableRow>
+                        <TableCell colSpan={3}> <Link href={`http://localhost:3000/dashboard/product/edit/${product.id}`}>{product.product_name}</Link></TableCell>
+                      </TableRow>
+              })
             ) : (
               <TableRow>
                 <TableCell

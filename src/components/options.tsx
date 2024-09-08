@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from './ui/button'
 import { Plus } from 'lucide-react'
 import Image from 'next/image'
@@ -15,16 +15,30 @@ import {
     SelectLabel,
     SelectTrigger,
     SelectValue,
-  } from "@/components/ui/select"
+} from "@/components/ui/select"
+import ImagePlaceHolder from "@/../public/images/image-placeholder.png";
+import { AspectRatio } from './ui/aspect-ratio'
+import axios from 'axios'
 
-export default function Options({ formik, options, setOptions }: any) {
+
+export default function Options({ 
+    formik, options, setOptions,
+    option1,
+    option2,
+    option3,
+    option4,
+    setOption1,
+    setOption2,
+    setOption3,
+    setOption4,
+}: any) {
 
     // const [options, setOptions] = useState([]) as any;
     const [optionsOpen, setOptionOpen] = useState(false)
-    const [option1, setOption1] = useState(false);
-    const [option2, setOption2] = useState(false);
-    const [option3, setOption3] = useState<any>(false);
-    const [option4, setOption4] = useState(false);
+    // const [option1, setOption1] = useState(false);
+    // const [option2, setOption2] = useState(false);
+    // const [option3, setOption3] = useState<any>(false);
+    // const [option4, setOption4] = useState(false);
 
     console.log(formik)
 
@@ -121,20 +135,32 @@ export default function Options({ formik, options, setOptions }: any) {
 
 
 
-function Option1({ formik, options, setOptions, setOption1, edit, isEditing, setIsEditing, editIndex, setEditIndex, option }: any) {
+function Option1({
+    formik, options, setOptions, setOption1, edit, isEditing, setIsEditing, editIndex, setEditIndex, option, isEditPage
+}: any) {
     console.log(formik)
+
+    console.log(isEditPage)
 
     console.log(isEditing)
 
+    console.log(option)
+
     const [items, setItems] = useState([0, 1, 2, 3])
 
-    let ansArray = edit ? option.answers : 
-    [
-        {
-            ans: '',
-            img: '',
-        }
-    ]
+    let ansArray = edit ? option.answers :
+        [
+            {
+                ans: '',
+                img: '',
+            }
+        ]
+
+    console.log(ansArray)
+
+    function isBase64Jpeg(imageData: any) {
+        return imageData.startsWith('data:image/jpeg;base64,');
+    }
 
     const [ans, setAns] = useState(ansArray);
 
@@ -220,7 +246,7 @@ function Option1({ formik, options, setOptions, setOption1, edit, isEditing, set
     const controls = useDragControls()
 
     return (
-        <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
+        <div className='bg-[#f2f2f2] px-5 py-6 my-4 rounded-md space-y-6'>
             <h3>Multiple choice question</h3>
 
             <div id="option1_question" className="w-60">
@@ -231,21 +257,46 @@ function Option1({ formik, options, setOptions, setOption1, edit, isEditing, set
                 />
             </div>
 
-            <div id="option1_ans" className="w-60">
+            <div id="option1_ans" className="w-full">
                 <Label htmlFor="option1_ans">Answers</Label>
                 <div className='space-y-2'>
 
                     {ans.map((ans: any, index: any) => (
-                        <div>
+                        <div className='flex justify-between'>
                             <Input id="option1_question" name="option1_ans" type="text"
                                 onChange={(e) => handleAnswerChange(e, index)}
                                 value={ans.ans}
-
+                                className='w-1/2'
                             />
+                            <Label htmlFor={'option1' + index} className='w-10'>
+                                {ans.img ?
+                                    <div className="w-full h-full">
 
-                            <Input id="option1_question_image" name="option1_ans_image" type="file"
+                                        <Image
+                                            src={(isEditPage && !isBase64Jpeg(ans.img)) ? "http://localhost:8000/storage/" + ans.img : ans.img}
+                                            alt="Your Image Description"
+                                            className="rounded-md object-cover"
+                                            width={100}
+                                            height={100}
+                                        // layout="fill"
+                                        />
+
+                                    </div> :
+                                    <div className="w-full bg-gray-300 h-10 flex rounded-sm">
+                                        <Image
+                                            src={ImagePlaceHolder}
+                                            alt="image-placeholder"
+                                            width={20}
+                                            height={20}
+                                            className="mx-auto my-auto"
+                                        />
+                                    </div>
+
+                                }
+                            </Label>
+                            <Input id={'option1' + index} name={'option1' + index} type="file"
                                 onChange={(e) => handleAnswerImageChange(e, index)}
-
+                                className='hidden'
                             />
 
                         </div>
@@ -269,19 +320,31 @@ function Option1({ formik, options, setOptions, setOption1, edit, isEditing, set
     )
 }
 
-function Option2({ formik, options, setOptions, setOption2, edit, isEditing, setIsEditing, editIndex, setEditIndex, option }: any) {
-    console.log(formik)
+function Option2({ formik, options, setOptions, setOption2, edit, isEditing, setIsEditing, editIndex, setEditIndex, option, isEditPage }: any) {
+    console.log(option)
+    console.log(edit)
 
     const [items, setItems] = useState([0, 1, 2, 3])
 
-    const [ans, setAns] = useState([
-        {
-            ans: '',
-            img: '',
-        }
-    ]);
+    let ansArray = edit ? option.answers :
+        [
+            {
+                ans: '',
+                img: '',
+            }
+        ]
 
-    const [question, setQuestion] = useState("");
+    console.log(ansArray)
+
+
+
+    const [ans, setAns] = useState(ansArray);
+
+    const [question, setQuestion] = useState(edit ? option.question : '');
+
+    function isBase64Jpeg(imageData: any) {
+        return imageData.startsWith('data:image/jpeg;base64,');
+    }
 
     function handleAnswer(e: any) {
         formik.values.option1_ans = e.target.value
@@ -327,11 +390,27 @@ function Option2({ formik, options, setOptions, setOption2, edit, isEditing, set
     }
 
     const handleFinished = () => {
-        setOptions((prev: any) => prev.concat({
-            type: '2',
-            question: question,
-            answers: ans
-        }))
+
+        if (isEditing && editIndex !== null) {
+            const updatedOptions = [...options];
+            updatedOptions[editIndex] = {
+                type: '2',
+                question: question,
+                answers: ans
+            };
+
+            console.log(updatedOptions);
+            setOptions(updatedOptions);
+            setIsEditing(false);
+            setEditIndex(null);
+        } else {
+            setOptions((prev: any) => prev.concat({
+                type: '2',
+                question: question,
+                answers: ans
+            }));
+        }
+
 
         setAns([
             {
@@ -347,7 +426,7 @@ function Option2({ formik, options, setOptions, setOption2, edit, isEditing, set
     const controls = useDragControls()
 
     return (
-        <div className='bg-[#f2f2f2] pl-5 py-6 my-4 rounded-md space-y-6'>
+        <div className='bg-[#f2f2f2] px-5 py-6 my-4 rounded-md space-y-6'>
             <h3>Multiple choice question</h3>
 
             <div id="option1_question" className="w-60">
@@ -358,21 +437,48 @@ function Option2({ formik, options, setOptions, setOption2, edit, isEditing, set
                 />
             </div>
 
-            <div id="option1_ans" className="w-60">
+            <div id="option1_ans" className="w-full">
                 <Label htmlFor="option1_ans">Answers</Label>
                 <div className='space-y-2'>
 
-                    {ans.map((ans, index: any) => (
-                        <div>
+                    {ans.map((ans: any, index: any) => (
+                        <div className='flex justify-between'>
                             <Input id="option1_question" name="option1_ans" type="text"
                                 onChange={(e) => handleAnswerChange(e, index)}
-                                value={formik.values.option1_ans}
-
+                                value={ans.ans}
+                                className='w-1/2'
                             />
 
-                            <Input id="option1_question_image" name="option1_ans_image" type="file"
-                                onChange={(e) => handleAnswerImageChange(e, index)}
+                            <Label htmlFor={'option2' + index} className='w-10'>
+                                {ans.img ?
+                                    <div className="w-full h-full">
 
+                                        <Image
+                                            src={(isEditPage && !isBase64Jpeg(ans.img)) ? "http://localhost:8000/storage/" + ans.img : ans.img}
+                                            alt="Your Image Description"
+                                            className="rounded-md object-cover"
+                                            width={100}
+                                            height={100}
+                                        // layout="fill"
+                                        />
+
+                                    </div> :
+                                    <div className="w-full bg-gray-300 h-10 flex rounded-sm">
+                                        <Image
+                                            src={ImagePlaceHolder}
+                                            alt="image-placeholder"
+                                            width={20}
+                                            height={20}
+                                            className="mx-auto my-auto"
+                                        />
+                                    </div>
+
+                                }
+                            </Label>
+
+                            <Input id={'option2' + index} name={'option2' + index} type="file"
+                                onChange={(e) => handleAnswerImageChange(e, index)}
+                                className='hidden'
                             />
 
                         </div>
@@ -399,35 +505,60 @@ function Option2({ formik, options, setOptions, setOption2, edit, isEditing, set
 function Option3({ formik, options, setOptions, setOption3, edit, isEditing, setIsEditing, editIndex, setEditIndex, option }: any) {
     console.log(formik)
 
+    console.log(option)
+
     const [items, setItems] = useState([0, 1, 2, 3])
 
-    const [ans, setAns] = useState([
-        {
-            label: "Smallest possible answer",
-            ans: '',
-            img: null,
-        },
-        {
-            label: "Biggest possible answer",
-            ans: '',
-            img: null,
-        },
-        {
-            label: "Step size",
-            ans: '',
-            img: null,
-        }
-    ]);
+    let ansArray = edit ? option.answers :
+        [
+            {
+                label: "Smallest possible answer",
+                ans: '',
+                img: null,
+                min: 0
+            },
+            {
+                label: "Biggest possible answer",
+                ans: '',
+                img: null,
+                max: 0
 
-    const [question, setQuestion] = useState("");
+            },
+            {
+                label: "Step size",
+                ans: '',
+                img: null,
+                step: 0
+            }
+        ]
+
+    console.log(ansArray)
+
+    const [ans, setAns] = useState(ansArray);
+
+    const [question, setQuestion] = useState(edit ? option.question : '');
+
+
 
     function handleAnswer(e: any) {
         formik.values.option1_ans = e.target.value
     }
 
     function handleAnswerChange(e: any, index: number) {
+        console.log(index)
         const newAns = [...ans];
         newAns[index].ans = e.target.value;
+        if (index == 0) {
+            newAns[index].min = e.target.value;
+        }
+
+        if (index == 1) {
+            newAns[index].max = e.target.value;
+        }
+
+        if (index == 2) {
+            newAns[index].step = e.target.value;
+        }
         setAns(newAns);
 
         // Update formik values
@@ -460,11 +591,26 @@ function Option3({ formik, options, setOptions, setOption3, edit, isEditing, set
 
 
     const handleFinished = () => {
-        setOptions((prev: any) => prev.concat({
-            type: '3',
-            question: question,
-            answers: ans
-        }))
+
+        if (isEditing && editIndex !== null) {
+            const updatedOptions = [...options];
+            updatedOptions[editIndex] = {
+                type: '3',
+                question: question,
+                answers: ans
+            };
+
+            console.log(updatedOptions);
+            setOptions(updatedOptions);
+            setIsEditing(false);
+            setEditIndex(null);
+        } else {
+            setOptions((prev: any) => prev.concat({
+                type: '3',
+                question: question,
+                answers: ans
+            }));
+        }
 
         setAns([
             {
@@ -505,12 +651,12 @@ function Option3({ formik, options, setOptions, setOption3, edit, isEditing, set
             <div id="option1_ans" className="w-60">
                 <div className='space-y-2'>
 
-                    {ans.map((ans, index: any) => (
+                    {ans.map((ans: any, index: any) => (
                         <div>
                             <Label>{ans.label}</Label>
                             <Input id="option1_question" name="option1_ans" type="number"
                                 onChange={(e) => handleAnswerChange(e, index)}
-                                value={formik.values.option1_ans}
+                                value={ans.ans}
 
                             />
 
@@ -539,32 +685,46 @@ function Option3({ formik, options, setOptions, setOption3, edit, isEditing, set
 function Option4({ formik, options, setOptions, setOption4, edit, isEditing, setIsEditing, editIndex, setEditIndex, option }: any) {
     console.log(formik)
 
+    console.log(option)
+
     const [items, setItems] = useState([0, 1, 2, 3])
 
-    const [products, setProducts] = useState([
-        {
-            id: 1,
-            name: 'product1'
-        },
-        {
-            id: 2,
-            name: 'product2'
-        },
-        {
-            id: 3,
-            name: 'product3'
-        },
-    ])
+    let ansArray = edit ? option.answers :
+        [
+            {
+                product_id: '',
+                product_name: '',
+                img: null,
+            }
+        ]
 
-    const [ans, setAns] = useState([
-        {
-            product_id: '',
-            product_name: '',
-            img: null,
+    console.log(ansArray)
+
+    const [ans, setAns] = useState(ansArray);
+
+    const [question, setQuestion] = useState(edit ? option.question : '');
+
+    const [products, setProducts] = useState<any>([])
+
+    const fetchProducts = async () => {
+
+        try {
+    
+    
+          const response = await axios.get('http://localhost:8000/api/v1/product');
+    
+          console.log('Response:', response.data);
+          setProducts(response.data.data)
+        } catch (error) {
+          console.error('Error posting data:', error);
         }
-    ]);
+      };
 
-    const [question, setQuestion] = useState("");
+      useEffect(()=>{
+        fetchProducts()
+      },[])
+
+
 
     function handleAnswer(e: any) {
         formik.values.option1_ans = e.target.value
@@ -573,13 +733,15 @@ function Option4({ formik, options, setOptions, setOption4, edit, isEditing, set
     function handleAnswerChange(e: any, index: number): any {
         console.log(e)
         console.log(ans)
-        const selectedProduct: any = products.find(product => product.name == e);
+        const selectedProduct: any = products.find((product: any) => product.product_name == e);
         console.log(selectedProduct)
         // return;
         const newAns = [...ans];
         newAns[index].product_id = selectedProduct?.id;
         newAns[index].product_name = e;
         setAns(newAns);
+
+        console.log(newAns)
 
         // Update formik values
         addAnswerField()
@@ -609,17 +771,40 @@ function Option4({ formik, options, setOptions, setOption4, edit, isEditing, set
 
     function addAnswerField() {
         // Check if the last answer is not empty
-        if (ans[ans.length - 1].product_id !== '') {
+        if (ans[ans.length - 1].product_name !== '' && ans[ans.length - 1].product_id !== null) {
             setAns([...ans, { product_id: '', product_name: '', img: null }]);
         }
     }
 
     const handleFinished = () => {
-        setOptions((prev: any) => prev.concat({
-            type: '4',
-            question: question,
-            answers: ans
-        }))
+
+        console.log(ans)
+        // return;
+
+        if (isEditing && editIndex !== null) {
+            const updatedOptions = [...options];
+            updatedOptions[editIndex] = {
+                type: '4',
+                question: question,
+                answers: ans
+            };
+
+            console.log(updatedOptions);
+            setOptions(updatedOptions);
+            setIsEditing(false);
+            setEditIndex(null);
+        } else {
+            console.log(ans)
+            // return
+            setOptions((prev: any) => prev.concat({
+                type: '4',
+                question: question,
+                answers: ans
+            }));
+        }
+
+        console.log(ans)
+        // return;
 
         setAns([
             {
@@ -651,7 +836,7 @@ function Option4({ formik, options, setOptions, setOption4, edit, isEditing, set
                 <Label htmlFor="option1_ans">Answers</Label>
                 <div className='space-y-2'>
 
-                    {ans.map((ans, index: any) => (
+                    {ans.map((ans: any, index: any) => (
                         <div>
                             {/* <Input id="option1_question" name="option1_ans" type="text"
                                 onChange={(e) => handleAnswerChange(e, index)}
@@ -668,14 +853,14 @@ function Option4({ formik, options, setOptions, setOption4, edit, isEditing, set
                                 <SelectContent>
                                     <SelectGroup>
                                         <SelectLabel>Fruits</SelectLabel>
-                                        {products.map((product: any)=>{
-                                           return <SelectItem 
-                                            value={product.name}>{product.name}</SelectItem>
+                                        {products.map((product: any) => {
+                                            return <SelectItem
+                                                value={product.product_name}>{product.product_name}</SelectItem>
                                         })}
-                                        <SelectItem value="banana">Banana</SelectItem>
+                                        {/* <SelectItem value="banana">Banana</SelectItem>
                                         <SelectItem value="blueberry">Blueberry</SelectItem>
                                         <SelectItem value="grapes">Grapes</SelectItem>
-                                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                                        <SelectItem value="pineapple">Pineapple</SelectItem> */}
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
@@ -701,4 +886,4 @@ function Option4({ formik, options, setOptions, setOption4, edit, isEditing, set
 }
 
 
-export {Option1, Option2, Option3, Option4}
+export { Option1, Option2, Option3, Option4 }
