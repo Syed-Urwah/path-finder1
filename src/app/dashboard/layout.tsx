@@ -43,6 +43,7 @@ export default function DashboardLayout({
   }: {
     children: React.ReactNode
   }) {
+    const isNotOnCreatePage = window.location.href !== 'http://localhost:3000/dashboard/form/create';
 
     const [toogleSidebar, setToogleSidebar] = useState(false)
 
@@ -128,8 +129,8 @@ export default function DashboardLayout({
         <div className="grid min-h-screen w-full md:grid-cols-[68px_1fr] lg:grid-cols-[68px_1fr]">
           <Sidebar2 />
           <div className="flex flex-col">
-          <Header setToogleSidebar={setToogleSidebar}/>
-          <div className="mt-32">
+          {isNotOnCreatePage && <Header setToogleSidebar={setToogleSidebar} />}
+          <div className={isNotOnCreatePage ? 'mt-32' : 'mt-20'}>
           {children}
           </div>
         </div>

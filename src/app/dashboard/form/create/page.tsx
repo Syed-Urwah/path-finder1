@@ -14,7 +14,7 @@ import {
   DropdownMenuItem
 } from "@/components/ui/dropdown-menu";
 
-
+import { Input } from "@/components/ui/input"
 import {
   Popover,
   PopoverContent,
@@ -49,86 +49,41 @@ export default function Page() {
       {/* Sidebar */}
       <div
         className={cn(
-          'w-[250px] bg-gray-100 p-4 shadow-md'
+          'w-[300px] bg-gray-100 shadow-md'
         )}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '7.5rem' }}>
-          <h2 style={{ margin: 0, lineHeight: '2.5rem' }} className="text-lg font-bold mb-4">Forms</h2>
-          {/* /////////////////////////////////  Search bar */}
+        <div className='m-4'>
+          <div className='grid grid-flow-col'>
+            <div className='flex justify-between'>
+              <h2  className="text-lg font-bold ">Forms</h2>
+              <Button className='bg-[#D3D3D3] w-10 h-10 rounded-full flex items-center justify-center p-0'>
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="plus"
+                    className="w-6 h-6 text-black"  
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                    />
+                  </svg>
+                </Button>
 
-          {/* <input
-            type="text"
-            placeholder="Search..."
-            style={{ width: '200px', padding: '8px', border: '1px solid #ccc' }}
-          /> */}
-
-          {/* <Button
-            variant="outline"
-            style={{
-              borderRadius: '50%',
-              padding: '0.5rem',
-              width: '2.5rem',
-              height: '2.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.5rem',
-            }}
-          >
-            +
-          </Button> */}
-          
-          {/* //////////////new button with svg/// */}
-          <div
-            // style={{
-            //   display: 'flex',
-            //   flexDirection: 'column',
-            //   alignItems: 'center',
-            //   justifyContent: 'center',
-            //   textAlign: 'center',
-            // }}
-          >
-            <button
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                backgroundColor: 'light grey',
-                padding: '8px',
-                cursor: 'pointer',
-              }}
-            >
-              <svg
-                aria-hidden="true"
-                focusable="false"
-                data-prefix="fas"
-                data-icon="plus"
-                className="svg-inline--fa fa-plus fa-lg"
-                role="img"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                style={{
-                  width: '24px',
-                  height: '24px',
-                  fill: 'currentColor',
-                }}
-              >
-                <path
-                  fill="currentColor"
-                  d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
-                />
-              </svg>
-            </button>
+            </div>
           </div>
-        </div>
-
-        <div className="sidebar-options">
-
-          <div className="option p-2 mt-4 hover:bg-gray-200 rounded-md cursor-pointer flex items-center">
-            {/* Wrench Icon */}
+          <div className='grid grid-flow-col mt-4'>
+            <Input
+              type="text"
+              placeholder="Search..." className=''
+            />
+          </div>
+          <div className='grid grid-flow-col mt-4'>
+            <Button className='option p-2 mt-4 hover:bg-gray-200 rounded-md  flex items-center'>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -145,6 +100,37 @@ export default function Page() {
               ></path>
             </svg>
             Configurator
+            </Button>
+          </div>
+          
+          
+
+          
+
+          {/* <Button
+            variant="outline"
+            style={{
+              borderRadius: '50%',
+              padding: '0.5rem',
+              width: '2.5rem',
+              height: '2.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.5rem',
+            }}
+          >
+            +
+          </Button> */}
+       
+        </div>
+
+        <div className="sidebar-options">
+
+          <div className="option p-2 mt-4 hover:bg-gray-200 rounded-md cursor-pointer flex items-center">
+            {/* Wrench Icon */}
+            
+            
           </div>
 
           <div className="option mb-2 mt-4 p-2 hover:bg-gray-200 rounded-md cursor-pointer flex items-center">
@@ -186,36 +172,13 @@ export default function Page() {
           </div>
 
         </div>
-        {/* vertical ellipses */}
-        <div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <div className="z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-start items-center hover:cursor-pointer" data-slot="trigger" aria-haspopup="true" aria-expanded="false" id="react-aria275040590-:rbt:">
-                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" style={{ width: '24px', height: '24px' }}>
-                  <path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
-                </svg>
-              </div>
-
-
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-
-              <DropdownMenuItem><span>Configurations</span></DropdownMenuItem>
-              <DropdownMenuItem><BookCopy className="mr-2 h-4 w-4" /><span>Relaties</span></DropdownMenuItem>
-
-
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-        </div>
-
       </div>
 
 
 
       {/*//////////////////////////////////// Main content with containers as rows////////////////////// */}
 
-      <div className="flex-grow p-4 flex flex-col space-y-4">
+      <div className="flex-grow  flex flex-col space-y-4">
         {/* <div className="bg-white p-4 border rounded-md shadow">Naamloze configurator</div> */}
         {/* The one with the popover over icons */}
         <div className="bg-white p-4 border rounded-md shadow flex items-center space-x-2">
