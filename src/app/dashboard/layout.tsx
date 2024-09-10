@@ -43,7 +43,11 @@ export default function DashboardLayout({
   }: {
     children: React.ReactNode
   }) {
-    const isNotOnCreatePage = window.location.href !== 'http://localhost:3000/dashboard/form/create';
+    const noHeaderRoutes = [
+      'http://localhost:3000/dashboard/form/create',
+      'http://localhost:3000/dashboard/form/create/new-page'
+    ];
+    const isNotOnSpecificPages = !noHeaderRoutes.includes(window.location.href);
 
     const [toogleSidebar, setToogleSidebar] = useState(false)
 
@@ -127,14 +131,21 @@ export default function DashboardLayout({
           </SheetContent>
         </Sheet>
         <div className="grid min-h-screen w-full md:grid-cols-[68px_1fr] lg:grid-cols-[68px_1fr]">
-          <Sidebar2 />
-          <div className="flex flex-col">
-          {isNotOnCreatePage && <Header setToogleSidebar={setToogleSidebar} />}
-          <div className={isNotOnCreatePage ? 'mt-32' : 'mt-20'}>
-          {children}
-          </div>
+          {isNotOnSpecificPages && <Sidebar2 />}
+          {isNotOnSpecificPages ? (
+            <div className="flex flex-col">
+              <Header setToogleSidebar={setToogleSidebar} />
+              <div className="mt-32">klasdkfjskd
+                {children}
+              </div>
+            </div>
+          ) : (
+            <div>
+              {children}
+            </div>
+          )}
         </div>
-        </div>
+
       </>
     )
   }
