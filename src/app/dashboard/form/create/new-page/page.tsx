@@ -7,10 +7,19 @@ import { Button } from "@/components/ui/button";
 import { Bold, BookCopy, Pencil, Trash, Weight, X } from "lucide-react";
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
-} from "@/components/ui/dropdown-menu";
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Select,
@@ -41,7 +50,9 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
 import { Modal } from "@/components/modal";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+
 
 export default function NewPage() {
   return (
@@ -81,10 +92,11 @@ export default function NewPage() {
             <span className="text-lg ">Naamloze configurator</span>
             <Pencil className="font-bold h-5 w-5" />
           </div>
+
           <div className="flex justify-end gap-4 items-center w-full h-full">
             <div className="flex gap-2 items-center h-full">
               <Button
-                className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap rounded font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 w-9"
+                className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap rounded font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-12 w-12" // Increased height and width
                 data-state="closed"
               >
                 <svg
@@ -92,20 +104,22 @@ export default function NewPage() {
                   focusable="false"
                   data-prefix="fas"
                   data-icon="desktop"
-                  className="w-16 h-16 svg-inline--fa fa-desktop"
+                  className="svg-inline--fa fa-desktop"
                   role="img"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 576 512"
+                  width="32"  // Adjusted the width here
+                  height="32" // Adjusted the height here
                 >
                   <path
                     fill="currentColor"
                     d="M64 0C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64H240l-10.7 32H160c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H346.7L336 416H512c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM512 64V288H64V64H512z"
-                  ></path>
+                  />
                 </svg>
               </Button>
 
               <Button
-                className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap rounded font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 w-9"
+                className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap rounded font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-12 w-12" // Increased height and width
                 data-state="closed"
               >
                 <svg
@@ -113,7 +127,7 @@ export default function NewPage() {
                   focusable="false"
                   data-prefix="fas"
                   data-icon="eye"
-                  className="w-6 h-6 svg-inline--fa fa-eye"
+                  className="w-8 h-8 svg-inline--fa fa-eye" // Increased size of the SVG icon
                   role="img"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 576 512"
@@ -124,24 +138,26 @@ export default function NewPage() {
                   ></path>
                 </svg>
               </Button>
+
               <div data-state="closed">
-                <Button className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap rounded font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 w-9">
+                <Button className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap rounded font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-12 w-12">
                   <svg
                     aria-hidden="true"
                     focusable="false"
                     data-prefix="fas"
                     data-icon="link"
-                    className="w-6 h-6 svg-inline--fa fa-link"
+                    className="w-8 h-8 svg-inline--fa fa-link" // Increased size of the SVG icon
                     role="img"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 640 512"
                   >
                     <path
                       fill="currentColor"
-                      d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"
+                      d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4 10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"
                     ></path>
                   </svg>
                 </Button>
+
               </div>
             </div>
             <div
@@ -150,7 +166,7 @@ export default function NewPage() {
             ></div>
             <div className="flex gap-4 items-center h-full">
               <Button
-                className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap rounded font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 w-9"
+                className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap rounded font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-12 w-12" // Increased button size
                 data-state="closed"
               >
                 <svg
@@ -158,7 +174,7 @@ export default function NewPage() {
                   focusable="false"
                   data-prefix="fas"
                   data-icon="gear"
-                  className="w-6 h-6 svg-inline--fa fa-gear"
+                  className="w-8 h-8 svg-inline--fa fa-gear" // Increased size of the SVG icon
                   role="img"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
@@ -169,11 +185,15 @@ export default function NewPage() {
                   ></path>
                 </svg>
               </Button>
+
               <Button className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap rounded font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#B0D59E] text-primary-foreground hover:bg-[#B0D59E] h-10 px-4 py-2 text-md">
-                Publiceren
+                Publish
               </Button>
             </div>
           </div>
+
+
+
         </header>
 
         <div className="w-full h-full flex flex-row">
@@ -191,7 +211,7 @@ export default function NewPage() {
             style={{ gridArea: "rightbar" }}
           >
             <Tabs defaultValue="account">
-              <TabsList className="flex justify-between bg-lime-300 border-b p-5">
+              <TabsList className="flex justify-between bg-white-300 border-b p-5">
                 <TabsTrigger className="w-full" value="content">
                   Content
                 </TabsTrigger>
@@ -280,6 +300,277 @@ export default function NewPage() {
                       placeholder="Type your message here."
                     />
                   </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Switch id="required-switch" />
+                    <p className="font-medium">Required</p>
+                  </div>
+
+                  <div className="flex flex-col gap-3">
+                    <p className="font-medium">Answers</p>
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center">
+                        <svg
+                          aria-hidden="true"
+                          focusable="false"
+                          data-prefix="fas"
+                          data-icon="grip-vertical"
+                          className="svg-inline--fa fa-grip-vertical w-6 h-6"
+                          role="img"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 320 512"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M40 352l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zm192 0l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 320c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 192l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 160c-22.1 0-40-17.9-40-40L0 72C0 49.9 17.9 32 40 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40z"
+                          ></path>
+                        </svg>
+                      </div>
+
+                      <div className="flex-grow">
+                        <Input disabled type="email" placeholder="Email" />
+                      </div>
+
+                      <div className="flex items-center">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger>
+                            <div
+                              className=" aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-center items-center hover:cursor-pointer"
+                              data-slot="trigger"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                              id="react-aria275040590-:rbt:"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                focusable="false"
+                                data-prefix="fas"
+                                data-icon="ellipsis-vertical"
+                                className="svg-inline--fa fa-ellipsis-vertical"
+                                role="img"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 128 512"
+                                style={{ width: "24px", height: "24px" }}
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"
+                                ></path>
+                              </svg>
+                            </div>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent className="">
+                            <DropdownMenuLabel>
+                              Add Description
+                              <Switch id="display-description" />
+                            </DropdownMenuLabel>
+                            <DropdownMenuItem><Trash
+                              className="mr-2 h-4 w-4" /><span>To Delete</span></DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center">
+                        <svg
+                          aria-hidden="true"
+                          focusable="false"
+                          data-prefix="fas"
+                          data-icon="grip-vertical"
+                          className="svg-inline--fa fa-grip-vertical w-6 h-6"
+                          role="img"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 320 512"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M40 352l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zm192 0l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 320c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 192l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 160c-22.1 0-40-17.9-40-40L0 72C0 49.9 17.9 32 40 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40z"
+                          ></path>
+                        </svg>
+                      </div>
+
+                      <div className="flex-grow">
+                        <Input disabled type="email" placeholder="Email" />
+                      </div>
+
+                      <div className="flex items-center">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger>
+                            <div
+                              className=" aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-center items-center hover:cursor-pointer"
+                              data-slot="trigger"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                              id="react-aria275040590-:rbt:"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                focusable="false"
+                                data-prefix="fas"
+                                data-icon="ellipsis-vertical"
+                                className="svg-inline--fa fa-ellipsis-vertical"
+                                role="img"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 128 512"
+                                style={{ width: "24px", height: "24px" }}
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"
+                                ></path>
+                              </svg>
+                            </div>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent className="">
+                            <DropdownMenuLabel>
+                              Add Description
+                              <Switch id="display-description" />
+                            </DropdownMenuLabel>
+                            <DropdownMenuItem><Trash
+                              className="mr-2 h-4 w-4" /><span>To Delete</span></DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </div>
+                    </div>
+
+                    <div className="flex-grow">
+                      <Input disabled type="a" placeholder="Add another item" />
+                    </div>
+
+                    <div className="flex flex-col gap-3">
+                      <p className="font-medium">Distance to previous question</p>
+                    </div>
+
+                    <div>
+                      <div>
+                        <Accordion type="single" collapsible>
+                          <AccordionItem value="item-1">
+                            <AccordionTrigger>Medium Distance</AccordionTrigger>
+                            <AccordionContent>
+                              <Select>
+                                <SelectTrigger className="w-[300px]">
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectGroup>
+                                    <SelectItem value="1">Small distance</SelectItem>
+                                    <SelectItem value="2">Medium distance</SelectItem>
+                                    <SelectItem value="3">Large distance</SelectItem>
+                                  </SelectGroup>
+                                </SelectContent>
+                              </Select>
+                            </AccordionContent>
+                          </AccordionItem>
+                        </Accordion>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </TabsContent>
+
+              <TabsContent defaultValue={"style"} value="style">
+                <div className="w-full border-b px-4  flex flex-col gap-5 pb-4">
+                  <div className="flex flex-col gap-1">
+                    <p className="font-medium">Font</p>
+
+                    <Select>
+                      <SelectTrigger className="w-[300px]">
+                        <SelectValue placeholder="Select a font" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="1">Poppins</SelectItem>
+                          <SelectItem value="2">Roboto</SelectItem>
+                          <SelectItem value="3">Courier Prime</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="flex flex-row gap-2 justify-center items-center">
+                    <Button variant="outline">Small</Button>
+                    <Button variant="outline">Medium</Button>
+                    <Button variant="outline">Large</Button>
+                  </div>
+
+
+
+                  <div className="grid grid-cols-4 gap-0">
+                    <div className="col-span-1">
+                      <Label className="font-bold">Border radius</Label>
+                    </div>
+                    <div className="col-span-1">
+
+                    </div>
+                    <div className="col-span-1">
+
+                    </div>
+                    <div className="col-span-1">
+
+                    </div>
+                    <div className="col-span-1">
+                      <Label className="font-bold">Border</Label>
+                    </div>
+                    <div className="col-span-1">
+
+                    </div>
+                    <div className="col-span-1">
+
+                    </div>
+                    <div className="col-span-1">
+
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="col-span-1">
+                      <Label className="font-bold">Border color</Label>
+                    </div>
+                    <div className="col-span-1">
+                      <Label className="font-bold">a</Label>
+                    </div>
+                    <div className="col-span-1">
+                      <Label className="font-bold">b</Label>
+                    </div>
+                    <div className="col-span-1">
+                      <Label className="font-bold">Buttons</Label>
+                    </div>
+                    <div className="col-span-1">
+                      <Label className="font-bold">a</Label>
+                    </div>
+                    <div className="col-span-1">
+                      <Label className="font-bold">b</Label>
+
+                    </div>
+                    <div className="col-span-1">
+                      <Label className="font-bold">Button text</Label>
+
+                    </div>
+                    <div className="col-span-1">
+                      <Label className="font-bold">a</Label>
+                    </div>
+                    <div className="col-span-1">
+
+                    </div>
+                  </div>
+
+                  <div>
+                    <div>
+                      <Accordion type="single" collapsible>
+                        <AccordionItem value="item-1">
+                          <AccordionTrigger>Custom css</AccordionTrigger>
+                          <AccordionContent>
+                          <Input></Input>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                    </div>
+                  </div>
+
+
+
                 </div>
               </TabsContent>
             </Tabs>

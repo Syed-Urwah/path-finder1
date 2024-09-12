@@ -102,38 +102,9 @@ export default function Page() {
             Configurator
             </Button>
           </div>
-          
-          
 
-          
-
-          {/* <Button
-            variant="outline"
-            style={{
-              borderRadius: '50%',
-              padding: '0.5rem',
-              width: '2.5rem',
-              height: '2.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.5rem',
-            }}
-          >
-            +
-          </Button> */}
-       
-        </div>
-
-        <div className="sidebar-options">
-
-          <div className="option p-2 mt-4 hover:bg-gray-200 rounded-md cursor-pointer flex items-center">
-            {/* Wrench Icon */}
-            
-            
-          </div>
-
-          <div className="option mb-2 mt-4 p-2 hover:bg-gray-200 rounded-md cursor-pointer flex items-center">
+          <div className='grid grid-flow-col mt-4'>
+            <Button className='option p-2 mt-4 hover:bg-gray-200 rounded-md  flex items-center'>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -150,9 +121,11 @@ export default function Page() {
               ></path>
             </svg>
             Availability
+            </Button>
           </div>
 
-          <div className="option p-2 mt-4 hover:bg-gray-200 rounded-md cursor-pointer flex items-center">
+          <div className='grid grid-flow-col mt-4'>
+            <Button className='option p-2 mt-4 hover:bg-gray-200 rounded-md  flex items-center'>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -169,7 +142,24 @@ export default function Page() {
               ></path>
             </svg>
             Appointment Scheduler
+            </Button>
           </div>
+       
+        </div>
+
+        <div className="sidebar-options">
+
+          <div className="option p-2 mt-4 hover:bg-gray-200 rounded-md cursor-pointer flex items-center">
+            {/* Wrench Icon */}
+            
+            
+          </div>
+        
+
+
+         
+
+          
 
         </div>
       </div>
