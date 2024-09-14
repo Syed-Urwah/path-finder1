@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // Change here
 import {
   Bell,
   CircleUser,
@@ -13,7 +14,6 @@ import {
   ShoppingCart,
   Users,
 } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,25 +36,40 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import Sidebar2 from "@/components/layout/Sidebar2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Header2 from "@/components/layout/Header2";
 
-export default function DashboardLayout({
-  children, // will be a page or nested layout
-}: {
+interface DashboardLayoutProps {
   children: React.ReactNode;
-}) {
-  const noHeaderRoutes = [
-    "http://localhost:3000/dashboard/form/create/new-page",
-  ];
-  const noSidebarRoutes = ["http://localhost:3000/dashboard/form/create"];
-  const isNotOnSpecificPages = !noHeaderRoutes.includes(window.location.href);
-  const isNotOnSpecificPages2 = !noSidebarRoutes.includes(window.location.href);
+}
 
-  const [toogleSidebar, setToogleSidebar] = useState(false);
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
+  const newPageRoutes = "/dashboard/form/create/new-page";
+  const createRoutes = "/dashboard/form/create";
+  const productRoutes = "/dashboard/product/create";
 
+  // Track client-side mounting
+  const [isMounted, setIsMounted] = useState(false);
+
+  const pathname = usePathname();
+
+  console.log(pathname);
+
+  useEffect(() => {
+    // Set the mounted state to true when the component is mounted
+    setIsMounted(true);
+  }, []);
+
+  const [toggleSidebar, setToggleSidebar] = useState(false);
+
+  // If the component has not yet mounted, do not render anything router-related
+  if (!isMounted) {
+    return null; // Return nothing or a loading state if preferred
+  }
   return (
     <>
-      <Sheet open={toogleSidebar}>
+      {/* Mobile Sheet for Sidebar */}
+      <Sheet open={toggleSidebar}>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
             <Menu className="h-5 w-5" />
@@ -127,16 +142,28 @@ export default function DashboardLayout({
           </div>
         </SheetContent>
       </Sheet>
+
+      {/* Main Layout */}
       <div className="grid min-h-screen w-full md:grid-cols-[68px_1fr] lg:grid-cols-[68px_1fr]">
-        {isNotOnSpecificPages && <Sidebar2 />}
-        {isNotOnSpecificPages && isNotOnSpecificPages2 ? (
-          <div className="flex flex-col">
-            <Header setToogleSidebar={setToogleSidebar} />
-            <div className="mt-32">{children}</div>
-          </div>
-        ) : (
+        {pathname === productRoutes ? (
+          <>
+            <Sidebar2 />
+            <div className="flex flex-col">
+              <Header setToggleSidebar={setToggleSidebar} />
+              <div className="mt-32">{children}</div>
+            </div>
+          </>
+        ) : pathname === newPageRoutes ? (
           <div>{children}</div>
-        )}
+        ) : pathname === createRoutes ? (
+          <>
+            <Sidebar2 />
+            <div className="flex flex-col">
+              <Header2 />
+              <div>{children}</div>
+            </div>
+          </>
+        ) : null}
       </div>
     </>
   );
