@@ -196,14 +196,243 @@ export default function NewPage() {
 
         </header>
 
+
+        {/* left sidebar*/}
         <div className="w-full h-full flex flex-row">
           <div
             className="w-full max-w-[300px] h-full flex flex-col border-r  bg-white hover:overflow-auto  "
-            style={{ gridArea: "leftbar" }}
-          ></div>
+            style={{ gridArea: "leftbar" }}>
+            <div className="w-full flex justify-between items-center p-4">
+              <p className="font-medium">Content</p>
+              <button type="button" aria-haspopup="dialog" data-state="closed">
+                <button className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full w-11 h-11" data-state="closed">
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="plus"
+                    className="svg-inline--fa fa-plus"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                    width="20" // Adjust the size here
+                    height="20"
+                  >
+                    <path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                  </svg>
+                </button>
+
+              </button>
+            </div>
+
+            {/* ///////////////////////////////QUESTIONS////////////////////// */}
+
+            <div className="h-full w-full rounded overflow-hidden scroll">
+              <div className="min-w-full table">
+
+
+                <div className="bg-white">
+                  <div className="h-full w-full">
+                    <p className="border-b px-4 pb-2 pt-8 truncate">Page 1</p>
+                    <div className="container">
+                      <div className="w-full flex items-center justify-between p-4 border-b py-6 cursor-grab bg-white">
+                        <div className="flex items-center">
+                          <div className="w-10 h-10 rounded-md flex justify-center items-center overflow-hidden bg-purple-200">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              className="w-6 h-6"
+                            >
+                              <circle cx="12" cy="12" r="12" fill="black" />
+                            </svg>
+                          </div>
+                          <p className="ml-2 max-w-xs truncate">Question 1</p>
+                        </div>
+                        <div className="flex items-center">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger>
+                              <div
+                                className="aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-center items-center hover:cursor-pointer"
+                                data-slot="trigger"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                id="react-aria275040590-:rbt:"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  focusable="false"
+                                  data-prefix="fas"
+                                  data-icon="ellipsis-vertical"
+                                  className="svg-inline--fa fa-ellipsis-vertical"
+                                  role="img"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 128 512"
+                                  style={{ width: "24px", height: "24px" }}
+                                >
+                                  <path
+                                    fill="currentColor"
+                                    d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"
+                                  ></path>
+                                </svg>
+                              </div>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                              <DropdownMenuItem>
+                                <BookCopy className="mr-2 h-4 w-4" /><span>Duplicate</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Trash className="mr-2 h-4 w-4" /><span>To Delete</span>
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div className="bg-white">
+                  <div className="h-full w-full">
+                    <p className="border-b px-4 pb-2 pt-8 truncate">Page 2</p>
+                    <div className="container">
+                      <div className="w-full flex items-center justify-between p-4 border-b py-6 cursor-grab bg-white">
+                        <div className="flex items-center">
+                          <button className="w-full flex gap-2 items-center hover:bg-[#0000000d] hover:p-[5px] hover:m-[-5px] rounded-[5px] cursor-pointer">
+                            <div className="w-[40px] h-[40px] rounded-[12px] flex justify-center items-center overflow-hidden">
+                              <div className="w-full h-full bg-[#D8BFD8] flex justify-center items-center flex-col">
+                                <div className="w-[24px] h-[24px] rounded-[5px] bg-black flex justify-center items-center">
+                                  <p className="text-white text-[10px]">1 m²</p>
+                                </div>
+                              </div>
+                            </div>
+                            <p className="ml-2 max-w-xs truncate">Question 2</p>
+                          </button>
+                        </div>
+                        <div className="flex items-center">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger>
+                              <div
+                                className="aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-center items-center hover:cursor-pointer"
+                                data-slot="trigger"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                id="react-aria275040590-:rbt:"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  focusable="false"
+                                  data-prefix="fas"
+                                  data-icon="ellipsis-vertical"
+                                  className="svg-inline--fa fa-ellipsis-vertical"
+                                  role="img"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 128 512"
+                                  style={{ width: "24px", height: "24px" }}
+                                >
+                                  <path
+                                    fill="currentColor"
+                                    d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"
+                                  ></path>
+                                </svg>
+                              </div>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                              <DropdownMenuItem>
+                                <BookCopy className="mr-2 h-4 w-4" /><span>Duplicate</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Trash className="mr-2 h-4 w-4" /><span>Delete</span>
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white">
+                  <div className="h-full w-full">
+                    <p className="border-b px-4 pb-2 pt-8 truncate">Page 3</p>
+                    <div className="container">
+                      <div className="w-full flex items-center justify-between p-4 border-b py-6 cursor-grab bg-white">
+                        <div className="flex items-center">
+                          <div className="w-10 h-10 rounded-md flex justify-center items-center overflow-hidden bg-purple-200">
+                            <div className="w-5 h-5 rounded bg-black flex justify-center items-center">
+                              <svg
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 448 512"
+                                className="text-purple-200 text-[15px]"
+                              >
+                                <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
+                              </svg>
+                            </div>
+                          </div>
+                          <p className="ml-2 max-w-xs truncate">Question 3</p>
+                        </div>
+                        <div className="flex items-center">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger>
+                              <div
+                                className="aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-center items-center hover:cursor-pointer"
+                                data-slot="trigger"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                id="react-aria275040590-:rbt:"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  focusable="false"
+                                  data-prefix="fas"
+                                  data-icon="ellipsis-vertical"
+                                  className="svg-inline--fa fa-ellipsis-vertical"
+                                  role="img"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 128 512"
+                                  style={{ width: "24px", height: "24px" }}
+                                >
+                                  <path
+                                    fill="currentColor"
+                                    d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"
+                                  ></path>
+                                </svg>
+                              </div>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                              <DropdownMenuItem>
+                                <BookCopy className="mr-2 h-4 w-4" /><span>Duplicate</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Trash className="mr-2 h-4 w-4" /><span>To Delete</span>
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+
+          {/* Main*/}
           <div className="w-full h-full flex flex-col border-r hover:overflow-auto">
             <div className=""></div>
           </div>
+
+
 
           {/* right side  */}
           <div
@@ -223,7 +452,7 @@ export default function NewPage() {
                 </TabsTrigger>
               </TabsList>
               <TabsContent defaultValue={"content"} value="content">
-                <div className="w-full border-b px-4  flex flex-col gap-5 pb-4">
+                <div className="w-full border-b px-4  flex flex-col gap-5 pb-4 mt-2">
                   <div className="flex flex-col gap-1">
                     <p className="font-medium">Type</p>
                     <Modal
@@ -256,7 +485,7 @@ export default function NewPage() {
                       }
                     />
                   </div>
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-1 ">
                     <p className="font-medium">Questions</p>
                     <div className="flex items-center gap-2">
                       <Input></Input>
@@ -444,24 +673,26 @@ export default function NewPage() {
 
                     <div>
                       <div>
-                        <Accordion type="single" collapsible>
+                        {/* <Accordion type="single" collapsible>
                           <AccordionItem value="item-1">
                             <AccordionTrigger>Medium Distance</AccordionTrigger>
-                            <AccordionContent>
-                              <Select>
-                                <SelectTrigger className="w-[300px]">
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectGroup>
-                                    <SelectItem value="1">Small distance</SelectItem>
-                                    <SelectItem value="2">Medium distance</SelectItem>
-                                    <SelectItem value="3">Large distance</SelectItem>
-                                  </SelectGroup>
-                                </SelectContent>
-                              </Select>
-                            </AccordionContent>
+                            <AccordionContent> */}
+                        <Select defaultValue="2">
+                          <SelectTrigger className="w-[300px]">
+                            <span>Select distance</span>
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectItem value="1">Small distance</SelectItem>
+                              <SelectItem value="2">Medium distance</SelectItem>
+                              <SelectItem value="3">Large distance</SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+
+                        {/* /         </AccordionContent>
                           </AccordionItem>
-                        </Accordion>
+                        </Accordion> */}
                       </div>
                     </div>
 
@@ -501,7 +732,7 @@ export default function NewPage() {
                     <div className="col-span-1">
                       <Label className="font-bold">Border radius</Label>
                     </div>
-                    <div className="col-span-1">
+                    {/* <div className="col-span-1">
 
                     </div>
                     <div className="col-span-1">
@@ -509,11 +740,40 @@ export default function NewPage() {
                     </div>
                     <div className="col-span-1">
 
+                    </div> */}
+                    <div className="h-full w-full flex flex-col col-span-3">
+                      <div className="flex w-full justify-around relative items-center border-b !border-0">
+                        <div
+                          className="h-full absolute hover:cursor-pointer p-[5px]"
+                          style={{ left: '0%', width: '33.3333%' }} // Correct style object usage
+                        >
+                          <div className="h-full w-full bg-transparent-5 rounded-[5px] bg-background-200"></div>
+                        </div>
+
+                        <button className="w-full h-fit flex justify-center py-[10px] z-10 hover:cursor-pointer">
+                          <div className="border-transparent-10 w-[50px] text-center rounded-[5px] py-[5px] flex justify-center items-center">
+                            <div className="h-[22px] w-[30px] border-[3px] border-black rounded-[0px]"></div>
+                          </div>
+                        </button>
+
+                        <button className="w-full h-fit flex justify-center py-[10px] z-10 hover:cursor-pointer">
+                          <div className="border-transparent-10 w-[50px] text-center rounded-[5px] py-[5px] flex justify-center items-center">
+                            <div className="h-[22px] w-[30px] border-[3px] border-black rounded-[5px]"></div>
+                          </div>
+                        </button>
+
+                        <button className="w-full h-fit flex justify-center py-[10px] z-10 hover:cursor-pointer">
+                          <div className="border-transparent-10 w-[50px] text-center rounded-[5px] py-[5px] flex justify-center items-center">
+                            <div className="h-[22px] w-[30px] border-[3px] border-black rounded-[10px]"></div>
+                          </div>
+                        </button>
+                      </div>
                     </div>
+
                     <div className="col-span-1">
                       <Label className="font-bold">Border</Label>
                     </div>
-                    <div className="col-span-1">
+                    {/* <div className="col-span-1">
 
                     </div>
                     <div className="col-span-1">
@@ -521,36 +781,106 @@ export default function NewPage() {
                     </div>
                     <div className="col-span-1">
 
+                    </div> */}
+                    <div className="h-full w-full flex flex-col col-span-3">
+                      <div className="flex w-full justify-around relative items-center border-b !border-0">
+
+                        <div
+                          className="h-full absolute hover:cursor-pointer p-[5px]"
+                          style={{ left: '66.6667%', width: '33.3333%' }} // Fixed inline styles
+                        >
+                          <div className="h-full w-full bg-transparent-5 rounded-[5px] bg-background-200"></div>
+                        </div>
+
+                        <button className="w-full h-fit flex justify-center py-[10px] z-10 hover:cursor-pointer">
+                          <div className="border-transparent-10 w-[50px] text-center rounded-[5px] py-[5px] flex justify-center items-center">
+                            <svg
+                              aria-hidden="true"
+                              focusable="false"
+                              data-prefix="fas"
+                              data-icon="ban"
+                              className="svg-inline--fa fa-ban text-[22px] !text-black h-[22px] w-[30px]"
+                              role="img"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 512 512"
+                            >
+                              <path fill="currentColor" d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path>
+                            </svg>
+                          </div>
+                        </button>
+
+                        <button className="w-full h-fit flex justify-center py-[10px] z-10 hover:cursor-pointer">
+                          <div className="border-transparent-10 w-[50px] h-[35px] text-center rounded-[5px] py-[5px] flex justify-center items-center">
+                            <div className="w-[30px] h-[2px] bg-black"></div>
+                          </div>
+                        </button>
+
+                        <button className="w-full h-fit flex justify-center py-[10px] z-10 hover:cursor-pointer">
+                          <div className="border-transparent-10 w-[50px] h-[35px] text-center rounded-[5px] py-[5px] flex justify-center items-center">
+                            <div className="w-[30px] h-[5px] bg-black"></div>
+                          </div>
+                        </button>
+
+                      </div>
                     </div>
+
                   </div>
 
                   <div className="grid grid-cols-3 gap-2">
                     <div className="col-span-1">
                       <Label className="font-bold">Border color</Label>
                     </div>
-                    <div className="col-span-1">
-                      <Label className="font-bold">a</Label>
+                    <div className="col-span-2">
+                      {/* <Button variant="ghost">#000000</Button> */}
+                      <div className="flex justify-between w-[150px] bg-input-background px-[10px] py-[7.5px] rounded placeholder:text-[#b0b0b0] outline-focus items-center cursor-pointer">
+                        <span className="font-medium">#000000</span>
+                        <span
+                          style={{
+                            backgroundColor: "rgb(0, 0, 0)", // Camel case for background-color
+                            width: "25px",
+                            height: "25px",
+                            borderRadius: "50%", // Camel case for border-radius
+                            display: "inline-block" // Optional, for making sure the span behaves like a block element if needed
+                          }}
+                        >
+                          &nbsp;
+                        </span>
+                      </div>
+
                     </div>
-                    <div className="col-span-1">
-                      <Label className="font-bold">b</Label>
-                    </div>
+
                     <div className="col-span-1">
                       <Label className="font-bold">Buttons</Label>
                     </div>
-                    <div className="col-span-1">
-                      <Label className="font-bold">a</Label>
+                    <div className="col-span-2">
+                      {/* <Button variant="ghost">#000000</Button> */}
+                      <div className="flex justify-between w-[150px] bg-input-background px-[10px] py-[7.5px] rounded placeholder:text-[#b0b0b0] outline-focus items-center cursor-pointer">
+                        <span className="font-medium">#000000</span>
+                        <span
+                          style={{
+                            backgroundColor: "rgb(0, 0, 0)", // Camel case for background-color
+                            width: "25px",
+                            height: "25px",
+                            borderRadius: "50%", // Camel case for border-radius
+                            display: "inline-block" // Optional, for making sure the span behaves like a block element if needed
+                          }}
+                        >
+                          &nbsp;
+                        </span>
+                      </div>
                     </div>
-                    <div className="col-span-1">
-                      <Label className="font-bold">b</Label>
 
-                    </div>
                     <div className="col-span-1">
                       <Label className="font-bold">Button text</Label>
 
                     </div>
                     <div className="col-span-1">
-                      <Label className="font-bold">a</Label>
+                      {/* <Button variant="ghost">#FFFFFF</Button> */}
+                      <div className="flex justify-between w-[150px] bg-input-background px-[10px] py-[7.5px] rounded placeholder:text-[#b0b0b0] outline-focus items-center cursor-pointer">
+                        <span className="font-medium">#FFFFFF</span>
+                      </div>
                     </div>
+
                     <div className="col-span-1">
 
                     </div>
@@ -562,7 +892,7 @@ export default function NewPage() {
                         <AccordionItem value="item-1">
                           <AccordionTrigger>Custom css</AccordionTrigger>
                           <AccordionContent>
-                          <Input></Input>
+                            <Input></Input>
                           </AccordionContent>
                         </AccordionItem>
                       </Accordion>
@@ -573,6 +903,7 @@ export default function NewPage() {
 
                 </div>
               </TabsContent>
+
             </Tabs>
           </div>
         </div>
