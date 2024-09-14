@@ -2,6 +2,7 @@
 import Link from "next/link"
 import {
     Bell,
+    BookCopy,
     CircleUser,
     Home,
     LineChart,
@@ -110,6 +111,19 @@ export default function Sidebar2() {
                                 6
                             </Badge>
                         </Link> */}
+                        <DropdownMenu >
+                        <DropdownMenuTrigger asChild>
+                        <div className="z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px]  items-center hover:cursor-pointer" data-slot="trigger" aria-haspopup="true" aria-expanded="false" id="react-aria275040590-:rbt:">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" className="svg-inline--fa fa-ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" style={{ width: '24px', height: '24px' }}>
+                            <path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path>
+                            </svg>
+                        </div>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                        <DropdownMenuItem><span>Configurations</span></DropdownMenuItem>
+                        <DropdownMenuItem><BookCopy className="mr-2 h-4 w-4" /><span>Relaties</span></DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                         
                     </nav>
                 </div>
