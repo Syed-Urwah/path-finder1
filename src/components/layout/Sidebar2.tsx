@@ -70,7 +70,7 @@ export default function Sidebar2() {
                                 {/* <span>Orders</span> */}
                             </motion.div>
                         </Link>
-                        <Link href="#" className="h-fit w-fit">
+                        <Link href="/dashboard/product" className="h-fit w-fit">
                             <motion.div
                                 className="flex items-center gap-3 rounded-r-3xl px-2 lg:px-4 py-2 text-muted-foreground transition-all text-base text-black relative overflow-hidden"
                                 

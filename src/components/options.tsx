@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Button } from './ui/button'
-import { Plus } from 'lucide-react'
+import { EllipsisVertical, Plus } from 'lucide-react'
 import Image from 'next/image'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
@@ -19,9 +19,17 @@ import {
 import ImagePlaceHolder from "@/../public/images/image-placeholder.png";
 import { AspectRatio } from './ui/aspect-ratio'
 import axios from 'axios'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 
-export default function Options({ 
+export default function Options({
     formik, options, setOptions,
     option1,
     option2,
@@ -209,6 +217,19 @@ function Option1({
         }
     }
 
+    const handleDelete = () => {
+        if (isEditing && editIndex !== null) {
+             // Remove item at a specific index using filter
+            const newOptions = options.filter((_: any, i: any) => i !== editIndex);
+            setOptions(newOptions);
+            setIsEditing(false);
+            setEditIndex(null);
+        }
+
+        setQuestion("")
+        setOption1(false)
+    }
+
     const handleFinished = () => {
         console.log(isEditing)
         console.log(editIndex)
@@ -250,11 +271,30 @@ function Option1({
             <h3>Multiple choice question</h3>
 
             <div id="option1_question" className="w-60">
-                <Label htmlFor="option1_question">Ask</Label>
-                <Input id="option1_question" name="option1_question" type="text"
-                    onChange={(e) => setQuestion(e.target.value)}
-                    value={question}
-                />
+            <Label htmlFor="option1_question">Ask</Label>
+
+                <div className='flex gap-2'>
+                    <Input id="option1_question" name="option1_question" type="text"
+                        onChange={(e) => setQuestion(e.target.value)}
+                        value={question}
+                    />
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <EllipsisVertical />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={handleDelete} className='space-x-2'>
+                                <span className="w-4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" className="svg-inline--fa fa-trash " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg></span>
+                                <p>To delete</p>
+                            </DropdownMenuItem>
+                            {/* <DropdownMenuItem>Billing</DropdownMenuItem>
+                            <DropdownMenuItem>Team</DropdownMenuItem>
+                            <DropdownMenuItem>Subscription</DropdownMenuItem> */}
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
             </div>
 
             <div id="option1_ans" className="w-full">
@@ -350,6 +390,19 @@ function Option2({ formik, options, setOptions, setOption2, edit, isEditing, set
         formik.values.option1_ans = e.target.value
     }
 
+    const handleDelete = () => {
+        if (isEditing && editIndex !== null) {
+             // Remove item at a specific index using filter
+            const newOptions = options.filter((_: any, i: any) => i !== editIndex);
+            setOptions(newOptions);
+            setIsEditing(false);
+            setEditIndex(null);
+        }
+
+        setQuestion("")
+        setOption2(false)
+    }
+
     function handleAnswerChange(e: any, index: number) {
         const newAns = [...ans];
         newAns[index].ans = e.target.value;
@@ -430,11 +483,30 @@ function Option2({ formik, options, setOptions, setOption2, edit, isEditing, set
             <h3>Multiple choice question</h3>
 
             <div id="option1_question" className="w-60">
-                <Label htmlFor="option1_question">Ask</Label>
-                <Input id="option1_question" name="option1_question" type="text"
-                    onChange={(e) => setQuestion(e.target.value)}
-                    value={question}
-                />
+            <Label htmlFor="option1_question">Ask</Label>
+
+                <div className='flex gap-2'>
+                    <Input id="option1_question" name="option1_question" type="text"
+                        onChange={(e) => setQuestion(e.target.value)}
+                        value={question}
+                    />
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <EllipsisVertical />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={handleDelete} className='space-x-2'>
+                                <span className="w-4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" className="svg-inline--fa fa-trash " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg></span>
+                                <p>To delete</p>
+                            </DropdownMenuItem>
+                            {/* <DropdownMenuItem>Billing</DropdownMenuItem>
+                            <DropdownMenuItem>Team</DropdownMenuItem>
+                            <DropdownMenuItem>Subscription</DropdownMenuItem> */}
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
             </div>
 
             <div id="option1_ans" className="w-full">
@@ -544,6 +616,19 @@ function Option3({ formik, options, setOptions, setOption3, edit, isEditing, set
         formik.values.option1_ans = e.target.value
     }
 
+    const handleDelete = () => {
+        if (isEditing && editIndex !== null) {
+             // Remove item at a specific index using filter
+            const newOptions = options.filter((_: any, i: any) => i !== editIndex);
+            setOptions(newOptions);
+            setIsEditing(false);
+            setEditIndex(null);
+        }
+
+        setQuestion("")
+        setOption3(false)
+    }
+
     function handleAnswerChange(e: any, index: number) {
         console.log(index)
         const newAns = [...ans];
@@ -641,11 +726,30 @@ function Option3({ formik, options, setOptions, setOption3, edit, isEditing, set
             <h3>Number question</h3>
 
             <div id="option1_question" className="w-60">
-                <Label htmlFor="option1_question">Ask</Label>
-                <Input id="option1_question" name="option1_question" type="text"
-                    onChange={(e) => setQuestion(e.target.value)}
-                    value={question}
-                />
+            <Label htmlFor="option1_question">Ask</Label>
+
+                <div className='flex gap-2'>
+                    <Input id="option1_question" name="option1_question" type="text"
+                        onChange={(e) => setQuestion(e.target.value)}
+                        value={question}
+                    />
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <EllipsisVertical />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={handleDelete} className='space-x-2'>
+                                <span className="w-4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" className="svg-inline--fa fa-trash " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg></span>
+                                <p>To delete</p>
+                            </DropdownMenuItem>
+                            {/* <DropdownMenuItem>Billing</DropdownMenuItem>
+                            <DropdownMenuItem>Team</DropdownMenuItem>
+                            <DropdownMenuItem>Subscription</DropdownMenuItem> */}
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
             </div>
 
             <div id="option1_ans" className="w-60">
@@ -709,20 +813,33 @@ function Option4({ formik, options, setOptions, setOption4, edit, isEditing, set
     const fetchProducts = async () => {
 
         try {
-    
-    
-          const response = await axios.get('http://localhost:8000/api/v1/product');
-    
-          console.log('Response:', response.data);
-          setProducts(response.data.data)
-        } catch (error) {
-          console.error('Error posting data:', error);
-        }
-      };
 
-      useEffect(()=>{
+
+            const response = await axios.get('http://localhost:8000/api/v1/product');
+
+            console.log('Response:', response.data);
+            setProducts(response.data.data)
+        } catch (error) {
+            console.error('Error posting data:', error);
+        }
+    };
+
+    const handleDelete = () => {
+        if (isEditing && editIndex !== null) {
+             // Remove item at a specific index using filter
+            const newOptions = options.filter((_: any, i: any) => i !== editIndex);
+            setOptions(newOptions);
+            setIsEditing(false);
+            setEditIndex(null);
+        }
+
+        setQuestion("")
+        setOption4(false)
+    }
+
+    useEffect(() => {
         fetchProducts()
-      },[])
+    }, [])
 
 
 
@@ -825,11 +942,30 @@ function Option4({ formik, options, setOptions, setOption4, edit, isEditing, set
             <h3>Cross-sell group</h3>
 
             <div id="option1_question" className="w-60">
-                <Label htmlFor="option1_question">Ask</Label>
-                <Input id="option1_question" name="option1_question" type="text"
-                    onChange={(e) => setQuestion(e.target.value)}
-                    value={question}
-                />
+            <Label htmlFor="option1_question">Ask</Label>
+
+                <div className='flex gap-2'>
+                    <Input id="option1_question" name="option1_question" type="text"
+                        onChange={(e) => setQuestion(e.target.value)}
+                        value={question}
+                    />
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <EllipsisVertical />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={handleDelete} className='space-x-2'>
+                                <span className="w-4"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" className="svg-inline--fa fa-trash " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg></span>
+                                <p>To delete</p>
+                            </DropdownMenuItem>
+                            {/* <DropdownMenuItem>Billing</DropdownMenuItem>
+                            <DropdownMenuItem>Team</DropdownMenuItem>
+                            <DropdownMenuItem>Subscription</DropdownMenuItem> */}
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
             </div>
 
             <div id="option1_ans" className="w-60">
@@ -848,11 +984,11 @@ function Option4({ formik, options, setOptions, setOption4, edit, isEditing, set
 
                             <Select onValueChange={(e) => handleAnswerChange(e, index)} defaultValue={ans.product_name}>
                                 <SelectTrigger className="w-[180px]">
-                                    <SelectValue placeholder="Select a fruit" />
+                                    <SelectValue placeholder="Select a Product" />
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-                                        <SelectLabel>Fruits</SelectLabel>
+                                        <SelectLabel>Products</SelectLabel>
                                         {products.map((product: any) => {
                                             return <SelectItem
                                                 value={product.product_name}>{product.product_name}</SelectItem>

@@ -14,12 +14,15 @@ import { Slider } from "@/components/ui/slider";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import axios from 'axios';
+import { useRouter } from "next/navigation";
 
 export default function ProductCreateForm({product}: any) {
 
     const isEdit = !!product; // Convert product to a boolean
     console.log(isEdit)
     console.log(product)
+
+    const router = useRouter()
 
     const [editIndex, setEditIndex] = useState<number | null>(null);
     const [isEditing, setIsEditing] = useState(false);
@@ -28,6 +31,7 @@ export default function ProductCreateForm({product}: any) {
     const [option2, setOption2] = useState(false);
     const [option3, setOption3] = useState<any>(false);
     const [option4, setOption4] = useState(false);
+    const [submitLoading, setSubmitLoading] = useState(false);
 
     let optionsArray = isEdit ? product.options : 
     [{
@@ -75,6 +79,33 @@ export default function ProductCreateForm({product}: any) {
           });
       
           console.log('Response:', response.data);
+          if(response.data.status == 'success'){
+            router.push('/dashboard/product')
+          }
+        } catch (error) {
+          console.error('Error posting data:', error);
+        }
+      };
+
+      const EditProduct = async (values: any) => {
+        
+        try {
+
+            let form: any = document.getElementById('product_form');
+            let formString = form.outerHTML;
+            
+        console.log(formString)
+          const response = await axios.put(`http://localhost:8000/api/v1/product/${product.id}`, {
+            // Replace with your data object
+            mainData: values,
+            form: formString,
+            options
+          });
+      
+          console.log('Response:', response.data);
+          if(response.data.status == 'success'){
+            router.push('/dashboard/product')
+          }
         } catch (error) {
           console.error('Error posting data:', error);
         }
@@ -96,7 +127,7 @@ export default function ProductCreateForm({product}: any) {
                 options
             });
            
-            createProduct(values)
+            isEdit ? EditProduct(values) : createProduct(values)
             // alert(JSON.stringify(values, null, 2));
         },
     });
@@ -253,10 +284,11 @@ export default function ProductCreateForm({product}: any) {
                         />
 
                         <button
+                            disabled={formik.isSubmitting}
                             type="submit"
                             className="mt-4 w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                         >
-                            Submit
+                            {formik.isSubmitting ? 'loading..' : 'Submit'}
                         </button>
                     </form>
                 </CardContent>
