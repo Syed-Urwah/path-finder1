@@ -219,8 +219,7 @@ export default function NewPage() {
             style={{ gridArea: "leftbar" }}>
             <div className="w-full flex justify-between items-center p-4">
               <p className="font-medium">Content</p>
-              <button type="button" aria-haspopup="dialog" data-state="closed">
-                <button className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full w-11 h-11" data-state="closed">
+              <Button className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full w-11 h-11">
                   <svg
                     aria-hidden="true"
                     focusable="false"
@@ -235,9 +234,7 @@ export default function NewPage() {
                   >
                     <path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
                   </svg>
-                </button>
-
-              </button>
+                </Button>
             </div>
 
             {/* ///////////////////////////////QUESTIONS////////////////////// */}

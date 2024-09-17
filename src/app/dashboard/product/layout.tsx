@@ -163,7 +163,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <div>{children}</div>
             </div>
           </>
-        ) : null}
+        ) :<div>{children}</div>}
       </div>
     </>
   );
