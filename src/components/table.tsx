@@ -198,6 +198,7 @@ export function DataTableDemo() {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
+  const [loading, setLoading] = React.useState(true)
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
@@ -211,7 +212,7 @@ export function DataTableDemo() {
   const fetchProducts = async () => {
 
     try {
-
+      setLoading(true)
 
       const response = await axios.get(process.env.NEXT_PUBLIC_BE_URL + '/api/v1/product');
 
@@ -220,6 +221,8 @@ export function DataTableDemo() {
     } catch (error) {
       console.error('Error posting data:', error);
     }
+
+    setLoading(false)
   };
 
   React.useEffect(() => {
@@ -250,7 +253,8 @@ export function DataTableDemo() {
   console.log(table)
 
   return (
-    <div className="w-full">
+    <> {loading ? "loading" : 
+<div className="w-full">
       {/* <div className="flex items-center py-4">
         <Input
           placeholder="Filter emails..."
@@ -340,6 +344,8 @@ export function DataTableDemo() {
           </Button>
         </div>
       </div>
-    </div>
+    </div>    
+    }</>
+    
   )
 }

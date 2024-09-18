@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: { runtime: 'edge' },
+        
     reactStrictMode: false,
     // async rewrites() {
     //   return [
@@ -15,7 +16,7 @@ const nextConfig = {
           host: '192.168.100.137',
         },
         images: {
-          domains: ['images.unsplash.com', 'localhost','oiqvaluk0meo17sm.public.blob.vercel-storage.com'],
+          domains: ['images.unsplash.com', 'localhost','oiqvaluk0meo17sm.public.blob.vercel-storage.com','api.mehmetk2.sg-host.com'],
         },
         middleware: ["middleware"],
         eslint: {
