@@ -71,7 +71,7 @@ export default function ProductCreateForm({product}: any) {
             let formString = form.outerHTML;
             
         console.log(formString)
-          const response = await axios.post(process.env.BE_URL +'/api/v1/product', {
+          const response = await axios.post(process.env.NEXT_PUBLIC_BE_URL +'/api/v1/product', {
             // Replace with your data object
             mainData: values,
             form: formString,
@@ -95,7 +95,7 @@ export default function ProductCreateForm({product}: any) {
             let formString = form.outerHTML;
             
         console.log(formString)
-          const response = await axios.put(process.env.BE_URL + `/api/v1/product/${product.id}`, {
+          const response = await axios.put(process.env.NEXT_PUBLIC_BE_URL + `/api/v1/product/${product.id}`, {
             // Replace with your data object
             mainData: values,
             form: formString,
@@ -426,7 +426,7 @@ function DisplayOptions({ option, isEdit }: any): any {
                                                 <div className=" h-full">
 
                                                     <Image
-                                                        src={isEdit ? process.env.BE_URL + "/storage/" + answer.img : answer.img}
+                                                        src={isEdit ? process.env.NEXT_PUBLIC_BE_URL + "/storage/" + answer.img : answer.img}
                                                         alt="Your Image Description"
                                                         className="rounded-md object-cover"
                                                         width={30}
@@ -458,7 +458,7 @@ function DisplayOptions({ option, isEdit }: any): any {
                                                 <div className=" h-full">
 
                                                     <Image
-                                                        src={isEdit ? process.env.BE_URL + "/storage/" + answer.img : answer.img}
+                                                        src={isEdit ? process.env.NEXT_PUBLIC_BE_URL + "/storage/" + answer.img : answer.img}
                                                         alt="Your Image Description"
                                                         className="rounded-md object-cover"
                                                         width={30}
