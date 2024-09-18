@@ -61,7 +61,7 @@ export default function Page() {
             let formString = form.outerHTML;
             
         console.log(formString)
-          const response = await axios.post('http://localhost:8000/api/v1/product', {
+          const response = await axios.post(process.env.BE_URL + '/api/v1/product', {
             // Replace with your data object
             mainData: values,
             form: formString,

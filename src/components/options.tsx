@@ -313,7 +313,7 @@ function Option1({
                                     <div className="w-full h-full">
 
                                         <Image
-                                            src={(isEditPage && !isBase64Jpeg(ans.img)) ? "http://localhost:8000/storage/" + ans.img : ans.img}
+                                            src={(isEditPage && !isBase64Jpeg(ans.img)) ? process.env.BE_URL + "/storage/" + ans.img : ans.img}
                                             alt="Your Image Description"
                                             className="rounded-md object-cover"
                                             width={100}
@@ -526,7 +526,7 @@ function Option2({ formik, options, setOptions, setOption2, edit, isEditing, set
                                     <div className="w-full h-full">
 
                                         <Image
-                                            src={(isEditPage && !isBase64Jpeg(ans.img)) ? "http://localhost:8000/storage/" + ans.img : ans.img}
+                                            src={(isEditPage && !isBase64Jpeg(ans.img)) ? process.env.BE_URL + "/storage/" + ans.img : ans.img}
                                             alt="Your Image Description"
                                             className="rounded-md object-cover"
                                             width={100}
@@ -815,7 +815,7 @@ function Option4({ formik, options, setOptions, setOption4, edit, isEditing, set
         try {
 
 
-            const response = await axios.get('http://localhost:8000/api/v1/product');
+            const response = await axios.get(process.env.BE_URL + '/api/v1/product');
 
             console.log('Response:', response.data);
             setProducts(response.data.data)

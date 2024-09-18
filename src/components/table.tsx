@@ -213,7 +213,7 @@ export function DataTableDemo() {
     try {
 
 
-      const response = await axios.get('http://localhost:8000/api/v1/product');
+      const response = await axios.get(process.env.BE_URL + '/api/v1/product');
 
       console.log('Response:', response.data);
       setProducts(response.data.data)
