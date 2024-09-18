@@ -7,11 +7,13 @@ export default function CreateLayout({ children }: { children: React.ReactNode }
   return (
     <html lang="en">
       <body>
-      
-      
-     
-        {children}
-      
+      <div className="grid min-h-screen w-full md:grid-cols-[68px_1fr]">
+      <Sidebar2 />
+      <div className="flex flex-col">
+        <Header2 />
+        <main className="p-4">{children}</main>
+      </div>
+    </div>
       </body>
     </html>
    

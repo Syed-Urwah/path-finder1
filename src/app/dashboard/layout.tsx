@@ -145,25 +145,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
       {/* Main Layout */}
       <div className="grid min-h-screen w-full md:grid-cols-[68px_1fr] lg:grid-cols-[68px_1fr]">
-        {pathname === productRoutes ? (
-          <>
+       
             <Sidebar2 />
             <div className="flex flex-col">
               <Header setToggleSidebar={setToggleSidebar} />
               <div className="mt-32">{children}</div>
             </div>
-          </>
-        ) : pathname === newPageRoutes ? (
-          <div>{children}</div>
-        ) : pathname === createRoutes ? (
-          <>
-            <Sidebar2 />
-            <div className="flex flex-col">
-              <Header2 />
-              <div>{children}</div>
-            </div>
-          </>
-        ) :<div>{children}</div>}
+                
       </div>
     </>
   );
