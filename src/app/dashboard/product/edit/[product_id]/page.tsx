@@ -17,7 +17,7 @@ export default function page({ params }: any) {
         try {
             setLoading(true)
     
-          const response = await axios.get(`http://localhost:8000/api/v1/product/getByid/${params.product_id}`);
+          const response = await axios.get(process.env.BE_URL + `/api/v1/product/getByid/${params.product_id}`);
     
           console.log('Response:', response.data);
           setProduct(response.data.data)
