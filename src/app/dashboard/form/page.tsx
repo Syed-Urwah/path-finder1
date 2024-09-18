@@ -52,7 +52,10 @@ export default function Page() {
           <div className="grid grid-flow-col">
             <div className="flex justify-between">
               <h2 className="text-lg font-bold ">Forms</h2>
-              <Button className="bg-[#D3D3D3] w-10 h-10 rounded-full flex items-center justify-center p-0">
+              <a
+                href="/dashboard/form/create"
+                className="bg-[#D3D3D3] w-10 h-10 rounded-full flex items-center justify-center p-0"
+              >
                 <svg
                   aria-hidden="true"
                   focusable="false"
@@ -68,14 +71,13 @@ export default function Page() {
                     d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
                   />
                 </svg>
-              </Button>
+              </a>
             </div>
           </div>
 
           <div className="grid grid-flow-col mt-4">
             <Input type="text" placeholder="Search..." className="" />
           </div>
-
 
           <div className="grid grid-flow-col mt-4">
             <Button className="option p-2 mt-4 bg-gray-200 rounded-md flex items-center justify-start text-black hover:bg-gray-200">
@@ -90,9 +92,7 @@ export default function Page() {
                 viewBox="0 0 512 512"
                 fill="currentColor"
               >
-                <path
-                  d="M352 320c88.4 0 160-71.6 160-160c0-15.3-2.2-30.1-6.2-44.2c-3.1-10.8-16.4-13.2-24.3-5.3l-76.8 76.8c-3 3-7.1 4.7-11.3 4.7H336c-8.8 0-16-7.2-16-16V118.6c0-4.2 1.7-8.3 4.7-11.3l76.8-76.8c7.9-7.9 5.4-21.2-5.3-24.3C382.1 2.2 367.3 0 352 0C263.6 0 192 71.6 192 160c0 19.1 3.4 37.5 9.5 54.5L19.9 396.1C7.2 408.8 0 426.1 0 444.1C0 481.6 30.4 512 67.9 512c18 0 35.3-7.2 48-19.9L297.5 310.5c17 6.2 35.4 9.5 54.5 9.5zM80 408a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"
-                ></path>
+                <path d="M352 320c88.4 0 160-71.6 160-160c0-15.3-2.2-30.1-6.2-44.2c-3.1-10.8-16.4-13.2-24.3-5.3l-76.8 76.8c-3 3-7.1 4.7-11.3 4.7H336c-8.8 0-16-7.2-16-16V118.6c0-4.2 1.7-8.3 4.7-11.3l76.8-76.8c7.9-7.9 5.4-21.2-5.3-24.3C382.1 2.2 367.3 0 352 0C263.6 0 192 71.6 192 160c0 19.1 3.4 37.5 9.5 54.5L19.9 396.1C7.2 408.8 0 426.1 0 444.1C0 481.6 30.4 512 67.9 512c18 0 35.3-7.2 48-19.9L297.5 310.5c17 6.2 35.4 9.5 54.5 9.5zM80 408a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"></path>
               </svg>
               Configurator
             </Button>
@@ -119,7 +119,6 @@ export default function Page() {
             </Button>
           </div>
 
-
           <div className="grid grid-flow-col mt-4">
             <Button className="option p-2 mt-4 bg-gray-200 rounded-md flex items-center justify-start text-black hover:bg-gray-200">
               <svg
@@ -140,8 +139,6 @@ export default function Page() {
               Appointment Scheduler
             </Button>
           </div>
-
-
         </div>
 
         <div className="sidebar-options">
@@ -156,7 +153,6 @@ export default function Page() {
       <div className="m-5 flex-grow  flex flex-col space-y-4">
         {/* <div className="bg-white p-4 border rounded-md shadow">Naamloze configurator</div> */}
         {/* The one with the popover over icons */}
-
 
         <div className="bg-white p-4 border rounded-md shadow flex items-center space-x-2">
           <Button variant="outline">

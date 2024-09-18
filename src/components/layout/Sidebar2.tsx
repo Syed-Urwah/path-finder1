@@ -22,18 +22,18 @@ import { motion } from "framer-motion";
 export default function Sidebar2() {
   const navItems = [
     {
-      href: "#",
+      href: "/dashboard/product",
       icon: Home,
       label: "Dashboard",
       isActive: true,
       notification: 0,
     },
     {
-      href: "#",
+      href: "/dashboard/form",
       icon: ShoppingCart,
       label: "Orders",
       isActive: false,
-      notification: 1,
+      notification: 0,
     },
     {
       href: "#",
