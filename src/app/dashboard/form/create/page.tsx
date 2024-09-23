@@ -2320,6 +2320,77 @@ export default function NewPage() {
                   </div>
                 </div>
               </TabsContent>
+
+              <TabsContent defaultValue="logic" value="logic">
+                <div className="w-full h-full pt-4 bg-white">
+                  <div className="w-full border-b px-4 flex flex-col gap-5 pb-4">
+                    <p className="font-semibold break-all whitespace-normal text-xl">Change logic for Page 1</p>
+                    <div className="flex flex-col gap-4 rounded bg-white"></div>
+                    <div className="flex flex-col gap-1 bg-gray-100 p-4 rounded-md">
+                      Always go to Name
+                      <div>
+                        <Button
+                          type="button"
+                          role="combobox"
+                          aria-controls="radix-:rmr:"
+                          aria-expanded="false"
+                          aria-autocomplete="none"
+                          dir="ltr"
+                          data-state="closed"
+                          className="flex h-[45px] w-full items-center justify-between whitespace-nowrap rounded-md border border-gray-300 bg-transparent pr-3 pl-3 py-2 ring-offset-background placeholder:text-gray-500 outline-none data-[state=open]:outline-none data-[state=open]:ring-1 data-[state=open]:ring-gray-300 disabled:cursor-not-allowed disabled:opacity-50 bg-white"
+                        >
+                          <span style={{ pointerEvents: 'none' }}>
+                            <div className="flex gap-3 items-center">
+                              <div className="w-[40px] h-[40px] rounded-[12px] bg-gray-200 flex items-center justify-center font-bold">
+                                <p>P</p>
+                              </div>
+                              Page 2
+                            </div>
+                          </span>
+                          <Select>
+                            <SelectTrigger className="w-[180px]">
+                              <SelectValue placeholder="Select a fruit" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Fruits</SelectLabel>
+                                <SelectItem value="apple">Apple</SelectItem>
+                                <SelectItem value="banana">Banana</SelectItem>
+                                <SelectItem value="blueberry">Blueberry</SelectItem>
+                                <SelectItem value="grapes">Grapes</SelectItem>
+                                <SelectItem value="pineapple">Pineapple</SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        </Button>
+                      </div>
+                    </div>
+                    <button className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                      <p>Add rule</p>
+                      <div>
+                        <span>
+                          <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            data-prefix="fas"
+                            data-icon="plus"
+                            className="svg-inline--fa fa-plus"
+                            role="img"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                            ></path>
+                          </svg>
+                        </span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </TabsContent>
+              
             </Tabs>
           </div>
         </div>
