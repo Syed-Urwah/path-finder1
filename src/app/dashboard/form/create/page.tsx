@@ -4,7 +4,7 @@
 import React from "react";
 import { cn } from "@/lib/utils"; // Shadcn's class func.
 import { Button } from "@/components/ui/button";
-import { Bold, BookCopy, Pencil, Trash, Weight, X } from "lucide-react";
+import { Bold, BookCopy, Pencil, Trash, Weight, X, Plus } from "lucide-react";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
@@ -830,8 +830,8 @@ export default function NewPage() {
                             transition: "background-color 0.3s",
                           }}
                           onMouseOver={(e) =>
-                            (e.currentTarget.style.backgroundColor =
-                              "lightgray")
+                          (e.currentTarget.style.backgroundColor =
+                            "lightgray")
                           }
                           onMouseOut={(e) =>
                             (e.currentTarget.style.backgroundColor = "white")
@@ -1228,8 +1228,8 @@ export default function NewPage() {
                             transition: "background-color 0.3s",
                           }}
                           onMouseOver={(e) =>
-                            (e.currentTarget.style.backgroundColor =
-                              "lightgray")
+                          (e.currentTarget.style.backgroundColor =
+                            "lightgray")
                           }
                           onMouseOut={(e) =>
                             (e.currentTarget.style.backgroundColor = "white")
@@ -1655,8 +1655,8 @@ export default function NewPage() {
                             transition: "background-color 0.3s",
                           }}
                           onMouseOver={(e) =>
-                            (e.currentTarget.style.backgroundColor =
-                              "lightgray")
+                          (e.currentTarget.style.backgroundColor =
+                            "lightgray")
                           }
                           onMouseOut={(e) =>
                             (e.currentTarget.style.backgroundColor = "white")
@@ -2326,7 +2326,7 @@ export default function NewPage() {
                   <div className="w-full border-b px-4 flex flex-col gap-5 pb-4">
                     <p className="font-semibold break-all whitespace-normal text-xl">Change logic for Page 1</p>
                     <div className="flex flex-col gap-4 rounded bg-white"></div>
-                    <div className="flex flex-col gap-1 bg-gray-100 p-4 rounded-md">
+                    {/* <div className="flex flex-col gap-1 bg-gray-100 p-4 rounded-md">
                       Always go to Name
                       <div>
                         <Button
@@ -2347,50 +2347,207 @@ export default function NewPage() {
                               Page 2
                             </div>
                           </span>
-                          <Select>
-                            <SelectTrigger className="w-[180px]">
-                              <SelectValue placeholder="Select a fruit" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectGroup>
-                                <SelectLabel>Fruits</SelectLabel>
-                                <SelectItem value="apple">Apple</SelectItem>
-                                <SelectItem value="banana">Banana</SelectItem>
-                                <SelectItem value="blueberry">Blueberry</SelectItem>
-                                <SelectItem value="grapes">Grapes</SelectItem>
-                                <SelectItem value="pineapple">Pineapple</SelectItem>
-                              </SelectGroup>
-                            </SelectContent>
-                          </Select>
+                         
+                        </Button>
+                      </div>
+                    </div> */}
+                    <div className="flex flex-col gap-1 bg-gray-100 p-4 rounded-md text-black">
+                      Always go to Name
+                      <div>
+                        <Button
+                          type="button"
+                          role="combobox"
+                          aria-controls="radix-:rmr:"
+                          aria-expanded="false"
+                          aria-autocomplete="none"
+                          dir="ltr"
+                          data-state="closed"
+                          className="flex h-[45px] w-full items-center justify-between whitespace-nowrap rounded-md border border-gray-300 bg-white pr-3 pl-3 py-2 ring-offset-background placeholder:text-gray-500 outline-none disabled:cursor-not-allowed disabled:opacity-50 hover:bg-white"
+                        >
+                          <span style={{ pointerEvents: 'none' }} className="text-black">
+                            <div className="flex gap-3 items-center">
+                              <div className="w-[40px] h-[40px] rounded-[12px] bg-gray-200 flex items-center justify-center font-bold text-black">
+                                <p>P</p>
+                              </div>
+                              <span className="text-black">Page 2</span>
+                            </div>
+                          </span>
                         </Button>
                       </div>
                     </div>
-                    <button className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                      <p>Add rule</p>
-                      <div>
+                  </div>
+
+                  <div className="flex flex-col gap-1 bg-gray-100 p-4 rounded-md mt-5 mr-3 ml-3">
+                    <h2 className=" font-bold mt-2">When</h2>
+                    <div className=" mr-5">
+                      <Select>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Make a choice" />
+                        </SelectTrigger>
+                        <SelectContent>
+
+                          <SelectItem value="l">
+                            <div className="flex items-center gap-2">
+                              <div className="w-full h-full bg-[#D8BFD8] flex justify-center items-center">
+                                <svg
+                                  aria-hidden="true"
+                                  focusable="false"
+                                  data-prefix="fas"
+                                  data-icon="building"
+                                  className="svg-inline--fa fa-building text-black"
+                                  role="img"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 384 512"
+                                  width="20px"
+                                  height="20px"
+                                >
+                                  <path
+                                    fill="currentColor"
+                                    d="M48 0C21.5 0 0 21.5 0 48V464c0 26.5 21.5 48 48 48h96V432c0-26.5 21.5-48 48-48s48 21.5 48 48v80h96c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H48zM64 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V240zm112-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V240zM80 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V112zM272 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16z"
+                                  ></path>
+                                </svg>
+                              </div>
+                              <span className="font-bold ml-2">Street</span>
+                            </div>
+                          </SelectItem>
+
+                          {/* <SelectItem value="d">
+                          <div className="flex items-center gap-2">
+                            <div className="w-full h-full bg-[#D8BFD8] flex justify-center items-center">
+                              <svg
+                                aria-hidden="true"
+                                focusable="false"
+                                data-prefix="fas"
+                                data-icon="check"
+                                className="svg-inline--fa fa-check text-black"
+                                role="img"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 448 512"
+                                width="20px"
+                                height="20px"
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"
+                                ></path>
+                              </svg>
+                            </div>
+                            <span className="font-bold ml-2">Multiple select question</span>
+                          </div>
+                        </SelectItem> */}
+
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="flex space-x-4 ml-5 mt-3">
+                      <button className="flex items-center bg-gray-300 text-black  px-2.5 py-1 rounded-l">
+                        <Plus className="mr-2" />
+                        And
+                      </button>
+                      <button className="flex items-center bg-gray-300 text-black  px-2.5 py-1 rounded-r">
+                        <Plus className="mr-2" />
+                        Or
+                      </button>
+                    </div>
+
+
+                    <h2 className=" font-bold mt-5">Then go to</h2>
+                    <div className="flex items-center relative w-full">
+                      <Select>
+                        <SelectTrigger className="w-[calc(100%-40px)]"> {/* Adjust width here */}
+                          <SelectValue placeholder="Make a choice" className="text-sm" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="light" className="text-sm">
+                            <div className="flex items-center gap-2">
+                              <div className="w-full h-full bg-[#D8BFD8] flex justify-center items-center">
+                                <svg
+                                  aria-hidden="true"
+                                  focusable="false"
+                                  data-prefix="fas"
+                                  data-icon="building"
+                                  className="svg-inline--fa fa-building text-black"
+                                  role="img"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 384 512"
+                                  width="20px"
+                                  height="20px"
+                                >
+                                  <path
+                                    fill="currentColor"
+                                    d="M48 0C21.5 0 0 21.5 0 48V464c0 26.5 21.5 48 48 48h96V432c0-26.5 21.5-48 48-48s48 21.5 48 48v80h96c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H48zM64 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V240zm112-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V240zM80 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V112zM272 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16z"
+                                  ></path>
+                                </svg>
+                              </div>
+                              <span className="font-bold ml-2">Street</span>
+                            </div>
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+
+                      <button className="!w-[32px] !h-[32px] bg-destructive/[0.1] rounded-full hover:bg-destructive/[0.2] flex items-center justify-center ml-2">
                         <span>
                           <svg
                             aria-hidden="true"
                             focusable="false"
                             data-prefix="fas"
-                            data-icon="plus"
-                            className="svg-inline--fa fa-plus"
+                            data-icon="trash"
+                            className="svg-inline--fa fa-trash text-destructive"
                             role="img"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512"
+                            width="16px" // Adjust SVG size as needed
+                            height="16px"
                           >
                             <path
                               fill="currentColor"
-                              d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                              d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"
                             ></path>
                           </svg>
                         </span>
+                      </button>
+                    </div>
+
+
+                    <h2 className=" font-bold mt-5">Otherwise go to</h2>
+                    <div className="mr-5">
+                      <Button
+                        type="button"
+                        role="combobox"
+                        aria-controls="radix-:rmr:"
+                        aria-expanded="false"
+                        aria-autocomplete="none"
+                        dir="ltr"
+                        data-state="closed"
+                        className="flex h-[45px] w-full items-center justify-between whitespace-nowrap rounded-md border border-gray-300 bg-white pr-3 pl-3 py-2 ring-offset-background placeholder:text-gray-500 outline-none disabled:cursor-not-allowed disabled:opacity-50 hover:bg-white"
+                      >
+                        <span style={{ pointerEvents: 'none' }} className="text-black">
+                          <div className="flex gap-3 items-center">
+                            <div className="w-[40px] h-[40px] rounded-[12px] bg-gray-200 flex items-center justify-center font-bold text-black">
+                              <p>P</p>
+                            </div>
+                            <span className="text-black">Page 3</span>
+                          </div>
+                        </span>
+                      </Button>
+                    </div>
+
+                    <button className="flex flex-col items-center space-y-2 px-3 py-6 mt-5 mr-5 bg-gray-200 text-black border border-dotted border-gray-400 rounded hover:bg-gray-300 transition duration-200">
+                      <p className="text-center">Add rule</p>
+                      <div className="flex items-center justify-center w-8 h-8 bg-gray-300 rounded-full">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" className="svg-inline--fa fa-plus w-4 h-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                          <path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                        </svg>
                       </div>
                     </button>
+
+
                   </div>
+
                 </div>
               </TabsContent>
-              
+
             </Tabs>
           </div>
         </div>

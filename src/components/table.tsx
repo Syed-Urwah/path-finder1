@@ -416,7 +416,7 @@ export function DataTableDemo() {
 
             <TableHeader>
               <TableRow>
-                <TableHead className="font-bold text-black">
+                <TableHead className="font-bold text-black text-xl">
                   Name
                   <span className="inline-block ml-1 text-xs">
                     <svg
@@ -447,7 +447,7 @@ export function DataTableDemo() {
                     </svg>
                   </span>
                 </TableHead>
-                <TableHead className="font-bold text-black">
+                <TableHead className="font-bold text-black text-xl">
                   Cross Sell
                   <span className="inline-block ml-1 text-xs">
                     <svg
