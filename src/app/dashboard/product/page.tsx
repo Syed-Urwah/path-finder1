@@ -1,3 +1,4 @@
+"use client"
 import { DataTableDemo } from '@/components/table'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
