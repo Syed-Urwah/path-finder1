@@ -1,9 +1,0 @@
-<script
-  type="text/javascript"
-  src="https://public-assets.typeform.com/public/oauthbtn/btn.min.js"
-  name="tf-login-button"
-  data-scope="{your_scopes}"
-  data-redirect_uri="{your_redirect_uri}"
-  data-state="{state}"
-  data-client_id="{your_client_id}"
-></script>
