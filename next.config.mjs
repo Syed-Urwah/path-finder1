@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: { runtime: 'edge' },
-        
+    output: 'export',
     reactStrictMode: false,
     // async rewrites() {
     //   return [
@@ -17,6 +17,7 @@ const nextConfig = {
         },
         images: {
           domains: ['images.unsplash.com', 'localhost','oiqvaluk0meo17sm.public.blob.vercel-storage.com','api.mehmetk2.sg-host.com'],
+          unoptimized: true
         },
         middleware: ["middleware"],
         eslint: {

@@ -113,9 +113,9 @@ export default function ProductCreateForm({product}: any) {
 
     const formik = useFormik({
         initialValues: {
-            product_name: isEdit ? product.product_name : "",
-            description: isEdit ? product.description :  "",
-            image: isEdit ? product.mediaUrl + '/' + product.image :  "",
+            product_name: isEdit ? product?.product_name : "",
+            description: isEdit ? product?.description :  "",
+            image: isEdit ? product?.mediaUrl + '/' + product?.image :  "",
         },
         onSubmit: (values) => {
             const jsonString = JSON.stringify({
@@ -235,8 +235,8 @@ export default function ProductCreateForm({product}: any) {
                         </div>
                         <div className="mb-4">
                             <Label htmlFor="options">Options</Label>
-                            {options.length > 0 &&
-                                options.map((option: any, index: any) => (
+                            {options?.length > 0 &&
+                                options?.map((option: any, index: any) => (
 
                                     (editIndex == index && isEditing) ? displayEdit(option)
 
@@ -314,7 +314,7 @@ export default function ProductCreateForm({product}: any) {
                             <p className="text-sm text-gray-600 font-sans text-base">{formik.values.description || "Description"}</p>
                         </div>
                     </div>
-                    {options.map((option: any) => {
+                    {options?.map((option: any) => {
                         return <DisplayOptions option={option} isEdit={isEdit} />
                     })}
 

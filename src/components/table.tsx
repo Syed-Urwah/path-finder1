@@ -326,8 +326,10 @@ export function DataTableDemo() {
             {products.length ? (
               products.map((product: any) => {
                 return <TableRow>
-                  <TableCell colSpan={3}> <Link href={`http://localhost:3000/dashboard/product/edit/${product.id}`}>{product.product_name}</Link></TableCell>
-                </TableRow>
+
+                        <TableCell colSpan={3}> <Link href={`/dashboard/product/edit/${product.id}`}>{product.product_name}</Link></TableCell>
+                      </TableRow>
+
               })
             ) : (
               <TableRow>
