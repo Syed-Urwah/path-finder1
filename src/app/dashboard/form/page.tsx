@@ -17,6 +17,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import Sidebar2 from "@/components/layout/Sidebar2";
+import Header2 from "@/components/layout/Header2";
+import Link from "next/link";
 
 export default function Page() {
   useEffect(() => {
@@ -45,14 +48,21 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="flex min-h-screen">
+    <html lang="en">
+      <body>
+    <div className="grid min-h-screen w-full md:grid-cols-[68px_1fr]">
+    <Sidebar2 />
+    <div className="flex flex-col">
+      <Header2 />
+      <main className="p-4">
+      <div className="flex min-h-screen">
       {/* Sidebar */}
       <div className={cn("w-[300px] bg-gray-100 shadow-md")}>
         <div className="m-4">
           <div className="grid grid-flow-col">
             <div className="flex justify-between">
               <h2 className="text-lg font-bold ">Forms</h2>
-              <a
+              <Link
                 href="/dashboard/form/create"
                 className="bg-[#D3D3D3] w-10 h-10 rounded-full flex items-center justify-center p-0"
               >
@@ -71,7 +81,7 @@ export default function Page() {
                     d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -511,5 +521,11 @@ export default function Page() {
         </div>
       </div>
     </div>
+      </main>
+    </div>
+  </div>
+  </body>
+    </html>
+   
   );
 }

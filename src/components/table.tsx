@@ -493,7 +493,7 @@ export function DataTableDemo() {
                   return (
                     <TableRow key={product.id}>
                       <TableCell colSpan={3}>
-                        <Link href={`http://localhost:3000/dashboard/product/edit/${product.id}`}>
+                        <Link href={`${process.env.NEXT_PUBLIC_FE_URL}/dashboard/product/edit/${product.id}`}>
                           {product.product_name}
                         </Link>
                       </TableCell>

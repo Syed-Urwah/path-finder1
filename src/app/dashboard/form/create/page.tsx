@@ -78,6 +78,7 @@ export default function NewPage() {
   const router = useRouter();
   return (
     <>
+    
       <div className="flex flex-col h-screen w-screen overflow-hidden">
         {/* Header*/}
         <header
@@ -446,7 +447,7 @@ export default function NewPage() {
           </div>
 
           {/* Main page in opt_pages file*/}
-          <div className="w-full h-full flex flex-col border-r hover:overflow-auto">
+          <div className="w-full h-full flex flex-col border-r hover:overflow-auto overflow-auto">
             <>
               {/* ////////////////////////PAGE-1(Radio button)Multiple choice question///////////////////////////////////////////// */}
               <div
