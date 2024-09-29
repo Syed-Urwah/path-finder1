@@ -78,7 +78,7 @@ export default function NewPage() {
   const router = useRouter();
   return (
     <>
-    
+
       <div className="flex flex-col h-screen w-screen overflow-hidden">
         {/* Header*/}
         <header
@@ -448,6 +448,10 @@ export default function NewPage() {
 
           {/* Main page in opt_pages file*/}
           <div className="w-full h-full flex flex-col border-r hover:overflow-auto overflow-auto">
+            {/* <div className="w-full h-[500px] flex flex-col border-r overflow-y-auto"> */}
+            {/* <div className="w-full h-full flex flex-col border-r overflow-y-auto scroll-smooth"> */}
+            {/* <div className="w-full flex-grow flex flex-col border-r overflow-y-auto"> */}
+
             <>
               {/* ////////////////////////PAGE-1(Radio button)Multiple choice question///////////////////////////////////////////// */}
               <div
@@ -1708,7 +1712,83 @@ export default function NewPage() {
                 </div>
               </div>
 
-              {/* ///////////////////////////////ADD PAGE PLUS BUTTON////////////////////////////////             */}
+              {/* ////////////////////////add page button//////////////////////////////////////////// */}
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  height: "100vh",
+                  justifyContent: "center", // Center content vertically
+                }}
+              >
+                {/* Main Container */}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "80%", // Match width with the header
+                    height: "auto", // Adjust height dynamically
+                    backgroundColor: "white",
+                    boxSizing: "border-box",
+                    alignItems: "center",
+                    justifyContent: "center", // Center content inside
+                    padding: "20px",
+                    borderRadius: "8px", // Removed the border and adjusted the styling
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    <span style={{ fontSize: "12px" }}>Add Page</span>
+                    <button
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                        backgroundColor: "white",
+                        padding: "8px",
+                        cursor: "pointer",
+                        border: "2px solid black", // You can remove this if border is unnecessary
+                      }}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="plus"
+                        className="svg-inline--fa fa-plus fa-lg"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
+                        style={{
+                          width: "24px",
+                          height: "24px",
+                          fill: "currentColor",
+                        }}
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              {/* ///////////////////////////////bt//////////////////////////////// */}
               <div
                 style={{
                   display: "flex",
@@ -1719,7 +1799,7 @@ export default function NewPage() {
                 }}
               >
                 <span style={{ marginTop: "8px", fontSize: "12px" }}>
-                  Add Page
+                 
                 </span>
                 <button
                   style={{
