@@ -38,6 +38,7 @@ import Header from "@/components/layout/Header";
 import Sidebar2 from "@/components/layout/Sidebar2";
 import { useEffect, useState } from "react";
 import Header2 from "@/components/layout/Header2";
+import MainLayout from "@/layout/mainLayout";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -69,7 +70,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <>
       {/* Mobile Sheet for Sidebar */}
-      <Sheet open={toggleSidebar}>
+      {/* <Sheet open={toggleSidebar}>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
             <Menu className="h-5 w-5" />
@@ -141,24 +142,24 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             </Card>
           </div>
         </SheetContent>
-      </Sheet>
+      </Sheet> */}
 
-      <html lang="en">
-      <body>
-     {/* Main Layout */}
-     <div className="grid min-h-screen w-full md:grid-cols-[68px_1fr] lg:grid-cols-[68px_1fr]">
-       
-       <Sidebar2 />
-       <div className="flex flex-col">
-         <Header setToggleSidebar={setToggleSidebar} />
-         <div className="mt-32">{children}</div>
-       </div>
-           
- </div>
-      </body>
-    </html>
 
-      
+      {/* Main Layout */}
+      {/* <div className="grid min-h-screen w-full md:grid-cols-[68px_1fr] lg:grid-cols-[68px_1fr]">
+
+        <Sidebar2 />
+        <div className="flex flex-col">
+          <Header setToggleSidebar={setToggleSidebar} />
+          <div className="mt-32">{children}</div>
+        </div>
+
+      </div> */}
+
+      <MainLayout>
+        {children}
+      </MainLayout>
+
     </>
   );
 }

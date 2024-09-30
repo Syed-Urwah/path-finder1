@@ -20,6 +20,7 @@ import {
 import Sidebar2 from "@/components/layout/Sidebar2";
 import Header2 from "@/components/layout/Header2";
 import Link from "next/link";
+import MainLayout from "@/layout/mainLayout";
 
 export default function Page() {
   useEffect(() => {
@@ -48,8 +49,6 @@ export default function Page() {
   }, []);
 
   return (
-    <html lang="en">
-      <body>
     <div className="grid min-h-screen w-full md:grid-cols-[68px_1fr]">
     <Sidebar2 />
     <div className="flex flex-col">
@@ -524,8 +523,7 @@ export default function Page() {
       </main>
     </div>
   </div>
-  </body>
-    </html>
+ 
    
   );
 }

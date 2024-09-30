@@ -43,7 +43,7 @@ interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export default function MainLayout({ children }: DashboardLayoutProps) {
   const newPageRoutes = "/dashboard/form/create/new-page";
   const createRoutes = "/dashboard/form/create";
   const productRoutes = "/dashboard/product/create";
@@ -143,16 +143,20 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </SheetContent>
       </Sheet>
 
-      {/* Main Layout */}
-      <div className="grid min-h-screen w-full md:grid-cols-[68px_1fr] lg:grid-cols-[68px_1fr]">
+    
+     {/* Main Layout */}
+     <div className="grid min-h-screen w-full md:grid-cols-[68px_1fr] lg:grid-cols-[68px_1fr]">
        
-            <Sidebar2 />
-            <div className="flex flex-col">
-              <Header setToggleSidebar={setToggleSidebar} />
-              <div className="mt-32">{children}</div>
-            </div>
-                
-      </div>
+       <Sidebar2 />
+       <div className="flex flex-col">
+         <Header setToggleSidebar={setToggleSidebar} />
+         <div className="mt-32">{children}</div>
+       </div>
+           
+ </div>
+      
+
+      
     </>
   );
 }

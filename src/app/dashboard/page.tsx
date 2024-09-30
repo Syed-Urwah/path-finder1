@@ -9,7 +9,7 @@ export default function page() {
           <main className="flex flex-col gap-4 p-4 lg:gap-6 lg:p-6">
 
             
-            <DataTableDemo />
+            {/* <DataTableDemo /> */}
 
           </main>
   )
