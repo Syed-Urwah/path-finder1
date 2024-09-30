@@ -52,7 +52,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   // Track client-side mounting
   const [isMounted, setIsMounted] = useState(false);
 
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   console.log(pathname);
 
