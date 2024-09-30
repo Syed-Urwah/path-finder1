@@ -33,6 +33,7 @@ export const columns: ColumnDef<Product>[] = [
     accessorKey: "product_name",
     header: ({ column }) => (
       <Button
+        className="font-bold text-black"
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
@@ -44,7 +45,7 @@ export const columns: ColumnDef<Product>[] = [
   },
   {
     accessorKey: "cross_sell",
-    header: () => <div>Cross-sells</div>,
+    header: () => <div className="font-bold text-black">Cross-sells</div>,
     cell: ({ row }) => <div>{row.getValue("cross_sell")}</div>,
   },
 ];

@@ -34,7 +34,21 @@ export function ContentStyleTab() {
         {/* <div className="w-full h-full flex flex-col border-r overflow-y-auto scroll-smooth"> */}
         {/* <div className="w-full flex-grow flex flex-col border-r overflow-y-auto"> */}
 
-        <>
+        <div
+          className="flex-grow flex flex-col overflow-y-auto scroll-smooth"
+          style={{
+            scrollbarWidth: "none", // Hide scrollbar for Firefox
+            msOverflowStyle: "none", // Hide scrollbar for IE and Edge
+          }}
+        >
+          {/* Hide scrollbar for Chrome, Safari and Edge */}
+          <style>
+            {`
+              .flex-grow::-webkit-scrollbar {
+                display: none;
+              }
+            `}
+          </style>
           {/* ////////////////////////PAGE-1(Radio button)Multiple choice question///////////////////////////////////////////// */}
           <div
             style={{
@@ -1407,7 +1421,7 @@ export function ContentStyleTab() {
               </svg>
             </button>
           </div>
-        </>
+        </div>
       </div>
     </>
   );
