@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import Head from 'next/head';
 
 import { Trash } from "lucide-react";
 import {
@@ -20,8 +21,28 @@ import {
 } from "@/components/ui/card";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label";
 import { FormSidebar } from "./sidebar";
+
+
 export function ContentStyleTab() {
   return (
     <>
@@ -50,1254 +71,284 @@ export function ContentStyleTab() {
             `}
           </style>
           {/* ////////////////////////PAGE-1(Radio button)Multiple choice question///////////////////////////////////////////// */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              height: "100vh",
-              padding: "20px",
-              boxSizing: "border-box",
-            }}
-          >
+
+          <div className="flex flex-col items-center h-screen p-5 box-border">
+
             {/* Header Section */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "80%", // Set width to match the main container
-                marginBottom: "7px",
-                textAlign: "left",
-                boxSizing: "border-box",
-              }}
-            >
-              <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
-                <h1
-                  style={{
-                    margin: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    fontWeight: "bold",
-                  }}
-                >
+            <div className="flex justify-between items-center w-4/5 mb-2.5 text-left box-border">
+              <div className="flex-1 flex items-center">
+                <h1 className="m-0 flex items-center font-bold">
                   Page1
-                  <Pen
-                    style={{
-                      marginLeft: "8px",
-                      height: "16px",
-                      width: "16px",
-                    }}
-                  />
+                  <Pen className="ml-2 w-4 h-4" />
                 </h1>
               </div>
 
-              {/* //////////////////////////////////HEADER BUTTONS////////////////////////////////////////////// */}
-              <>
-                <div
-                  style={{
-                    display: "flex", // Use flexbox to lay out buttons in a row
-                    alignItems: "center", // Align items vertically in the center
-                    gap: "10px", // Optional: Adds space between buttons
-                  }}
-                >
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <ChevronUp
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Page Up
-                    </div>
-                  </button>
+              {/* Header Buttons */}
+              
+              <div className="flex items-center gap-2.5 mr-8">
+                <button className="p-1.5 border-none rounded-full bg-gray-200 text-white cursor-pointer relative w-8 h-8 flex items-center justify-center">
+                  <ChevronUp className="w-4 h-4 text-black" />
+                </button>
+                <button className="p-1.5 border-none rounded-full bg-gray-200 text-white cursor-pointer relative w-8 h-8 flex items-center justify-center">
+                  <ChevronDown className="w-4 h-4 text-black" />
+                </button>
+                <button className="p-1.5 border-none rounded-full bg-gray-200 text-white cursor-pointer relative w-8 h-8 flex items-center justify-center">
+                  <Settings className="w-4 h-4 text-black" />
+                </button>
+                <button className="p-1.5 border-none rounded-full bg-gray-200 text-white cursor-pointer relative w-8 h-8 flex items-center justify-center">
+                  <Copy className="w-4 h-4 text-black" />
+                </button>
+                <button className="p-1.5 border-none rounded-full bg-gray-200 text-white cursor-pointer relative w-8 h-8 flex items-center justify-center">
+                  <Trash className="w-4 h-4 text-black" />
+                </button>
+              </div>
 
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <ChevronDown
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Page Down
-                    </div>
-                  </button>
 
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Settings
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Settings
-                    </div>
-                  </button>
-
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Copy
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Duplicate
-                    </div>
-                  </button>
-
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Trash
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Delete
-                    </div>
-                  </button>
-                </div>
-              </>
             </div>
 
             {/* Main Container */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                border: "5px solid black",
-                borderRadius: "8px",
-                width: "80%", // Match width with the header
-                height: "90%",
-                backgroundColor: "white",
-                boxSizing: "border-box",
-              }}
-            >
-              <div
-                style={{
-                  flex: 1,
-                  padding: "20px",
-                  boxSizing: "border-box",
-                }}
-              >
-                {/* Image */}
+
+            <div className="flex flex-row border-4 border-black rounded-lg w-[800px] h-[500px]  bg-white box-border">
+              {/* Left Image Container */}
+              <div className="flex-1 p-5 box-border flex justify-center items-center">
                 <img
                   src="/images/image.jpg"
                   alt="Description of image"
-                  style={{
-                    width: "100%", // Adjust the width as needed
-                    height: "auto", // Maintain aspect ratio
-                    marginBottom: "20px", // Space between image and text
-                  }}
+                  className="w-full h-auto mb-5"
                 />
               </div>
 
-              <div
-                style={{
-                  flex: 1,
-                  padding: "20px",
-                  boxSizing: "border-box",
-                }}
-              >
-                {/* Content for the second section */}
-                <Card className="w-[500px], h-[400px]">
-                  <CardHeader>
-                    <CardTitle>Question 1</CardTitle>
-                  </CardHeader>
-                  <CardContent>
+              {/* Right Card Container */}
+              <div className="flex-1 p-5 box-border flex flex-col justify-between">
+                {/* Card Component with fixed height */}
+                <Card className="w-[90%] h-[80%] mx-auto shadow-lg p-4 flex flex-col justify-between">
+                  <CardContent className="overflow-y-auto custom-scrollbar">
                     <form>
-                      <div className="flex justify-between ">
-                        <Label className="font-bold text-base">
-                          Question 1
-                        </Label>
-                        <span className="bg-gray-400 mb-4 rounded-lg">
-                          Verplicht
-                        </span>
+                      {/* Question 1 */}
+                      <div className="flex justify-between mb-3">
+                        <Label className="font-bold text-sm">Question 1</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
                       </div>
                       <RadioGroup defaultValue="option-one">
                         <div className="flex flex-col space-y-2">
-                          <div className="p-4 rounded-lg border border-gray-300 flex items-center space-x-80">
+                          <div className="p-3 rounded-lg border border-gray-300 flex items-center justify-between">
                             {/* Image in front of Answer A */}
-
                             <div className="flex items-center space-x-2">
-                              <RadioGroupItem
-                                value="option-one"
-                                id="option-one"
-                              />
-                              <Label htmlFor="option-one">Answer A</Label>
+                              <RadioGroupItem value="option-one" id="option-one" />
+                              <Label htmlFor="option-one" className="text-sm">Answer A</Label>
                             </div>
                             <img
                               src="your-image-url.jpg"
-                              className="w-8 ml-6 h-8 object-contain"
+                              className="w-6 h-6 object-contain"
                             />
                           </div>
-                          <div className="p-4 rounded-lg border border-gray-300">
+                          <div className="p-3 rounded-lg border border-gray-300">
                             <div className="flex items-center space-x-2">
-                              <RadioGroupItem
-                                value="option-two"
-                                id="option-two"
-                              />
-                              <Label htmlFor="option-two">Answer B</Label>
+                              <RadioGroupItem value="option-two" id="option-two" />
+                              <Label htmlFor="option-two" className="text-sm">Answer B</Label>
                             </div>
                           </div>
-                          <div className="p-4 rounded-lg border border-gray-300">
+                          <div className="p-3 rounded-lg border border-gray-300">
                             <div className="flex items-center space-x-2">
-                              <RadioGroupItem
-                                value="option-three"
-                                id="option-three"
-                              />
-                              <Label htmlFor="option-three">Answer C</Label>
+                              <RadioGroupItem value="option-three" id="option-three" />
+                              <Label htmlFor="option-three" className="text-sm">Answer C</Label>
                             </div>
                           </div>
                         </div>
                       </RadioGroup>
-                    </form>
-                  </CardContent>
-                  <CardFooter className="flex justify-between">
-                    <Button
-                      style={{
-                        backgroundColor: "white",
-                        color: "black",
-                        borderRadius: "50%", // Circle shape
-                        width: "50px", // Adjust width as needed
-                        height: "50px", // Adjust height to match width
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        border: "2px solid black", // Black border
-                        marginRight: "10px",
-                        cursor: "pointer",
-                        transition: "background-color 0.3s",
-                      }}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.backgroundColor = "lightgray")
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.backgroundColor = "white")
-                      }
-                    >
-                      <ArrowLeft
-                        style={{
-                          color: "black",
-                          fontWeight: "bold",
-                          width: "24px", // Adjust to fit the button
-                          height: "24px", // Adjust to fit the button
-                        }}
-                      />
-                    </Button>
 
-                    <Button
-                      style={{
-                        backgroundColor: "black",
-                        color: "white",
-                        borderRadius: "25px", // Oval shape
-                        padding: "10px 20px",
-                        border: "none",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        transition: "background-color 0.3s",
-                      }}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.backgroundColor = "gray")
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.backgroundColor = "black")
-                      }
-                    >
-                      <span style={{ marginRight: "8px" }}>Volgende</span>
-                      <ArrowRight
-                        style={{
-                          color: "white",
-                          fontWeight: "bold",
-                          width: "16px", // Adjust to fit the button
-                          height: "16px", // Adjust to fit the button
-                        }}
-                      />
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </div>
-            </div>
-          </div>
-
-          {/* ////////////////////////PAGE-2(slider)Number question///////////////////////////////////////////// */}
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              height: "100vh",
-              padding: "20px",
-              boxSizing: "border-box",
-            }}
-          >
-            {/* Header Section */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "80%", // Set width to match the main container
-                marginBottom: "7px",
-                textAlign: "left",
-                boxSizing: "border-box",
-              }}
-            >
-              <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
-                <h1
-                  style={{
-                    margin: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Page2
-                  <Pen
-                    style={{
-                      marginLeft: "8px",
-                      height: "16px",
-                      width: "16px",
-                    }}
-                  />
-                </h1>
-              </div>
-
-              {/* //////////////////////////////////HEADER BUTTONS////////////////////////////////////////////// */}
-              <>
-                <div
-                  style={{
-                    display: "flex", // Use flexbox to lay out buttons in a row
-                    alignItems: "center", // Align items vertically in the center
-                    gap: "10px", // Optional: Adds space between buttons
-                  }}
-                >
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <ChevronUp
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Page Up
-                    </div>
-                  </button>
-
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <ChevronDown
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Page Down
-                    </div>
-                  </button>
-
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Settings
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Settings
-                    </div>
-                  </button>
-
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Copy
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Duplicate
-                    </div>
-                  </button>
-
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Trash
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Delete
-                    </div>
-                  </button>
-                </div>
-              </>
-            </div>
-
-            {/* Main Container */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                border: "5px solid black",
-                borderRadius: "8px",
-                width: "80%", // Match width with the header
-                height: "90%",
-                backgroundColor: "white",
-                boxSizing: "border-box",
-              }}
-            >
-              <div
-                style={{
-                  flex: 1,
-                  padding: "20px",
-                  boxSizing: "border-box",
-                }}
-              >
-                {/* Image */}
-                <img
-                  src="/images/image.jpg"
-                  alt="Description of image"
-                  style={{
-                    width: "100%", // Adjust the width as needed
-                    height: "auto", // Maintain aspect ratio
-                    marginBottom: "20px", // Space between image and text
-                  }}
-                />
-              </div>
-
-              <div
-                style={{
-                  flex: 1,
-                  padding: "20px",
-                  boxSizing: "border-box",
-                }}
-              >
-                {/* Content for the second section */}
-                <Card className="w-[500px], h-[400px]">
-                  <CardHeader>
-                    <CardTitle>Question 2</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <form>
-                      <div className="flex justify-between ">
-                        <Label className="font-bold text-base">
-                          Question 2
-                        </Label>
-                        <span className="bg-gray-400 mb-4 rounded-lg">
-                          Verplicht
-                        </span>
+                      {/* Question 2 */}
+                      <div className="flex justify-between mt-4">
+                        <Label className="font-bold text-sm">Multiple select question</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
                       </div>
-                    </form>
-                  </CardContent>
-                  <CardFooter className="flex justify-between">
-                    <Button
-                      style={{
-                        backgroundColor: "white",
-                        color: "black",
-                        borderRadius: "50%", // Circle shape
-                        width: "50px", // Adjust width as needed
-                        height: "50px", // Adjust height to match width
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        border: "2px solid black", // Black border
-                        marginRight: "10px",
-                        cursor: "pointer",
-                        transition: "background-color 0.3s",
-                      }}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.backgroundColor = "lightgray")
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.backgroundColor = "white")
-                      }
-                    >
-                      <ArrowLeft
-                        style={{
-                          color: "black",
-                          fontWeight: "bold",
-                          width: "24px", // Adjust to fit the button
-                          height: "24px", // Adjust to fit the button
-                        }}
-                      />
-                    </Button>
 
-                    <Button
-                      style={{
-                        backgroundColor: "black",
-                        color: "white",
-                        borderRadius: "25px", // Oval shape
-                        padding: "10px 20px",
-                        border: "none",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        transition: "background-color 0.3s",
-                      }}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.backgroundColor = "gray")
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.backgroundColor = "black")
-                      }
-                    >
-                      <span style={{ marginRight: "8px" }}>Volgende</span>
-                      <ArrowRight
-                        style={{
-                          color: "white",
-                          fontWeight: "bold",
-                          width: "16px", // Adjust to fit the button
-                          height: "16px", // Adjust to fit the button
-                        }}
-                      />
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </div>
-            </div>
-          </div>
-
-          {/* ////////////////////////PAGE-3(checkbox)Multiple select question//////////////////////////////////////////// */}
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              height: "100vh",
-              padding: "20px",
-              boxSizing: "border-box",
-            }}
-          >
-            {/* Header Section */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "80%", // Set width to match the main container
-                marginBottom: "7px",
-                textAlign: "left",
-                boxSizing: "border-box",
-              }}
-            >
-              <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
-                <h1
-                  style={{
-                    margin: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Page3
-                  <Pen
-                    style={{
-                      marginLeft: "8px",
-                      height: "16px",
-                      width: "16px",
-                    }}
-                  />
-                </h1>
-              </div>
-
-              {/* //////////////////////////////////HEADER BUTTONS////////////////////////////////////////////// */}
-              <>
-                <div
-                  style={{
-                    display: "flex", // Use flexbox to lay out buttons in a row
-                    alignItems: "center", // Align items vertically in the center
-                    gap: "10px", // Optional: Adds space between buttons
-                  }}
-                >
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <ChevronUp
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Page Up
-                    </div>
-                  </button>
-
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <ChevronDown
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Page Down
-                    </div>
-                  </button>
-
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Settings
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Settings
-                    </div>
-                  </button>
-
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Copy
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Duplicate
-                    </div>
-                  </button>
-
-                  <button
-                    style={{
-                      padding: "10px",
-                      border: "none",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0",
-                      color: "white",
-                      cursor: "pointer",
-                      position: "relative",
-                      width: "40px",
-                      height: "40px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Trash
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        color: "black",
-                      }}
-                    />
-                    <div
-                      style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                        bottom: "100%",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        backgroundColor: "#333",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "4px",
-                        whiteSpace: "nowrap",
-                        zIndex: 1,
-                        fontSize: "12px",
-                      }}
-                    >
-                      Delete
-                    </div>
-                  </button>
-                </div>
-              </>
-            </div>
-
-            {/* Main Container */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                border: "5px solid black",
-                borderRadius: "8px",
-                width: "80%", // Match width with the header
-                height: "90%",
-                backgroundColor: "white",
-                boxSizing: "border-box",
-              }}
-            >
-              <div
-                style={{
-                  flex: 1,
-                  padding: "20px",
-                  boxSizing: "border-box",
-                }}
-              >
-                {/* Image */}
-                <img
-                  src="/images/image.jpg"
-                  alt="Description of image"
-                  style={{
-                    width: "100%", // Adjust the width as needed
-                    height: "auto", // Maintain aspect ratio
-                    marginBottom: "20px", // Space between image and text
-                  }}
-                />
-              </div>
-
-              <div
-                style={{
-                  flex: 1,
-                  padding: "20px",
-                  boxSizing: "border-box",
-                }}
-              >
-                {/* Content for the second section */}
-                <Card className="w-[500px], h-[400px]">
-                  <CardHeader>
-                    <CardTitle>Question 3</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <form>
                       <div className="flex flex-col space-y-2">
-                        <div className="p-4 rounded-lg border border-gray-300 flex items-center space-x-80">
+                        <div className="p-3 rounded-lg border border-gray-300 flex items-center justify-between">
                           <div className="flex items-center space-x-2">
-                            <input
-                              type="checkbox"
-                              id="checkbox1"
-                              className="h-6 w-6"
-                            />
-                            <Label htmlFor="checkbox1">Answer A</Label>
+                            <Checkbox id="option-one" />
+                            <Label htmlFor="option-one" className="text-sm">Answer A</Label>
                           </div>
                           <img
                             src="your-image-url.jpg"
-                            className="w-8 ml-6 h-8 object-contain"
-                            alt="Icon for Answer A"
+                            className="w-6 h-6 object-contain"
                           />
                         </div>
-                        <div className="p-4 rounded-lg border border-gray-300">
+                        <div className="p-3 rounded-lg border border-gray-300">
                           <div className="flex items-center space-x-2">
-                            <input
-                              type="checkbox"
-                              id="checkbox2"
-                              className="h-6 w-6"
-                            />
-                            <Label htmlFor="checkbox2">Answer B</Label>
+                            <Checkbox id="option-two" />
+                            <Label htmlFor="option-two" className="text-sm">Answer B</Label>
                           </div>
                         </div>
-                        <div className="p-4 rounded-lg border border-gray-300">
+                        <div className="p-3 rounded-lg border border-gray-300">
                           <div className="flex items-center space-x-2">
-                            <input
-                              type="checkbox"
-                              id="checkbox3"
-                              className="h-6 w-6"
-                            />
-                            <Label htmlFor="checkbox3">Answer C</Label>
+                            <Checkbox id="option-three" />
+                            <Label htmlFor="option-three" className="text-sm">Answer C</Label>
                           </div>
                         </div>
                       </div>
+
+                      {/* Question #3 */}
+                      <div className="flex justify-between mt-4">
+                        <Label className="font-bold text-sm">Number question</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+
+                      <div className="flex justify-between gap-3 mt-4">
+                        <div className="grid w-full max-w-sm items-center gap-1.5 transition-colors duration-300 hover:bg-gray-200 p-2 rounded-md">
+                          <label className="font-sans text-base">meters</label>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm"></span>
+                            <input
+                              type="number"
+                              id="meters"
+                              min="10"
+                              max="100"
+                              value="50"
+                              className="w-[50px] text-center border rounded-sm"
+                            />
+                            <span className="text-sm"></span>
+                          </div>
+                        </div>
+                        <div className="grid w-full max-w-sm items-center">
+                          <div className="flex justify-between mb-1">
+                            <span className="text-sm">10</span>
+                            <span className="text-sm">100</span>
+                          </div>
+                          <input type="range" min="10" max="100" step="5" value="50" className="w-full" />
+                        </div>
+                      </div>
+
+                      {/* Question #4 */}
+                      <div className="flex justify-between mt-4 mb-2"> {/* margin below heading */}
+                        <Label className="font-bold text-sm">Dropdown question</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+                      <Select>
+                        <SelectTrigger className="w-[240px]">
+                          <SelectValue placeholder="select" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="a">Answer A</SelectItem>
+                          <SelectItem value="b">Answer B</SelectItem>
+                          <SelectItem value="c">Answer C</SelectItem>
+                        </SelectContent>
+                      </Select>
+
+                      {/* Question #5 */}
+                      <div className="flex justify-between mt-4 mb-2">
+                        <Label className="font-bold text-sm">First name</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+                      <Input type="email" placeholder="Enter first name here" />
+
+                      {/* Question #6 */}
+                      <div className="flex justify-between mt-4 mb-2">
+                        <Label className="font-bold text-sm">Last name</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+                      <Input type="email" placeholder="Enter last name here" />
+
+                      {/* Question #7 */}
+                      <div className="flex justify-between mt-4 mb-2">
+                        <Label className="font-bold text-sm">Email</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+                      <Input type="email" placeholder="Enter email here" />
+
+                      {/* Question #8 */}
+                      <div className="flex justify-between mt-4 mb-2">
+                        <Label className="font-bold text-sm">Phone</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+                      <Input type="email" placeholder="Enter phone number here" />
+
+                      {/* Question #9 */}
+                      <div className="flex justify-between mt-4 mb-2">
+                        <Label className="font-bold text-sm">Company name</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+                      <Input type="email" placeholder="Enter your answer here" />
+
+                      {/* Question #10 */}
+                      <div className="flex justify-between mt-4 mb-2">
+                        <Label className="font-bold text-sm">Chamber of commerce</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+                      <Input type="email" placeholder="Enter your answer here" />
+
+                      {/* Question #11 */}
+                      <div className="flex justify-between mt-4 mb-2">
+                        <Label className="font-bold text-sm">Contact person</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+                      <Input type="email" placeholder="Enter your answer here" />
+
+                      {/* Question #12 */}
+                      <div className="flex justify-between mt-4 mb-2">
+                        <Label className="font-bold text-sm">VAT number</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+                      <Input type="email" placeholder="Enter your answer here" />
+
+                      {/* Question #13 */}
+                      <div className="flex justify-between mt-4 mb-2">
+                        <Label className="font-bold text-sm">Long text input field</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+                      <Textarea placeholder="Type your message here." />
+
+                      {/* Question #14 */}
+                      <div className="flex justify-between mt-4 mb-2">
+                        <Label className="font-bold text-sm">Short text input field</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+                      <Input type="email" placeholder="Type your message here." />
+
+                      {/* Question #15*/}
+                      <div className="flex justify-between mt-4 mb-2">
+                        <Label className="font-bold text-sm">Street</Label>
+                        <span className="bg-gray-400 py-1 px-2 rounded-lg text-xs">Verplicht</span>
+                      </div>
+                      <Input type="email" placeholder="Enter your answer here" />
+
+
+
+
+
+
                     </form>
                   </CardContent>
-                  <CardFooter className="flex justify-between">
-                    <Button
-                      style={{
-                        backgroundColor: "white",
-                        color: "black",
-                        borderRadius: "50%", // Circle shape
-                        width: "50px", // Adjust width as needed
-                        height: "50px", // Adjust height to match width
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        border: "2px solid black", // Black border
-                        marginRight: "10px",
-                        cursor: "pointer",
-                        transition: "background-color 0.3s",
-                      }}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.backgroundColor = "lightgray")
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.backgroundColor = "white")
-                      }
-                    >
-                      <ArrowLeft
-                        style={{
-                          color: "black",
-                          fontWeight: "bold",
-                          width: "24px", // Adjust to fit the button
-                          height: "24px", // Adjust to fit the button
-                        }}
-                      />
-                    </Button>
 
-                    <Button
-                      style={{
-                        backgroundColor: "black",
-                        color: "white",
-                        borderRadius: "25px", // Oval shape
-                        padding: "10px 20px",
-                        border: "none",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        transition: "background-color 0.3s",
-                      }}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.backgroundColor = "gray")
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.backgroundColor = "black")
-                      }
-                    >
-                      <span style={{ marginRight: "8px" }}>Volgende</span>
-                      <ArrowRight
-                        style={{
-                          color: "white",
-                          fontWeight: "bold",
-                          width: "16px", // Adjust to fit the button
-                          height: "16px", // Adjust to fit the button
-                        }}
-                      />
+                  {/* Buttons positioned at the bottom */}
+                  <CardFooter className="flex justify-between mt-9">
+                    <Button className="bg-white text-black rounded-full w-10 h-10 flex items-center justify-center border-2 border-black cursor-pointer">
+                      {/* <ArrowLeft className="w-5 h-5 font-bold text-black" /> */}
+                      <div>
+                      <ArrowLeft className="w-5 h-5 font-bold text-black" />
+                      </div>
+                    </Button>
+     
+                        
+                    <Button className="bg-black text-white rounded-2xl py-2 px-4 border-none cursor-pointer flex items-center">
+                      <span className="mr-2 text-sm">Volgende</span>
+                      <ArrowRight className="w-4 h-4 font-bold text-white" />
                     </Button>
                   </CardFooter>
+           
+
                 </Card>
               </div>
             </div>
+
+
+
+
+
           </div>
+
+
+
 
           {/* ////////////////////////add page button//////////////////////////////////////////// */}
 
@@ -1375,7 +426,7 @@ export function ContentStyleTab() {
           </div>
 
           {/* ///////////////////////////////bt//////////////////////////////// */}
-          <div
+          {/* <div
             style={{
               display: "flex",
               flexDirection: "column",
@@ -1420,7 +471,7 @@ export function ContentStyleTab() {
                 />
               </svg>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
