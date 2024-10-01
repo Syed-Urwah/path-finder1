@@ -109,6 +109,8 @@ export function ContentStyleTab() {
             {/* Main Container */}
 
             <div className="flex flex-row border-4 border-black rounded-lg w-[800px] h-[500px]  bg-white box-border">
+          {/* <div className="flex flex-row border-4 border-black rounded-lg w-[800px] h-[500px] bg-white box-border overflow-auto">*/}
+             
               {/* Left Image Container */}
               <div className="flex-1 p-5 box-border flex justify-center items-center">
                 <img
@@ -312,13 +314,9 @@ export function ContentStyleTab() {
                       </div>
                       <Input type="email" placeholder="Enter your answer here" />
 
-
-
-
-
-
                     </form>
                   </CardContent>
+
 
                   {/* Buttons positioned at the bottom */}
                   <CardFooter className="flex justify-between mt-9">
@@ -425,53 +423,6 @@ export function ContentStyleTab() {
             </div>
           </div>
 
-          {/* ///////////////////////////////bt//////////////////////////////// */}
-          {/* <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-            }}
-          >
-            <span style={{ marginTop: "8px", fontSize: "12px" }}></span>
-            <button
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                border: "2px solid black",
-                backgroundColor: "white",
-                padding: "8px",
-                cursor: "pointer",
-              }}
-            >
-              <svg
-                aria-hidden="true"
-                focusable="false"
-                data-prefix="fas"
-                data-icon="plus"
-                className="svg-inline--fa fa-plus fa-lg"
-                role="img"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                style={{
-                  width: "24px",
-                  height: "24px",
-                  fill: "currentColor",
-                }}
-              >
-                <path
-                  fill="currentColor"
-                  d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
-                />
-              </svg>
-            </button>
-          </div> */}
         </div>
       </div>
     </>
