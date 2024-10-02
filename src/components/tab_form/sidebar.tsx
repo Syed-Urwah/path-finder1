@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { BookCopy, Trash } from "lucide-react";
+import { Modal } from "../modal";
 
 // Define the FormSidebar component
 export function FormSidebar() {
@@ -29,8 +30,10 @@ export function FormSidebar() {
       >
         {/* Top Section */}
         <div className="w-full flex justify-between items-center p-4">
-          <p className="font-medium">Content</p>
-          <Button className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full w-11 h-11">
+          <p className="font-medium">Content123</p>
+          <Modal
+            button={
+              <Button className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full w-11 h-11">
             <svg
               aria-hidden="true"
               focusable="false"
@@ -49,6 +52,9 @@ export function FormSidebar() {
               ></path>
             </svg>
           </Button>
+            }
+          />
+          
         </div>
         <div>
           <div className=" w-full rounded overflow-hidden scroll">

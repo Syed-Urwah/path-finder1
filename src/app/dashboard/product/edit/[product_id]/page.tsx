@@ -6,7 +6,7 @@ import ProductCreateForm from '@/components/ProductCreateForm'
 
 
 
-export async function generateStaticParams() {
+export async function generateStaticParams({param}: any) {
 
   const response = await fetch(process.env.NEXT_PUBLIC_BE_URL + '/api/v1/product').then((res) => res.json());
 

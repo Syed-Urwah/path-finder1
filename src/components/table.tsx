@@ -21,6 +21,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Spinner } from "./ui/spinner";
+import Link from "next/link";
 
 export type Product = {
   id: number;
@@ -131,20 +132,23 @@ export function DataTableDemo() {
               <TableBody>
                 {table.getRowModel().rows?.length ? (
                   table.getRowModel().rows.map((row) => (
+                   
                     <TableRow
                       key={row.id}
-                      onClick={() =>
-                        (window.location.href = `${process.env.NEXT_PUBLIC_FE_URL}/dashboard/product/edit/${row.original.id}`)
-                      }
+                      // onClick={() =>
+                      //   (window.location.href = `${process.env.NEXT_PUBLIC_FE_URL}/dashboard/product/edit/${row.original.id}`)
+                      // }
                       style={{ cursor: "pointer" }}
                     >
                       {row.getVisibleCells().map((cell) => (
+                         <Link href={`${process.env.NEXT_PUBLIC_FE_URL}/dashboard/product/edit/${row.original.id}`}>
                         <TableCell key={cell.id}>
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()
                           )}
                         </TableCell>
+                        </Link>
                       ))}
                     </TableRow>
                   ))
