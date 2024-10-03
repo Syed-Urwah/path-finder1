@@ -37,24 +37,7 @@ export default function ProductCreateForm({ product }: any) {
   const [option4, setOption4] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  let optionsArray = isEdit
-    ? product.options
-    : [
-        {
-          type: "1",
-          question: "question1",
-          answers: [
-            {
-              ans: "ans1",
-              img: "",
-            },
-            {
-              ans: "ans2",
-              img: "",
-            },
-          ],
-        },
-      ];
+  let optionsArray = isEdit ? product.options : [];
 
   const [options, setOptions] = useState<any>(optionsArray);
 

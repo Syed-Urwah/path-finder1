@@ -370,6 +370,15 @@ function Option1({
         })
       );
     }
+    setAns([
+      {
+        ans: "",
+        img: "",
+      },
+    ]);
+    setQuestion("");
+    setOption1(false);
+    console.log(options);
   };
 
   const controls = useDragControls();
