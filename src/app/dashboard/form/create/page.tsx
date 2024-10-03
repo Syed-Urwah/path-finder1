@@ -75,10 +75,59 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ContentStyleTab } from "@/components/tab_form/contentStyleTab";
 import LogicTab from "@/components/tab_form/logicTab";
+import { PagesRouteModule } from "next/dist/server/future/route-modules/pages/module.compiled";
 
 export default function NewPage() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("content");
+
+  const intialValue = [
+    {
+      id: 1,
+      order: 1,
+      questions: [
+        {
+        question_type_id: 1,
+        name: "question1",
+        answers: [
+          {
+            ans: 'ans1',
+            img: '',
+          },
+          {
+            ans: 'ans2',
+            img: '',
+          },
+        ]
+        }
+      ],
+      
+    },
+    {
+      id: 1,
+      order: 2,
+      questions: [
+        {
+        question_type_id: 1,
+        name: "question1",
+        answers: [
+          {
+            ans: 'ans1',
+            img: '',
+          },
+          {
+            ans: 'ans2',
+            img: '',
+          },
+        ]
+        }
+      ],
+      
+    },
+  ]
+
+  const [pages, setPages] = useState(intialValue)
+
   return (
     <>
       <div className="flex flex-col h-screen w-screen overflow-hidden">
@@ -220,7 +269,7 @@ export default function NewPage() {
 
         <div className="w-full h-full flex flex-row">
           {(activeTab === "content" || activeTab === "style") && (
-            <ContentStyleTab />
+            <ContentStyleTab pages={pages} setPages={setPages} />
           )}
           {activeTab === "logic" && <LogicTab />}
 

@@ -1,6 +1,7 @@
 "use client";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -15,7 +16,35 @@ interface ModalProps {
   button: React.ReactNode;
 }
 
-export function Modal({ button }: ModalProps) {
+export function Modal({ button, pages, setPages }: any) {
+
+  //only question_type_id=1 is added Todo(remaining)
+  function handleAddQuestion(event: any): any{
+    const id = event.currentTarget.id; // Access the button's id
+    console.log(id)
+
+    const newQuestion = {
+      question_type_id: 1,
+      name: "New Question",
+      answers: [
+        { ans: 'New Answer 1', img: '' },
+        { ans: 'New Answer 2', img: '' },
+      ]
+    };
+
+    const updatedValue = pages.map((page: any) => {
+      if (page.order === 1) {
+        // Add the new question to the page with order: 1
+        return {
+          ...page,
+          questions: [...page.questions, newQuestion],
+        };
+      }
+      return page; // Return other pages without changes
+    });
+    setPages(updatedValue) 
+  }
+
   return (
     <>
       <Dialog>
@@ -36,7 +65,8 @@ export function Modal({ button }: ModalProps) {
             </div>
 
             <div className="col-span-4">
-              <button className="w-full flex gap-2 items-center hover:bg-[#0000000d] hover:p-[5px] hover:m-[-5px] rounded-[5px] cursor-pointer">
+            <DialogClose asChild>
+              <button onClick={handleAddQuestion} id="1"  className="w-full flex gap-2 items-center hover:bg-[#0000000d] hover:p-[5px] hover:m-[-5px] rounded-[5px] cursor-pointer">
                 <div className="w-[40px] h-[40px] rounded-[12px] flex justify-center items-center overflow-hidden">
                   <div className="w-full h-full bg-[#D8BFD8] flex justify-center items-center flex-col">
                     <svg
@@ -60,6 +90,7 @@ export function Modal({ button }: ModalProps) {
                 </div>
                 <p>Multiple choice question</p>
               </button>
+              </DialogClose>
             </div>
 
             <div className="col-span-4">
