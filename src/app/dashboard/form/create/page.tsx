@@ -82,8 +82,6 @@ export default function NewPage() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("content");
 
-
-
   const intialValue = [
     {
       id: 1,
@@ -92,19 +90,25 @@ export default function NewPage() {
         {
           question_type_id: 1,
           name: "question1",
+          desc_status: false,
+          description: "desc 1",
+          require: true,
           answers: [
             {
-              ans: 'ans1',
-              img: '',
+              ans: "ans1",
+              img: "",
+              description: "",
+              desc_status: false,
             },
             {
-              ans: 'ans2',
-              img: '',
+              ans: "ans2",
+              img: "",
+              description: "",
+              desc_status: false,
             },
-          ]
-        }
+          ],
+        },
       ],
-
     },
     {
       id: 1,
@@ -113,23 +117,29 @@ export default function NewPage() {
         {
           question_type_id: 1,
           name: "question1",
+          desc_status: false,
+          description: "desc 2",
+          require: true,
           answers: [
             {
-              ans: 'ans1',
-              img: '',
+              ans: "ans1",
+              img: "",
+              description: "",
+              desc_status: false,
             },
             {
-              ans: 'ans2',
-              img: '',
+              ans: "ans2",
+              img: "",
+              description: "",
+              desc_status: false,
             },
-          ]
-        }
+          ],
+        },
       ],
-
     },
-  ]
+  ];
 
-  const [pages, setPages] = useState(intialValue)
+  const [pages, setPages] = useState(intialValue);
 
   return (
     <>
@@ -263,7 +273,10 @@ export default function NewPage() {
                 </svg>
               </Button>
 
-              <Button onClick={()=>console.log(pages)} className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap rounded font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#B0D59E] text-primary-foreground hover:bg-[#B0D59E] h-10 px-4 py-2 text-md">
+              <Button
+                onClick={() => console.log(pages)}
+                className="inline-flex items-center justify-center cursor-pointer whitespace-nowrap rounded font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-[#B0D59E] text-primary-foreground hover:bg-[#B0D59E] h-10 px-4 py-2 text-md"
+              >
                 Publish
               </Button>
             </div>
@@ -274,13 +287,16 @@ export default function NewPage() {
           {(activeTab === "content" || activeTab === "style") && (
             <ContentStyleTab pages={pages} setPages={setPages} />
           )}
-          {activeTab === "logic" ? <LogicTab />
-            :
-            <RightSidebar activeTab={activeTab} setActiveTab={setActiveTab} pages={pages} setPages={setPages} />
-
-          }
-
-
+          {activeTab === "logic" ? (
+            <LogicTab />
+          ) : (
+            <RightSidebar
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              pages={pages}
+              setPages={setPages}
+            />
+          )}
         </div>
       </div>
     </>

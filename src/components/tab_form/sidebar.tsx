@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useRef } from "react";
 import { motion, PanInfo } from "framer-motion";
 import { Button } from "@/components/ui/button"; // Ensure you import the Button component from the correct path
@@ -13,25 +13,25 @@ import { Modal } from "../modal";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 // Define the FormSidebar component
-export function FormSidebar({ pages,setPages }: any) {
+export function FormSidebar({ pages, setPages }: any) {
   const [showBottomSheet, setShowBottomSheet] = useState<boolean>(true);
   const [dragPosition, setDragPosition] = useState<{ y: number }>({ y: 0 });
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   const searchParams = useSearchParams();
-  const router = useRouter()
-  const pathname = usePathname()
+  const router = useRouter();
+  const pathname = usePathname();
 
-  console.log(pages)
+  console.log(pages);
 
   const handleDrag = (_: any, info: PanInfo) => {
     setDragPosition({ y: info.point.y });
   };
 
-  function handleQuestionEditDisplay(page:any, question:any): any{
-    console.log("page: " + page)
-    console.log("question: " + question)
-    router.push(pathname + '?' + updateParams(page, question))
+  function handleQuestionEditDisplay(page: any, question: any): any {
+    console.log("page: " + page);
+    console.log("question: " + question);
+    router.push(pathname + "?" + updateParams(page, question));
   }
 
   // Function to update 'page' and 'question' values
@@ -39,17 +39,17 @@ export function FormSidebar({ pages,setPages }: any) {
     const updatedParams: any = new URLSearchParams(searchParams.toString());
 
     // Set the new values for 'page' and 'question'
-    updatedParams.set('page', newPage);
-    updatedParams.set('question', newQuestion);
+    updatedParams.set("page", newPage);
+    updatedParams.set("question", newQuestion);
 
     // Update the URL with the new search parameters
-    return updatedParams.toString()
+    return updatedParams.toString();
   };
 
-  const page = searchParams.get('page'); // Get the 'page' query parameter
-  const question = searchParams.get('question'); // Get the 'question' query parameter
+  const page = searchParams.get("page"); // Get the 'page' query parameter
+  const question = searchParams.get("question"); // Get the 'question' query parameter
 
-  console.log(page,question)
+  console.log(page, question);
 
   return (
     <>
@@ -61,7 +61,7 @@ export function FormSidebar({ pages,setPages }: any) {
       >
         {/* Top Section */}
         <div className="w-full flex justify-between items-center p-4">
-          <p className="font-medium">Content123</p>
+          <p className="font-medium">Content</p>
           <Modal
             pages={pages}
             setPages={setPages}
@@ -87,280 +87,109 @@ export function FormSidebar({ pages,setPages }: any) {
               </Button>
             }
           />
-
         </div>
         <div>
           {pages?.map((page: any, pageIndex: number) => {
             return (
-              <div className=" w-full rounded overflow-hidden scroll">
+              <div
+                key={pageIndex}
+                className=" w-full rounded overflow-hidden scroll"
+              >
                 <div className="min-w-full table">
                   <div className="bg-white">
                     <div className="h-full w-full">
-                      <p className="border-b px-4 pb-2 pt-8 truncate">Page {page.order}</p>
+                      <p className="border-b px-4 pb-2 pt-8 truncate">
+                        Page {page.order}
+                      </p>
                       <div className="container bg-[#F9F9F9]">
-                        {page.questions?.map((question: any, questionIndex: number) => {
-                          return (
-                            <div onClick={()=>handleQuestionEditDisplay(pageIndex,questionIndex)} className="w-full flex items-center justify-between p-4 border-b py-6 cursor-grab bg-[#F9F9F9]">
-                              <div className="flex items-center">
-                                <div className="w-10 h-10 rounded-md flex justify-center items-center overflow-hidden bg-purple-200">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    className="w-6 h-6"
-                                  >
-                                    <circle cx="12" cy="12" r="12" fill="black" />
-                                  </svg>
-                                </div>
-                                <p className="ml-2 max-w-xs truncate">{question.name}</p>
-                              </div>
-                              <div className="flex items-center">
-                                <DropdownMenu>
-                                  <DropdownMenuTrigger>
-                                    <div
-                                      className="aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-center items-center hover:cursor-pointer"
-                                      data-slot="trigger"
-                                      aria-haspopup="true"
-                                      aria-expanded="false"
-                                      id="react-aria275040590-:rbt:"
+                        {page.questions?.map(
+                          (question: any, questionIndex: number) => {
+                            return (
+                              <div
+                                key={questionIndex}
+                                onClick={() =>
+                                  handleQuestionEditDisplay(
+                                    pageIndex,
+                                    questionIndex
+                                  )
+                                }
+                                className="w-full flex items-center justify-between p-4 border-b py-6 cursor-grab bg-[#F9F9F9]"
+                              >
+                                <div className="flex items-center">
+                                  <div className="w-10 h-10 rounded-md flex justify-center items-center overflow-hidden bg-purple-200">
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="24"
+                                      height="24"
+                                      viewBox="0 0 24 24"
+                                      className="w-6 h-6"
                                     >
-                                      <svg
-                                        aria-hidden="true"
-                                        focusable="false"
-                                        data-prefix="fas"
-                                        data-icon="ellipsis-vertical"
-                                        className="svg-inline--fa fa-ellipsis-vertical"
-                                        role="img"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 128 512"
-                                        style={{ width: "24px", height: "24px" }}
-                                      >
-                                        <path
-                                          fill="currentColor"
-                                          d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"
-                                        ></path>
-                                      </svg>
-                                    </div>
-                                  </DropdownMenuTrigger>
-                                  <DropdownMenuContent>
-                                    <DropdownMenuItem>
-                                      <BookCopy className="mr-2 h-4 w-4" />
-                                      <span>Duplicate</span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem>
-                                      <Trash className="mr-2 h-4 w-4" />
-                                      <span>To Delete</span>
-                                    </DropdownMenuItem>
-                                  </DropdownMenuContent>
-                                </DropdownMenu>
-                              </div>
-                            </div>
-                          )
-                        })}
-                        <div className="w-full flex items-center justify-between p-4 border-b py-6 cursor-grab bg-[#F9F9F9]">
-                          <div className="flex items-center">
-                            <div className="w-10 h-10 rounded-md flex justify-center items-center overflow-hidden bg-purple-200">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                className="w-6 h-6"
-                              >
-                                <circle cx="12" cy="12" r="12" fill="black" />
-                              </svg>
-                            </div>
-                            <p className="ml-2 max-w-xs truncate">Question 1</p>
-                          </div>
-                          <div className="flex items-center">
-                            <DropdownMenu>
-                              <DropdownMenuTrigger>
-                                <div
-                                  className="aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-center items-center hover:cursor-pointer"
-                                  data-slot="trigger"
-                                  aria-haspopup="true"
-                                  aria-expanded="false"
-                                  id="react-aria275040590-:rbt:"
-                                >
-                                  <svg
-                                    aria-hidden="true"
-                                    focusable="false"
-                                    data-prefix="fas"
-                                    data-icon="ellipsis-vertical"
-                                    className="svg-inline--fa fa-ellipsis-vertical"
-                                    role="img"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 128 512"
-                                    style={{ width: "24px", height: "24px" }}
-                                  >
-                                    <path
-                                      fill="currentColor"
-                                      d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"
-                                    ></path>
-                                  </svg>
+                                      <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="12"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </div>
+                                  <p className="ml-2 max-w-xs truncate">
+                                    {question.name}
+                                  </p>
                                 </div>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent>
-                                <DropdownMenuItem>
-                                  <BookCopy className="mr-2 h-4 w-4" />
-                                  <span>Duplicate</span>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem>
-                                  <Trash className="mr-2 h-4 w-4" />
-                                  <span>To Delete</span>
-                                </DropdownMenuItem>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
-                          </div>
-                        </div>
+                                <div className="flex items-center">
+                                  <DropdownMenu>
+                                    <DropdownMenuTrigger>
+                                      <div
+                                        className="aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-center items-center hover:cursor-pointer"
+                                        data-slot="trigger"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                        id="react-aria275040590-:rbt:"
+                                      >
+                                        <svg
+                                          aria-hidden="true"
+                                          focusable="false"
+                                          data-prefix="fas"
+                                          data-icon="ellipsis-vertical"
+                                          className="svg-inline--fa fa-ellipsis-vertical"
+                                          role="img"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          viewBox="0 0 128 512"
+                                          style={{
+                                            width: "24px",
+                                            height: "24px",
+                                          }}
+                                        >
+                                          <path
+                                            fill="currentColor"
+                                            d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"
+                                          ></path>
+                                        </svg>
+                                      </div>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent>
+                                      <DropdownMenuItem>
+                                        <BookCopy className="mr-2 h-4 w-4" />
+                                        <span>Duplicate</span>
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem>
+                                        <Trash className="mr-2 h-4 w-4" />
+                                        <span>To Delete</span>
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  </DropdownMenu>
+                                </div>
+                              </div>
+                            );
+                          }
+                        )}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            )
+            );
           })}
-          <div className=" w-full rounded overflow-hidden scroll">
-            <div className="min-w-full table">
-              <div className="bg-white">
-                <div className="h-full w-full">
-                  <p className="border-b px-4 pb-2 pt-8 truncate">Page 1</p>
-                  <div className="container bg-[#F9F9F9]">
-                    <div className="w-full flex items-center justify-between p-4 border-b py-6 cursor-grab bg-[#F9F9F9]">
-                      <div className="flex items-center">
-                        <div className="w-10 h-10 rounded-md flex justify-center items-center overflow-hidden bg-purple-200">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            className="w-6 h-6"
-                          >
-                            <circle cx="12" cy="12" r="12" fill="black" />
-                          </svg>
-                        </div>
-                        <p className="ml-2 max-w-xs truncate">Question 1</p>
-                      </div>
-                      <div className="flex items-center">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger>
-                            <div
-                              className="aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-center items-center hover:cursor-pointer"
-                              data-slot="trigger"
-                              aria-haspopup="true"
-                              aria-expanded="false"
-                              id="react-aria275040590-:rbt:"
-                            >
-                              <svg
-                                aria-hidden="true"
-                                focusable="false"
-                                data-prefix="fas"
-                                data-icon="ellipsis-vertical"
-                                className="svg-inline--fa fa-ellipsis-vertical"
-                                role="img"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 128 512"
-                                style={{ width: "24px", height: "24px" }}
-                              >
-                                <path
-                                  fill="currentColor"
-                                  d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"
-                                ></path>
-                              </svg>
-                            </div>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent>
-                            <DropdownMenuItem>
-                              <BookCopy className="mr-2 h-4 w-4" />
-                              <span>Duplicate</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <Trash className="mr-2 h-4 w-4" />
-                              <span>To Delete</span>
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className=" w-full rounded overflow-hidden scroll">
-            <div className="min-w-full table">
-              <div className="bg-white">
-                <div className="h-full w-full">
-                  <p className="border-b px-4 pb-2 pt-8 truncate">Page 2</p>
-                  <div className="container bg-[#F9F9F9]">
-                    <div className="w-full flex items-center justify-between p-4 border-b py-6 cursor-grab bg-[#F9F9F9]">
-                      <div className="flex items-center">
-                        <div className="w-10 h-10 rounded-md flex justify-center items-center overflow-hidden bg-purple-200">
-                          <svg
-                            aria-hidden="true"
-                            focusable="false"
-                            data-prefix="fas"
-                            data-icon="user"
-                            className="w-[24px] h-[24px] text-black"
-                            role="img"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 448 512"
-                          >
-                            <path
-                              fill="currentColor"
-                              d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
-                            ></path>
-                          </svg>
-                        </div>
-                        <p className="ml-2 max-w-xs truncate">Question 2</p>
-                      </div>
-                      <div className="flex items-center">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger>
-                            <div
-                              className="aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased h-[40px] w-[40px] text-[18px] flex justify-center items-center hover:cursor-pointer"
-                              data-slot="trigger"
-                              aria-haspopup="true"
-                              aria-expanded="false"
-                              id="react-aria275040590-:rbt:"
-                            >
-                              <svg
-                                aria-hidden="true"
-                                focusable="false"
-                                data-prefix="fas"
-                                data-icon="ellipsis-vertical"
-                                className="svg-inline--fa fa-ellipsis-vertical"
-                                role="img"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 128 512"
-                                style={{ width: "24px", height: "24px" }}
-                              >
-                                <path
-                                  fill="currentColor"
-                                  d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"
-                                ></path>
-                              </svg>
-                            </div>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent>
-                            <DropdownMenuItem>
-                              <BookCopy className="mr-2 h-4 w-4" />
-                              <span>Duplicate</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <Trash className="mr-2 h-4 w-4" />
-                              <span>To Delete</span>
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {showBottomSheet && (
@@ -466,7 +295,6 @@ export function FormSidebar({ pages,setPages }: any) {
                 </div>
               </div>
             </div>
-
           </motion.div>
         )}
       </div>
