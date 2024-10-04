@@ -32,7 +32,7 @@ export function Modal({ button, pages, setPages }: any) {
       ]
     };
 
-    const updatedValue = pages.map((page: any) => {
+    const updatedValue = pages?.map((page: any) => {
       if (page.order === 1) {
         // Add the new question to the page with order: 1
         return {

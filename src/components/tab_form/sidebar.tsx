@@ -10,14 +10,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { BookCopy, Trash } from "lucide-react";
 import { Modal } from "../modal";
-import { useRouter } from "next/router";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 // Define the FormSidebar component
 export function FormSidebar({ pages,setPages }: any) {
   const [showBottomSheet, setShowBottomSheet] = useState<boolean>(true);
   const [dragPosition, setDragPosition] = useState<{ y: number }>({ y: 0 });
   const sidebarRef = useRef<HTMLDivElement>(null);
+
+  const searchParams = useSearchParams();
+  const router = useRouter()
+  const pathname = usePathname()
 
   console.log(pages)
 
@@ -28,9 +31,21 @@ export function FormSidebar({ pages,setPages }: any) {
   function handleQuestionEditDisplay(page:any, question:any): any{
     console.log("page: " + page)
     console.log("question: " + question)
+    router.push(pathname + '?' + updateParams(page, question))
   }
 
-  const searchParams = useSearchParams();
+  // Function to update 'page' and 'question' values
+  const updateParams = (newPage: any, newQuestion: any) => {
+    const updatedParams: any = new URLSearchParams(searchParams.toString());
+
+    // Set the new values for 'page' and 'question'
+    updatedParams.set('page', newPage);
+    updatedParams.set('question', newQuestion);
+
+    // Update the URL with the new search parameters
+    return updatedParams.toString()
+  };
+
   const page = searchParams.get('page'); // Get the 'page' query parameter
   const question = searchParams.get('question'); // Get the 'question' query parameter
 
