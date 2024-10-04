@@ -1,12 +1,12 @@
 /////////////////////Those left/right sidebars structure
 
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils"; // Shadcn's class func.
 import { Button } from "@/components/ui/button";
 import { Bold, BookCopy, Pencil, Trash, Weight, X, Plus } from "lucide-react";
 import { ChevronRight } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -80,6 +80,8 @@ import RightSidebar from "@/components/tab_form/RightSidebar";
 
 export default function NewPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [activeTab, setActiveTab] = useState("content");
 
   const intialValue = [
@@ -140,6 +142,27 @@ export default function NewPage() {
   ];
 
   const [pages, setPages] = useState(intialValue);
+
+  // Function to update 'page' and 'question' values
+  const updateParams = (newPage: any, newQuestion: any) => {
+    const updatedParams: any = new URLSearchParams(searchParams.toString());
+
+    // Set the new values for 'page' and 'question'
+    updatedParams.set("page", newPage);
+    updatedParams.set("question", newQuestion);
+
+    // Update the URL with the new search parameters
+    return updatedParams.toString();
+  };
+
+  const page = searchParams.get("page"); // Get the 'page' query parameter
+  const question = searchParams.get("question"); // Get the 'question' query parameter
+
+  useEffect(()=>{
+    if(page==null || question == null ){
+      router.push(pathname + "?" + updateParams(0, 0));
+    }
+  },[])
 
   return (
     <>

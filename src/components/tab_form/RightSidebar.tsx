@@ -101,6 +101,14 @@ export default function RightSidebar({
   function handleQuestionChange(e: any) {
     const updatedPages = [...pages];
     updatedPages[pageIndex].questions[questionIndex].name = e.target.value;
+    // updatedPages[pageIndex].questions[questionIndex].description =
+    //   e.target.value;
+    setPages(updatedPages);
+  }
+
+  function handleQuestionDescriptionChange(e: any) {
+    const updatedPages = [...pages];
+    // updatedPages[pageIndex].questions[questionIndex].name = e.target.value;
     updatedPages[pageIndex].questions[questionIndex].description =
       e.target.value;
     setPages(updatedPages);
@@ -234,7 +242,7 @@ export default function RightSidebar({
                   className="mt-2"
                   placeholder="Type your description here."
                   value={question.description || ""}
-                  onChange={handleQuestionChange}
+                  onChange={handleQuestionDescriptionChange}
                 />
               )}
             </div>
