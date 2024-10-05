@@ -84,6 +84,16 @@ export default function NewPage() {
   const pathname = usePathname();
   const [activeTab, setActiveTab] = useState("content");
 
+  const initialValueStyle = {
+    text_font: "",
+    text_size: "",
+    text_color: "",
+    border_line: "",
+    border_radius: "",
+    border_color: "",
+    button_color: "",
+    button_text: "",
+  };
   const intialValue = [
     {
       id: 1,
@@ -113,7 +123,7 @@ export default function NewPage() {
       ],
     },
     {
-      id: 1,
+      id: 2,
       order: 2,
       questions: [
         {
@@ -141,8 +151,13 @@ export default function NewPage() {
     },
   ];
 
-  const [pages, setPages] = useState(intialValue);
+  const finalValue = {
+    style: initialValueStyle,
+    pages: intialValue,
+  };
 
+  const [pages, setPages] = useState(intialValue);
+  const [style, setStyle] = useState(initialValueStyle);
   // Function to update 'page' and 'question' values
   const updateParams = (newPage: any, newQuestion: any) => {
     const updatedParams: any = new URLSearchParams(searchParams.toString());
@@ -158,11 +173,11 @@ export default function NewPage() {
   const page = searchParams.get("page"); // Get the 'page' query parameter
   const question = searchParams.get("question"); // Get the 'question' query parameter
 
-  useEffect(()=>{
-    if(page==null || question == null ){
+  useEffect(() => {
+    if (page == null || question == null) {
       router.push(pathname + "?" + updateParams(0, 0));
     }
-  },[])
+  }, []);
 
   return (
     <>
@@ -308,7 +323,12 @@ export default function NewPage() {
 
         <div className="w-full h-full flex flex-row">
           {(activeTab === "content" || activeTab === "style") && (
-            <ContentStyleTab pages={pages} setPages={setPages} />
+            <ContentStyleTab
+              pages={pages}
+              setPages={setPages}
+              style={style}
+              setStyle={setStyle}
+            />
           )}
           {activeTab === "logic" ? (
             <LogicTab />
@@ -318,6 +338,8 @@ export default function NewPage() {
               setActiveTab={setActiveTab}
               pages={pages}
               setPages={setPages}
+              style={style}
+              setStyle={setStyle}
             />
           )}
         </div>

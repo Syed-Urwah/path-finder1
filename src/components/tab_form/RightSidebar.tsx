@@ -79,6 +79,8 @@ export default function RightSidebar({
   setActiveTab,
   pages,
   setPages,
+  style,
+  setStyle,
 }: any) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -89,6 +91,57 @@ export default function RightSidebar({
 
   const pageIndex: any = searchParams.get("page");
   const questionIndex: any = searchParams.get("question");
+  const [borderColor, setBorderColor] = useState("#000000"); // Initial color
+  const [buttonColor, setButtonColor] = useState("#000000"); // Initial color
+  const [buttonTextColor, setButtonTextColor] = useState("#000000"); // Initial color
+
+  const handleColorChange = (e: any) => {
+    const updatedStyle = {
+      ...style,
+      border_color: e.target.value,
+    };
+
+    setStyle(updatedStyle);
+    setBorderColor(e.target.value);
+  };
+  const handleBtnColorChange = (e: any) => {
+    const updatedStyle = {
+      ...style,
+      button_color: e.target.value,
+    };
+
+    setStyle(updatedStyle);
+    setButtonColor(e.target.value);
+  };
+  const handleBtnTxtColorChange = (e: any) => {
+    const updatedStyle = {
+      ...style,
+      button_text: e.target.value,
+    };
+
+    setStyle(updatedStyle);
+    setButtonTextColor(e.target.value);
+  };
+
+  const handleTextSizeChange = (value: any) => {
+    const updatedStyle = {
+      ...style,
+      text_size: value,
+    };
+    setStyle(updatedStyle);
+  };
+  const handleBorderLineClick = (borderLine: any) => {
+    setStyle((prevStyle: any) => ({
+      ...prevStyle,
+      border_line: borderLine,
+    }));
+  };
+  const handleBorderRadiusClick = (radius: any) => {
+    setStyle((prevStyle: any) => ({
+      ...prevStyle,
+      border_radius: radius,
+    }));
+  };
 
   useEffect(() => {
     const pageObject = pages[pageIndex ? pageIndex : 0];
@@ -237,7 +290,7 @@ export default function RightSidebar({
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
-              {question.desc_status && (
+              {question && question.desc_status && (
                 <Textarea
                   className="mt-2"
                   placeholder="Type your description here."
@@ -375,178 +428,206 @@ export default function RightSidebar({
             <div className="flex flex-col gap-1">
               <p className="font-medium">Font</p>
 
-              <Select>
+              <Select
+                onValueChange={(value) => {
+                  const updatedStyle = {
+                    ...style,
+                    text_font: value,
+                  };
+                  console.log("---->", updatedStyle);
+
+                  setStyle(updatedStyle);
+                }}
+              >
                 <SelectTrigger className="w-[300px]">
                   <SelectValue placeholder="Select a font" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectItem value="1">Poppins</SelectItem>
-                    <SelectItem value="2">Roboto</SelectItem>
-                    <SelectItem value="3">Courier Prime</SelectItem>
+                    <SelectItem value="sans-serif">Poppins</SelectItem>
+                    <SelectItem value="sans-serif">Roboto</SelectItem>
+                    <SelectItem value="monospace">Courier Prime</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
             </div>
 
             <div className="flex flex-row gap-2 justify-center items-center">
-              <Button variant="outline">Small</Button>
-              <Button variant="outline">Medium</Button>
-              <Button variant="outline">Large</Button>
+              <Button
+                variant="outline"
+                onClick={() => handleTextSizeChange("text-sm")}
+              >
+                Small
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => handleTextSizeChange("text-md")}
+              >
+                Medium
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => handleTextSizeChange("text-lg")}
+              >
+                Large
+              </Button>
             </div>
 
-            <div className="grid grid-cols-4 gap-0">
-              <div className="col-span-1">
+            <div className="flex flex-col gap-4">
+              {/* Border Radius Section */}
+              <div className="flex items-center justify-between">
                 <Label className="font-bold">Border radius</Label>
-              </div>
-              {/* <div className="col-span-1">
-
-                    </div>
-                    <div className="col-span-1">
-
-                    </div>
-                    <div className="col-span-1">
-
-                    </div> */}
-              <div className="h-full w-full flex flex-col col-span-3">
-                <div className="flex w-full justify-around relative items-center border-b !border-0">
-                  <div
-                    className="h-full absolute hover:cursor-pointer p-[5px]"
-                    style={{ left: "0%", width: "33.3333%" }} // Correct style object usage
+                <div className="flex justify-between w-[180px] items-center">
+                  {/* Border radius 0px */}
+                  <button
+                    className={`p-[10px] hover:cursor-pointer ${
+                      style.border_radius === "0px" ? "bg-gray-200" : ""
+                    }`}
+                    onClick={() => handleBorderRadiusClick("0px")}
                   >
-                    <div className="h-full w-full bg-transparent-5 rounded-[5px] bg-background-200"></div>
-                  </div>
-
-                  <button className="w-full h-fit flex justify-center py-[10px] z-10 hover:cursor-pointer">
-                    <div className="border-transparent-10 w-[50px] text-center rounded-[5px] py-[5px] flex justify-center items-center">
-                      <div className="h-[22px] w-[30px] border-[3px] border-black rounded-[0px]"></div>
-                    </div>
+                    <div className="h-[22px] w-[30px] border-[2px] border-black rounded-[0px]"></div>
                   </button>
 
-                  <button className="w-full h-fit flex justify-center py-[10px] z-10 hover:cursor-pointer">
-                    <div className="border-transparent-10 w-[50px] text-center rounded-[5px] py-[5px] flex justify-center items-center">
-                      <div className="h-[22px] w-[30px] border-[3px] border-black rounded-[5px]"></div>
-                    </div>
+                  {/* Border radius 5px */}
+                  <button
+                    className={`p-[10px] hover:cursor-pointer ${
+                      style.border_radius === "10px" ? "bg-gray-200" : ""
+                    }`}
+                    onClick={() => handleBorderRadiusClick("10px")}
+                  >
+                    <div className="h-[22px] w-[30px] border-[2px] border-black rounded-[5px]"></div>
                   </button>
 
-                  <button className="w-full h-fit flex justify-center py-[10px] z-10 hover:cursor-pointer">
-                    <div className="border-transparent-10 w-[50px] text-center rounded-[5px] py-[5px] flex justify-center items-center">
-                      <div className="h-[22px] w-[30px] border-[3px] border-black rounded-[10px]"></div>
-                    </div>
+                  {/* Border radius 10px */}
+                  <button
+                    className={`p-[10px] hover:cursor-pointer ${
+                      style.border_radius === "50px" ? "bg-gray-200" : ""
+                    }`}
+                    onClick={() => handleBorderRadiusClick("50px")}
+                  >
+                    <div className="h-[22px] w-[30px] border-[2px] border-black rounded-[10px]"></div>
                   </button>
                 </div>
               </div>
 
-              <div className="col-span-1">
+              {/* Border Section */}
+              <div className="flex items-center justify-between">
                 <Label className="font-bold">Border</Label>
-              </div>
-              {/* <div className="col-span-1">
-
-                    </div>
-                    <div className="col-span-1">
-
-                    </div>
-                    <div className="col-span-1">
-
-                    </div> */}
-              <div className="h-full w-full flex flex-col col-span-3">
-                <div className="flex w-full justify-around relative items-center border-b !border-0">
-                  <div
-                    className="h-full absolute hover:cursor-pointer p-[5px]"
-                    style={{ left: "66.6667%", width: "33.3333%" }} // Fixed inline styles
+                <div className="flex justify-between w-[180px] items-center">
+                  {/* No Border Button */}
+                  <button
+                    className="p-[10px] hover:cursor-pointer"
+                    onClick={() => handleBorderLineClick("none")}
                   >
-                    <div className="h-full w-full bg-transparent-5 rounded-[5px] bg-background-200"></div>
-                  </div>
-
-                  <button className="w-full h-fit flex justify-center py-[10px] z-10 hover:cursor-pointer">
-                    <div className="border-transparent-10 w-[50px] text-center rounded-[5px] py-[5px] flex justify-center items-center">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="ban"
-                        className="svg-inline--fa fa-ban text-[22px] !text-black h-[22px] w-[30px]"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"
-                        ></path>
-                      </svg>
-                    </div>
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="ban"
+                      className="svg-inline--fa fa-ban text-[22px] !text-black h-[22px] w-[30px]"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"
+                      ></path>
+                    </svg>
                   </button>
 
-                  <button className="w-full h-fit flex justify-center py-[10px] z-10 hover:cursor-pointer">
-                    <div className="border-transparent-10 w-[50px] h-[35px] text-center rounded-[5px] py-[5px] flex justify-center items-center">
-                      <div className="w-[30px] h-[2px] bg-black"></div>
-                    </div>
+                  {/* 2px Border Button */}
+                  <button
+                    className={`p-[10px] hover:cursor-pointer ${
+                      style.border_line === "2px" ? "bg-gray-200" : ""
+                    } rounded-[5px]`}
+                    onClick={() => handleBorderLineClick("2px")}
+                  >
+                    <div className="w-[30px] h-[2px] bg-black"></div>
                   </button>
 
-                  <button className="w-full h-fit flex justify-center py-[10px] z-10 hover:cursor-pointer">
-                    <div className="border-transparent-10 w-[50px] h-[35px] text-center rounded-[5px] py-[5px] flex justify-center items-center">
-                      <div className="w-[30px] h-[5px] bg-black"></div>
-                    </div>
+                  {/* 5px Border Button */}
+                  <button
+                    className={`p-[10px] hover:cursor-pointer ${
+                      style.border_line === "5px" ? "bg-gray-200" : ""
+                    }`}
+                    onClick={() => handleBorderLineClick("5px")}
+                  >
+                    <div className="w-[30px] h-[5px] bg-black"></div>
                   </button>
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-2">
-              <div className="col-span-1">
-                <Label className="font-bold">Border color</Label>
-              </div>
-              <div className="col-span-2">
-                {/* <Button variant="ghost">#000000</Button> */}
-                <div className="flex justify-between w-[150px] bg-input-background px-[10px] py-[7.5px] rounded placeholder:text-[#b0b0b0] outline-focus items-center cursor-pointer">
-                  <span className="font-medium">#000000</span>
-                  <span
+            <div className="flex flex-col gap-4">
+              {/* Border color section */}
+              <div className="flex items-center">
+                <Label className="font-bold w-1/3">Border color</Label>
+                <div className="flex justify-between w-[150px] bg-input-background px-2 py-[7.5px] rounded placeholder:text-[#b0b0b0] outline-focus items-center cursor-pointer">
+                  <span className="font-medium">{borderColor}</span>
+                  <input
+                    type="color"
+                    value={style.border_color}
+                    onChange={handleColorChange}
                     style={{
-                      backgroundColor: "rgb(0, 0, 0)", // Camel case for background-color
-                      width: "25px",
-                      height: "25px",
-                      borderRadius: "50%", // Camel case for border-radius
-                      display: "inline-block", // Optional, for making sure the span behaves like a block element if needed
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      backgroundColor: borderColor,
+                      padding: "0",
+                      display: "inline-block",
+                      border: `2px solid ${borderColor}`,
+                      boxSizing: "border-box",
                     }}
-                  >
-                    &nbsp;
-                  </span>
+                  />
                 </div>
               </div>
 
-              <div className="col-span-1">
-                <Label className="font-bold">Buttons</Label>
-              </div>
-              <div className="col-span-2">
-                {/* <Button variant="ghost">#000000</Button> */}
-                <div className="flex justify-between w-[150px] bg-input-background px-[10px] py-[7.5px] rounded placeholder:text-[#b0b0b0] outline-focus items-center cursor-pointer">
-                  <span className="font-medium">#000000</span>
-                  <span
+              {/* Buttons section */}
+              <div className="flex items-center">
+                <Label className="font-bold w-1/3">Buttons</Label>
+                <div className="flex justify-between w-[150px] bg-input-background px-2 py-[7.5px] rounded placeholder:text-[#b0b0b0] outline-focus items-center cursor-pointer">
+                  <span className="font-medium">{buttonColor}</span>
+                  <input
+                    type="color"
+                    value={style.button_color}
+                    onChange={handleBtnColorChange}
                     style={{
-                      backgroundColor: "rgb(0, 0, 0)", // Camel case for background-color
-                      width: "25px",
-                      height: "25px",
-                      borderRadius: "50%", // Camel case for border-radius
-                      display: "inline-block", // Optional, for making sure the span behaves like a block element if needed
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      backgroundColor: buttonColor,
+                      padding: "0",
+                      display: "inline-block",
+                      border: `2px solid ${buttonColor}`,
+                      boxSizing: "border-box",
                     }}
-                  >
-                    &nbsp;
-                  </span>
+                  />
                 </div>
               </div>
 
-              <div className="col-span-1">
-                <Label className="font-bold">Button text</Label>
-              </div>
-              <div className="col-span-1">
-                {/* <Button variant="ghost">#FFFFFF</Button> */}
-                <div className="flex justify-between w-[150px] bg-input-background px-[10px] py-[7.5px] rounded placeholder:text-[#b0b0b0] outline-focus items-center cursor-pointer">
-                  <span className="font-medium">#FFFFFF</span>
+              {/* Button text section */}
+              <div className="flex items-center">
+                <Label className="font-bold w-1/3">Button text</Label>
+                <div className="flex justify-between w-[150px] bg-input-background px-2 py-[7.5px] rounded placeholder:text-[#b0b0b0] outline-focus items-center cursor-pointer">
+                  <span className="font-medium">{buttonTextColor}</span>
+                  <input
+                    type="color"
+                    value={style.button_text}
+                    onChange={handleBtnTxtColorChange}
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      backgroundColor: buttonTextColor,
+                      padding: "0",
+                      display: "inline-block",
+                      border: `2px solid ${buttonTextColor}`,
+                      boxSizing: "border-box",
+                    }}
+                  />
                 </div>
               </div>
-
-              <div className="col-span-1"></div>
             </div>
 
             <div>
