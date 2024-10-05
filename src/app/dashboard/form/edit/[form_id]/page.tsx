@@ -1,10 +1,13 @@
-/////////////////////Those left/right sidebars structure
-
 "use client";
 import React, { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { Input } from "@/components/ui/input";
 import {
   Tooltip,
@@ -52,18 +55,16 @@ interface Style {
   button_text: string;
 }
 
-interface FormData {
-  style: Style;
-  pages: Page[];
-}
-
 export default function NewPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const params = useParams();
+  const formId = params?.form_id as string | undefined;
   const [activeTab, setActiveTab] = useState("content");
 
-  const initialValueStyle = {
+  const [pages, setPages] = useState();
+  const [style, setStyle] = useState({
     form_name: "Naamloze configurator",
     text_font: "",
     text_size: "",
@@ -73,22 +74,7 @@ export default function NewPage() {
     border_color: "",
     button_color: "",
     button_text: "",
-  };
-  const intialValue = [
-    {
-      id: 1,
-      order: 1,
-      questions: [],
-    },
-  ];
-
-  const finalValue = {
-    style: initialValueStyle,
-    pages: intialValue,
-  };
-
-  const [pages, setPages] = useState(intialValue);
-  const [style, setStyle] = useState(initialValueStyle);
+  });
   const updateParams = (newPage: any, newQuestion: any) => {
     const updatedParams: any = new URLSearchParams(searchParams.toString());
 
@@ -106,10 +92,27 @@ export default function NewPage() {
       router.push(pathname + "?" + updateParams(0, 0));
     }
   }, []);
+
+  const fetchFormData = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BE_URL}/api/v1/forms/${formId}`
+      );
+      const data = response.data.data;
+      setPages(data.pages);
+      setStyle(data.style);
+    } catch (err) {
+      console.error("Failed to fetch form data:", err);
+    }
+  }, []); // Add dependencies if necessary
+
+  useEffect(() => {
+    fetchFormData();
+  }, [fetchFormData]); // Now safe to include as it's memoized
   const [isEditing, setIsEditing] = useState(false);
 
   const handlePencilClick = () => {
-    setIsEditing(true); // Show input field when clicking the pencil
+    setIsEditing(true);
   };
 
   const handleInputChange = (e: any) => {
@@ -132,8 +135,8 @@ export default function NewPage() {
 
     try {
       console.log("Backend URL:", process.env.NEXT_PUBLIC_BE_URL);
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BE_URL}/api/v1/forms`,
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_BE_URL}/api/v1/forms/${formId}`,
         data
       );
       console.log("Response:", response.data);

@@ -144,7 +144,9 @@ export default function RightSidebar({
   };
 
   useEffect(() => {
-    const pageObject = pages[pageIndex ? pageIndex : 0];
+    console.log(pageIndex);
+
+    const pageObject = pages ? pages[pageIndex ? pageIndex : 0] : null;
     const questionObject =
       pageObject?.questions[questionIndex ? questionIndex : 0];
     setQuestion(questionObject);
@@ -179,12 +181,13 @@ export default function RightSidebar({
   const handleAddAnswer = () => {
     if (newAnswer.trim() !== "") {
       const updatedPages = [...pages];
-      const page = updatedPages[0];
-      const question = page.questions[0];
+      const page = updatedPages[pageIndex]; // Get the correct page based on the pageIndex
+      const question = page.questions[questionIndex]; // Get the correct question based on the questionIndex
 
       question.answers = [...question.answers, { ans: newAnswer }];
       setPages(updatedPages);
       setNewAnswer("");
+
       setTimeout(() => {
         const lastIndex = question.answers.length - 1;
         inputRefs.current[lastIndex]?.focus();
@@ -290,14 +293,14 @@ export default function RightSidebar({
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
-              {question && question.desc_status && (
+              {question && question.desc_status ? (
                 <Textarea
                   className="mt-2"
                   placeholder="Type your description here."
-                  value={question.description || ""}
+                  value={question.description}
                   onChange={handleQuestionDescriptionChange}
                 />
-              )}
+              ) : null}
             </div>
 
             <div className="flex items-center space-x-2">
@@ -393,7 +396,7 @@ export default function RightSidebar({
                   </div>
 
                   {/* Conditionally render description input if desc_status is true */}
-                  {ans.desc_status && (
+                  {ans.desc_status ? (
                     <div className="mt-2">
                       <Textarea
                         className="mt-2"
@@ -408,7 +411,7 @@ export default function RightSidebar({
                         }}
                       />
                     </div>
-                  )}
+                  ) : null}
                 </div>
               ))}
 

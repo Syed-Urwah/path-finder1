@@ -132,22 +132,18 @@ export function DataTableDemo() {
               <TableBody>
                 {table.getRowModel().rows?.length ? (
                   table.getRowModel().rows.map((row) => (
-                   
-                    <TableRow
-                      key={row.id}
-                      // onClick={() =>
-                      //   (window.location.href = `${process.env.NEXT_PUBLIC_FE_URL}/dashboard/product/edit/${row.original.id}`)
-                      // }
-                      style={{ cursor: "pointer" }}
-                    >
+                    <TableRow key={row.id} style={{ cursor: "pointer" }}>
                       {row.getVisibleCells().map((cell) => (
-                         <Link href={`${process.env.NEXT_PUBLIC_FE_URL}/dashboard/product/edit/${row.original.id}`}>
-                        <TableCell key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </TableCell>
+                        <Link
+                          key={cell.id}
+                          href={`${process.env.NEXT_PUBLIC_FE_URL}/dashboard/product/edit/${row.original.id}`}
+                        >
+                          <TableCell key={cell.id}>
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </TableCell>
                         </Link>
                       ))}
                     </TableRow>
