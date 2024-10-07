@@ -145,7 +145,7 @@ export default function NewPage() {
       console.error("Error:", error);
       alert("An unexpected error occurred. Please try again.");
     }
-  }, [style, pages]);
+  }, [style, pages, router]);
   return (
     <>
       <div className="flex flex-col h-screen w-screen overflow-hidden">
@@ -313,18 +313,15 @@ export default function NewPage() {
               setStyle={setStyle}
             />
           )}
-          {activeTab === "logic" ? (
-            <LogicTab />
-          ) : (
-            <RightSidebar
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-              pages={pages}
-              setPages={setPages}
-              style={style}
-              setStyle={setStyle}
-            />
-          )}
+          {activeTab === "logic" ? <LogicTab /> : null}
+          <RightSidebar
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            pages={pages}
+            setPages={setPages}
+            style={style}
+            setStyle={setStyle}
+          />
         </div>
       </div>
     </>

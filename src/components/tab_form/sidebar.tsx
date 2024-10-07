@@ -56,11 +56,11 @@ export function FormSidebar({ pages, setPages }: any) {
       {/* Left sidebar */}
       <div
         ref={sidebarRef}
-        className="w-full max-w-[300px] h-full flex flex-col border-r bg-white hover:overflow-auto relative"
+        className="w-full max-w-[300px] h-full flex flex-col border-r bg-[#F4F4F4]  relative"
         style={{ gridArea: "leftbar" }}
       >
         {/* Top Section */}
-        <div className="w-full flex justify-between items-center p-4">
+        <div className="w-full flex justify-between items-center p-4 bg-white">
           <p className="font-medium">Content</p>
           <Modal
             pages={pages}

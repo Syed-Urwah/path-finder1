@@ -41,8 +41,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { FormSidebar } from "./sidebar";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
   // Helper function to remove duplicate pages based on 'id'
   function removeDuplicates(pagesArray: any) {
     return Array.from(new Set(pagesArray.map((page: any) => page.id))).map(
@@ -89,27 +93,24 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
     setPages([...pages, newPage]);
   };
 
+  function handleQuestionEditDisplay(page: any): any {
+    console.log("page: " + page);
+    router.push(pathname + "?" + updateParams(page));
+  }
+
+  const updateParams = (newPage: any) => {
+    const updatedParams: any = new URLSearchParams(searchParams.toString());
+
+    updatedParams.set("page", newPage);
+
+    return updatedParams.toString();
+  };
   function addPage() {
     setPages((prev: any) =>
       prev.concat({
         id: 1,
         order: pages.length + 1,
-        questions: [
-          {
-            question_type_id: 1,
-            name: "question1",
-            answers: [
-              {
-                ans: "ans1",
-                img: "",
-              },
-              {
-                ans: "ans2",
-                img: "",
-              },
-            ],
-          },
-        ],
+        questions: [],
       })
     );
   }
@@ -151,6 +152,7 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
                   fontFamily: style.text_font,
                   fontSize: style.text_size,
                 }}
+                onClick={() => handleQuestionEditDisplay(index)}
               >
                 {/* Header Section */}
                 <div className="flex justify-between items-center w-4/5 mb-2.5 text-left box-border">
@@ -221,7 +223,7 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
 
                 {/* Main Container */}
                 <div
-                  className={`flex flex-row w-[800px] h-[500px] bg-white box-border`}
+                  className={`flex flex-row w-[800px] h-[500px] bg-white box-border `}
                   style={{
                     borderColor: style.border_color || "#000000", // Dynamic border color
                     borderRadius: style.border_radius || "0px", // Dynamic border radius
@@ -265,7 +267,7 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
                               <div key={index}>
                                 <div className="flex justify-between mb-3">
                                   <Label
-                                    className={`font-bold text-sm ${style.text_size} ${style.text_font}`}
+                                    className={`font-bold  ${style.text_size} ${style.text_font}`}
                                   >
                                     {question.name}
                                   </Label>
@@ -276,7 +278,7 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
                                 </div>
                                 {question && question.desc_status ? (
                                   <Label
-                                    className="text text-sm"
+                                    className="text "
                                     style={{
                                       fontFamily: style.text_font,
                                       fontSize: style.text_size,
@@ -303,7 +305,6 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
                                               />
                                               <Label
                                                 htmlFor={`option-${index}`}
-                                                className="text-sm"
                                                 style={{
                                                   fontFamily: style.text_font,
                                                   fontSize: style.text_size,
@@ -402,6 +403,7 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
           >
             {/* Main Container */}
             <div
+              className="mb-12"
               style={{
                 display: "flex",
                 flexDirection: "column",

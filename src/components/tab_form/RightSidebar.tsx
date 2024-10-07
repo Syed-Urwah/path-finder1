@@ -151,7 +151,7 @@ export default function RightSidebar({
       pageObject?.questions[questionIndex ? questionIndex : 0];
     setQuestion(questionObject);
     setActiveTab("content");
-  }, [searchParams, pathname, pages]);
+  }, [searchParams, pathname, pages, pageIndex, questionIndex, setActiveTab]);
 
   function handleQuestionChange(e: any) {
     const updatedPages = [...pages];
@@ -447,9 +447,11 @@ export default function RightSidebar({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectItem value="sans-serif">Poppins</SelectItem>
-                    <SelectItem value="sans-serif">Roboto</SelectItem>
+                    <SelectItem value="'Poppins', sans-serif">
+                      Poppins
+                    </SelectItem>
                     <SelectItem value="monospace">Courier Prime</SelectItem>
+                    <SelectItem value="'Roboto', sans-serif">Roboto</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
@@ -464,13 +466,13 @@ export default function RightSidebar({
               </Button>
               <Button
                 variant="outline"
-                onClick={() => handleTextSizeChange("text-md")}
+                onClick={() => handleTextSizeChange("text-lg")}
               >
                 Medium
               </Button>
               <Button
                 variant="outline"
-                onClick={() => handleTextSizeChange("text-lg")}
+                onClick={() => handleTextSizeChange("text-xl")}
               >
                 Large
               </Button>
@@ -593,16 +595,18 @@ export default function RightSidebar({
                   <span className="font-medium">{buttonColor}</span>
                   <input
                     type="color"
-                    value={style.button_color}
-                    onChange={handleBtnColorChange}
+                    value={style.button_text}
+                    onChange={handleBtnTxtColorChange}
                     style={{
                       width: "40px",
                       height: "40px",
                       borderRadius: "50%",
-                      backgroundColor: buttonColor,
                       padding: "0",
-                      display: "inline-block",
-                      border: `2px solid ${buttonColor}`,
+                      border: "none",
+                      background: "none",
+                      appearance: "none",
+                      cursor: "pointer",
+                      outline: "none",
                       boxSizing: "border-box",
                     }}
                   />

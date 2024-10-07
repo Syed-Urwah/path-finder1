@@ -12,28 +12,36 @@ import {
 import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "./ui/label";
+import { useSearchParams } from "next/navigation";
 interface ModalProps {
   button: React.ReactNode;
 }
 
 export function Modal({ button, pages, setPages }: any) {
-
+  const searchParams = useSearchParams();
   //only question_type_id=1 is added Todo(remaining)
-  function handleAddQuestion(event: any): any{
+  function handleAddQuestion(event: any): any {
     const id = event.currentTarget.id; // Access the button's id
-    console.log(id)
+
+    console.log(id);
 
     const newQuestion = {
       question_type_id: 1,
       name: "New Question",
       answers: [
-        { ans: 'New Answer 1', img: '' },
-        { ans: 'New Answer 2', img: '' },
-      ]
+        { ans: "New Answer 1", img: "" },
+        { ans: "New Answer 2", img: "" },
+      ],
     };
 
     const updatedValue = pages?.map((page: any) => {
-      if (page.order === 1) {
+      const pageIndex = searchParams.get("page");
+      console.log("pageIndex", pageIndex);
+
+      const currentPageIndex = pages.indexOf(page);
+      console.log("currentPageIndex", currentPageIndex);
+
+      if (currentPageIndex == pageIndex) {
         // Add the new question to the page with order: 1
         return {
           ...page,
@@ -42,7 +50,7 @@ export function Modal({ button, pages, setPages }: any) {
       }
       return page; // Return other pages without changes
     });
-    setPages(updatedValue) 
+    setPages(updatedValue);
   }
 
   return (
@@ -65,31 +73,35 @@ export function Modal({ button, pages, setPages }: any) {
             </div>
 
             <div className="col-span-4">
-            <DialogClose asChild>
-              <button onClick={handleAddQuestion} id="1"  className="w-full flex gap-2 items-center hover:bg-[#0000000d] hover:p-[5px] hover:m-[-5px] rounded-[5px] cursor-pointer">
-                <div className="w-[40px] h-[40px] rounded-[12px] flex justify-center items-center overflow-hidden">
-                  <div className="w-full h-full bg-[#D8BFD8] flex justify-center items-center flex-col">
-                    <svg
-                      aria-hidden="true"
-                      focusable="false"
-                      data-prefix="fas"
-                      data-icon="circle"
-                      className="svg-inline--fa fa-circle"
-                      role="img"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 512 512"
-                      width="20px"
-                      height="20px"
-                    >
-                      <path
-                        fill="#000000"
-                        d="M256 8C119.4 8 8 119.4 8 256s111.4 248 248 248 248-111.4 248-248S392.6 8 256 8zM256 464c-114.9 0-208-93.1-208-208S141.1 48 256 48s208 93.1 208 208-93.1 208-208 208z"
-                      ></path>
-                    </svg>
+              <DialogClose asChild>
+                <button
+                  onClick={handleAddQuestion}
+                  id="1"
+                  className="w-full flex gap-2 items-center hover:bg-[#0000000d] hover:p-[5px] hover:m-[-5px] rounded-[5px] cursor-pointer"
+                >
+                  <div className="w-[40px] h-[40px] rounded-[12px] flex justify-center items-center overflow-hidden">
+                    <div className="w-full h-full bg-[#D8BFD8] flex justify-center items-center flex-col">
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="circle"
+                        className="svg-inline--fa fa-circle"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        width="20px"
+                        height="20px"
+                      >
+                        <path
+                          fill="#000000"
+                          d="M256 8C119.4 8 8 119.4 8 256s111.4 248 248 248 248-111.4 248-248S392.6 8 256 8zM256 464c-114.9 0-208-93.1-208-208S141.1 48 256 48s208 93.1 208 208-93.1 208-208 208z"
+                        ></path>
+                      </svg>
+                    </div>
                   </div>
-                </div>
-                <p>Multiple choice question</p>
-              </button>
+                  <p>Multiple choice question</p>
+                </button>
               </DialogClose>
             </div>
 
