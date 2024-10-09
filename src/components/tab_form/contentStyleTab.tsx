@@ -121,6 +121,7 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
     <>
       {/* left sidebar*/}
       <FormSidebar pages={pages} setPages={setPages} />
+
       <div className="w-full h-screen overflow-y-auto">
         <div className="flex flex-col w-full max-w-2xl mx-auto px-4 py-8 ">
           {/* Page Container */}
@@ -187,7 +188,10 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
 
               {/* Card with Content */}
               <Card
-                className="shadow-2xl w-full "
+                // className="shadow-2xl w-full "
+                 className="shadow-2xl w-[800px]"
+                //  className="shadow-2xl w-[800px] h-[600px]"
+                
                 style={{
                   borderColor: style.border_color || "#000000",
                   borderRadius: style.border_radius || "0px",
@@ -295,32 +299,35 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
                         </CardContent>
                         <CardFooter className="flex justify-between mt-9">
                           <Button
-                            className={`bg-white ${
-                              style.button_color
+                            className={`bg-white hover:bg-gray-100 ${style.button_color
                                 ? `text-[${style.button_color}]`
                                 : "text-black"
-                            } rounded-full w-10 h-10 flex items-center justify-center border-2  cursor-pointer ${
-                              style.text_size
-                            } ${style.text_font}`}
+                              } rounded-full w-10 h-10 flex items-center justify-center border-2  cursor-pointer ${style.text_size
+                              } ${style.text_font}`}
                             style={{
+                              // borderColor: style.button_color || "black",
+                              // borderRadius: style.border_radius || "0px",
                               borderColor: style.button_color || "black",
-                              borderRadius: style.border_radius || "0px",
+                              borderRadius: "50%",
+                              width: "48px",
+                              height: "48px",
                             }}
                           >
-                            <ArrowLeft
-                              style={{
-                                color: style.button_text || "white",
-                              }}
-                              className="w-4 h-4 font-bold text-white"
-                            />
+                            <div>
+                              <ArrowLeft
+                                style={{
+                                  color: style.button_text || "black",
+                                }}
+                                className="w-4 h-4 font-bold text-white"
+                              />
+                            </div>
                           </Button>
 
                           <Button
-                            className={`bg-black ${
-                              style.button_text
+                            className={`bg-black ${style.button_text
                                 ? `text-${style.button_text}`
                                 : "text-white"
-                            } rounded-2xl py-2 px-4 border-none cursor-pointer flex items-center`}
+                              } rounded-2xl py-2 px-4 border-none cursor-pointer flex items-center`}
                             style={{
                               backgroundColor: style.button_color || "black",
                             }}
@@ -352,7 +359,9 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
 
           <div className="flex flex-col items-center justify-center mb-4">
             {/* Main Container */}
-            <div className=" flex flex-col w-full  bg-white box-border items-center justify-center p-5 rounded-lg">
+            {/* <div className=" flex flex-col w-full  bg-white box-border items-center justify-center p-5 rounded-lg">
+             */}
+            <div className=" flex flex-col w-full box-border items-center justify-center p-5 rounded-lg">
               <div className="flex flex-col items-center justify-center text-center">
                 <span className="text-xs">Add Page</span>
                 <button

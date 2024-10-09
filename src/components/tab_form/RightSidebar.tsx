@@ -426,6 +426,7 @@ export default function RightSidebar({
             </div>
           </div>
         </TabsContent>
+
         <TabsContent defaultValue={"style"} value="style">
           <div className="w-full border-b px-4  flex flex-col gap-5 pb-4">
             <div className="flex flex-col gap-1">
@@ -485,9 +486,8 @@ export default function RightSidebar({
                 <div className="flex justify-between w-[180px] items-center">
                   {/* Border radius 0px */}
                   <button
-                    className={`p-[10px] hover:cursor-pointer ${
-                      style.border_radius === "0px" ? "bg-gray-200" : ""
-                    }`}
+                    className={`p-[10px] hover:cursor-pointer ${style.border_radius === "0px" ? "bg-gray-200" : ""
+                      }`}
                     onClick={() => handleBorderRadiusClick("0px")}
                   >
                     <div className="h-[22px] w-[30px] border-[2px] border-black rounded-[0px]"></div>
@@ -495,9 +495,8 @@ export default function RightSidebar({
 
                   {/* Border radius 5px */}
                   <button
-                    className={`p-[10px] hover:cursor-pointer ${
-                      style.border_radius === "10px" ? "bg-gray-200" : ""
-                    }`}
+                    className={`p-[10px] hover:cursor-pointer ${style.border_radius === "10px" ? "bg-gray-200" : ""
+                      }`}
                     onClick={() => handleBorderRadiusClick("10px")}
                   >
                     <div className="h-[22px] w-[30px] border-[2px] border-black rounded-[5px]"></div>
@@ -505,9 +504,8 @@ export default function RightSidebar({
 
                   {/* Border radius 10px */}
                   <button
-                    className={`p-[10px] hover:cursor-pointer ${
-                      style.border_radius === "50px" ? "bg-gray-200" : ""
-                    }`}
+                    className={`p-[10px] hover:cursor-pointer ${style.border_radius === "50px" ? "bg-gray-200" : ""
+                      }`}
                     onClick={() => handleBorderRadiusClick("50px")}
                   >
                     <div className="h-[22px] w-[30px] border-[2px] border-black rounded-[10px]"></div>
@@ -543,9 +541,8 @@ export default function RightSidebar({
 
                   {/* 2px Border Button */}
                   <button
-                    className={`p-[10px] hover:cursor-pointer ${
-                      style.border_line === "2px" ? "bg-gray-200" : ""
-                    } rounded-[5px]`}
+                    className={`p-[10px] hover:cursor-pointer ${style.border_line === "2px" ? "bg-gray-200" : ""
+                      } rounded-[5px]`}
                     onClick={() => handleBorderLineClick("2px")}
                   >
                     <div className="w-[30px] h-[2px] bg-black"></div>
@@ -553,9 +550,8 @@ export default function RightSidebar({
 
                   {/* 5px Border Button */}
                   <button
-                    className={`p-[10px] hover:cursor-pointer ${
-                      style.border_line === "5px" ? "bg-gray-200" : ""
-                    }`}
+                    className={`p-[10px] hover:cursor-pointer ${style.border_line === "5px" ? "bg-gray-200" : ""
+                      }`}
                     onClick={() => handleBorderLineClick("5px")}
                   >
                     <div className="w-[30px] h-[5px] bg-black"></div>
@@ -570,7 +566,7 @@ export default function RightSidebar({
                 <Label className="font-bold w-1/3">Border color</Label>
                 <div className="flex justify-between w-[150px] bg-input-background px-2 py-[7.5px] rounded placeholder:text-[#b0b0b0] outline-focus items-center cursor-pointer">
                   <span className="font-medium">{borderColor}</span>
-                  <input
+                  {/* <input
                     type="color"
                     value={style.border_color}
                     onChange={handleColorChange}
@@ -584,7 +580,25 @@ export default function RightSidebar({
                       border: `2px solid ${borderColor}`,
                       boxSizing: "border-box",
                     }}
+                  /> */}
+                  <input
+                    type="color"
+                    value={style.border_color}
+                    onChange={handleColorChange}
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "0%", // Making it a square
+                      padding: "0",
+                      border: "none", // Removing the border
+                      background: "none", // Removing the background
+                      appearance: "none", // Ensuring it's minimal like the button text one
+                      cursor: "pointer",
+                      outline: "none", // No outline on focus
+                      boxSizing: "border-box",
+                    }}
                   />
+
                 </div>
               </div>
 
@@ -593,7 +607,7 @@ export default function RightSidebar({
                 <Label className="font-bold w-1/3">Buttons</Label>
                 <div className="flex justify-between w-[150px] bg-input-background px-2 py-[7.5px] rounded placeholder:text-[#b0b0b0] outline-focus items-center cursor-pointer">
                   <span className="font-medium">{buttonColor}</span>
-                  <input
+                  {/* <input
                     type="color"
                     value={style.button_text}
                     onChange={handleBtnTxtColorChange}
@@ -609,7 +623,25 @@ export default function RightSidebar({
                       outline: "none",
                       boxSizing: "border-box",
                     }}
+                  /> */}
+                  <input
+                    type="color"
+                    value={style.button_color}
+                    onChange={handleBtnColorChange}
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%", // Keeping it circular
+                      padding: "0",
+                      border: "none",
+                      background: "none",
+                      appearance: "none",
+                      cursor: "pointer",
+                      outline: "none",
+                      boxSizing: "border-box",
+                    }}
                   />
+
                 </div>
               </div>
 
@@ -618,7 +650,7 @@ export default function RightSidebar({
                 <Label className="font-bold w-1/3">Button text</Label>
                 <div className="flex justify-between w-[150px] bg-input-background px-2 py-[7.5px] rounded placeholder:text-[#b0b0b0] outline-focus items-center cursor-pointer">
                   <span className="font-medium">{buttonTextColor}</span>
-                  <input
+                  {/* <input
                     type="color"
                     value={style.button_text}
                     onChange={handleBtnTxtColorChange}
@@ -630,6 +662,23 @@ export default function RightSidebar({
                       padding: "0",
                       display: "inline-block",
                       border: `2px solid ${buttonTextColor}`,
+                      boxSizing: "border-box",
+                    }}
+                  /> */}
+                  <input
+                    type="color"
+                    value={style.button_text}
+                    onChange={handleBtnTxtColorChange}
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      padding: "0",
+                      border: "none",
+                      background: "none",
+                      appearance: "none",
+                      cursor: "pointer",
+                      outline: "none",
                       boxSizing: "border-box",
                     }}
                   />
