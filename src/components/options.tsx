@@ -282,11 +282,11 @@ function Option1({
   let ansArray = edit
     ? option.answers
     : [
-        {
-          ans: "",
-          img: "",
-        },
-      ];
+      {
+        ans: "",
+        img: "",
+      },
+    ];
 
   function isBase64Jpeg(imageData: any) {
     return imageData.startsWith("data:image/jpeg;base64,");
@@ -387,8 +387,8 @@ function Option1({
     <div className="bg-[#f2f2f2] px-5 py-6 my-4 rounded-md space-y-6">
       <h3>Multiple choice question</h3>
 
-      <div id="option1_question" className="w-60">
-        <Label htmlFor="option1_question">Ask</Label>
+      {/* <div id="option1_question" className="w-60">
+        <Label htmlFor="option1_question">Question</Label>
 
         <div className="flex gap-2">
           <Input
@@ -397,13 +397,15 @@ function Option1({
             type="text"
             onChange={(e) => setQuestion(e.target.value)}
             value={question}
+            className="bg-white rounded-full border border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+
           />
           <DropdownMenu>
             <DropdownMenuTrigger>
               <EllipsisVertical />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
+             
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleDelete} className="space-x-2">
                 <span className="w-4">
@@ -428,13 +430,58 @@ function Option1({
               {/* <DropdownMenuItem>Billing</DropdownMenuItem>
                             <DropdownMenuItem>Team</DropdownMenuItem>
                             <DropdownMenuItem>Subscription</DropdownMenuItem> */}
-            </DropdownMenuContent>
+      {/* </DropdownMenuContent>
           </DropdownMenu>
+        </div>
+      </div> */}
+
+      <div id="option1_question" className="w-full">
+        <Label htmlFor="option1_question">Question</Label>
+
+        <div className="flex gap-2 w-full">
+          <Input
+            id="option1_question"
+            name="option1_question"
+            type="text"
+            onChange={(e) => setQuestion(e.target.value)}
+            value={question}
+            className="w-full bg-white rounded-full border border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          />
+
+          {/* <DropdownMenu>
+            <DropdownMenuTrigger>
+              <EllipsisVertical />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleDelete} className="space-x-2">
+                <span className="w-4">
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="trash"
+                    className="svg-inline--fa fa-trash"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"
+                    ></path>
+                  </svg>
+                </span>
+                <p>To delete</p>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu> */}
         </div>
       </div>
 
+
       <div id="option1_ans" className="w-full">
-        <Label htmlFor="option1_ans">Answers</Label>
+        <Label htmlFor="option1_ans">Option 1</Label>
         <div className="space-y-2">
           {ans.map((ans: any, index: any) => (
             <div key={index} className="flex justify-between">
@@ -444,7 +491,8 @@ function Option1({
                 type="text"
                 onChange={(e) => handleAnswerChange(e, index)}
                 value={ans.ans}
-                className="w-1/2"
+                // className="w-1/2 bg-white rounded-full border border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="w-96 bg-white rounded-full border border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               />
               <Label htmlFor={"option1" + index} className="w-10">
                 {ans.img ? (
@@ -453,19 +501,19 @@ function Option1({
                       src={
                         isEditPage && !isBase64Jpeg(ans.img)
                           ? process.env.NEXT_PUBLIC_BE_URL +
-                            "/storage/" +
-                            ans.img
+                          "/storage/" +
+                          ans.img
                           : ans.img
                       }
                       alt="Your Image Description"
                       className="rounded-md object-cover"
                       width={100}
                       height={100}
-                      // layout="fill"
+                    // layout="fill"
                     />
                   </div>
                 ) : (
-                  <div className="w-full bg-gray-300 h-10 flex rounded-sm">
+                  <div className="w-full bg-gray-300 h-10  ml-2 flex rounded-full">
                     <Image
                       src={ImagePlaceHolder}
                       alt="image-placeholder"
@@ -488,9 +536,56 @@ function Option1({
         </div>
       </div>
 
-      <Button type="button" onClick={handleFinished}>
-        Finished
-      </Button>
+      <div className="flex justify-between w-full">
+
+        <Button
+          type="button"
+          className="rounded-full px-4 py-2 bg-gray-400"
+        >
+          Cancel
+        </Button>
+
+        <Button type="button" className="rounded-full px-4 py-2" onClick={handleFinished}>
+          Save changes
+        </Button>
+      </div>
+
+
+      {/* MINE <div className="grid grid-flow-row grid-cols-10 items-center gap-1">
+        <div className="col-span-2">
+          <button className="w-full px-2 py-1">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="grip-vertical"
+              className="svg-inline--fa fa-grip-vertical"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 320 512"
+              width="16"
+              height="16"
+            >
+              <path
+                fill="currentColor"
+                d="M40 352l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zm192 0l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 320c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 192l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 160c-22.1 0-40-17.9-40-40L0 72C0 49.9 17.9 32 40 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40z"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div className="col-span-8">
+          <input
+            type="text"
+            placeholder="Enter text"
+            className="w-full px-4 py-2 border rounded bg-white"
+          />
+        </div>
+      </div> */}
+      
+   
+
+
     </div>
   );
 }
@@ -516,11 +611,11 @@ function Option2({
   let ansArray = edit
     ? option.answers
     : [
-        {
-          ans: "",
-          img: "",
-        },
-      ];
+      {
+        ans: "",
+        img: "",
+      },
+    ];
 
   console.log(ansArray);
 
@@ -688,15 +783,15 @@ function Option2({
                       src={
                         isEditPage && !isBase64Jpeg(ans.img)
                           ? process.env.NEXT_PUBLIC_BE_URL +
-                            "/storage/" +
-                            ans.img
+                          "/storage/" +
+                          ans.img
                           : ans.img
                       }
                       alt="Your Image Description"
                       className="rounded-md object-cover"
                       width={100}
                       height={100}
-                      // layout="fill"
+                    // layout="fill"
                     />
                   </div>
                 ) : (
@@ -752,25 +847,25 @@ function Option3({
   let ansArray = edit
     ? option.answers
     : [
-        {
-          label: "Smallest possible answer",
-          ans: "",
-          img: null,
-          min: 0,
-        },
-        {
-          label: "Biggest possible answer",
-          ans: "",
-          img: null,
-          max: 0,
-        },
-        {
-          label: "Step size",
-          ans: "",
-          img: null,
-          step: 0,
-        },
-      ];
+      {
+        label: "Smallest possible answer",
+        ans: "",
+        img: null,
+        min: 0,
+      },
+      {
+        label: "Biggest possible answer",
+        ans: "",
+        img: null,
+        max: 0,
+      },
+      {
+        label: "Step size",
+        ans: "",
+        img: null,
+        step: 0,
+      },
+    ];
 
   console.log(ansArray);
 
@@ -974,12 +1069,12 @@ function Option4({
   let ansArray = edit
     ? option.answers
     : [
-        {
-          product_id: "",
-          product_name: "",
-          img: null,
-        },
-      ];
+      {
+        product_id: "",
+        product_name: "",
+        img: null,
+      },
+    ];
 
   console.log(ansArray);
 

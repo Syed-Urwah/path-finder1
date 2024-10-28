@@ -222,19 +222,34 @@ export default function ProductCreateForm({ product }: any) {
       <Card className="w-[500px] bg-white rounded-xl shadow-md">
         <CardContent className="p-6">
           <form onSubmit={formik.handleSubmit}>
-            <div className="mb-4">
-              <Label htmlFor="product_name">Name</Label>
+            {/* <div className="mb-4">
+              <Label htmlFor="product_name" className="block text-sm font-bold text-gray-700">Product Name</Label>
               <Input
                 id="product_name"
                 name="product_name"
                 type="text"
                 onChange={formik.handleChange}
                 value={formik.values.product_name}
-                className="bg-gray-100"
+                className="bg-white "
+                required
+              />
+            </div> */}
+            <div className="mb-4">
+              <Label htmlFor="product_name" className="block text-sm font-bold text-gray-700">
+                Product Name
+              </Label>
+              <Input
+                id="product_name"
+                name="product_name"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.product_name}
+                className="bg-white rounded-full border border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 required
               />
             </div>
-            <div className="mb-4">
+
+            {/* <div className="mb-4">
               <Label htmlFor="description">Description</Label>
               <Input
                 id="description"
@@ -245,8 +260,26 @@ export default function ProductCreateForm({ product }: any) {
                 className="bg-gray-100"
                 required
               />
+            </div> */}
+
+
+            {/* <div className="mb-4"> */}
+            <div className="mt-7">
+              <Label htmlFor="description" className="block text-sm font-bold text-gray-700">
+                Description
+              </Label>
+              <textarea
+                id="description"
+                name="description"
+                onChange={formik.handleChange}
+                value={formik.values.description}
+                className="bg-white mt-1 block w-full h-32 rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                required
+              />
             </div>
-            <div className="mb-4">
+
+
+            {/* <div className="mb-4">
               <Label htmlFor="picture">
                 Image (5:3)
                 {mainImage ? (
@@ -261,7 +294,7 @@ export default function ProductCreateForm({ product }: any) {
                     )}
                   </AspectRatio>
                 ) : (
-                  <div className="w-full bg-gray-300 h-32 flex rounded-sm">
+                  <div className="w-full bg-white h-32 flex rounded-sm border border-gray-300">
                     <Image
                       src={!mainImage ? ImagePlaceHolder : mainImage}
                       alt="image-placeholder"
@@ -291,8 +324,58 @@ export default function ProductCreateForm({ product }: any) {
                   setMainImage(e.target.files[0]);
                 }}
               />
+            </div> */}
+
+            <div className="mt-7">
+              <Label htmlFor="picture">
+                {/* Image (5:3) */}
+                {mainImage ? (
+                  <AspectRatio ratio={5 / 3} className="w-full h-full">
+                    {mainImage && (
+                      <Image
+                        src={!mainImage ? ImagePlaceHolder : mainImage}
+                        alt="Your Image Description"
+                        className="rounded-md object-cover"
+                        layout="fill"
+                      />
+                    )}
+                  </AspectRatio>
+                ) : (
+                  <div className="w-full bg-white h-32 flex flex-col items-center justify-center rounded-sm border-4 border-dotted border-gray-400">
+                    <Image
+                      src={!mainImage ? ImagePlaceHolder : mainImage}
+                      alt="image-placeholder"
+                      width={30}
+                      height={30}
+                    />
+                    <span className="mt-2 text-gray-700">Click here to upload your file or drag</span>
+                    <span className="mt-2 text-gray-500">Supported format JPG,PNG (upto 10 Mb)</span>
+                  </div>
+                )}
+              </Label>
+
+              <Input
+                id="picture"
+                type="file"
+                name="image"
+                className="hidden"
+                onChange={(e: any) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    const reader: any = new FileReader();
+                    reader.onloadend = () => {
+                      setMainImage(reader.result);
+                      formik.setFieldValue(`image`, reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                  setMainImage(e.target.files[0]);
+                }}
+              />
             </div>
-            <div className="mb-4">
+
+
+            <div className="mt-7">
               <Label htmlFor="options">Options</Label>
               {options?.length > 0 &&
                 options?.map((option: any, index: any) =>
@@ -377,7 +460,7 @@ export default function ProductCreateForm({ product }: any) {
         id="product_form"
         className="w-[500px] h-[800px]  mx-4 flex flex-col  "
       >
-        <div className=" border-4 border-black bg-gray-300 p-4 rounded-xl w-[500px] ">
+        <div className=" border-4 border-gray-200 p-4 rounded-xl w-[500px] ">
           <div className="bg-white p-4 rounded-lg">
             <AspectRatio ratio={16 / 9} className="w-full h-full">
               {mainImage && (
@@ -551,14 +634,14 @@ function DisplayOptions({ option, isEdit, isEditing }: any): any {
                               answer.img.startsWith("data:image") // Check if the image is base64 encoded
                                 ? answer.img // Use it directly
                                 : process.env.NEXT_PUBLIC_BE_URL +
-                                  "/storage/" +
-                                  answer.img // Otherwise, construct the full URL
+                                "/storage/" +
+                                answer.img // Otherwise, construct the full URL
                             }
                             alt="Your Image Description"
                             className="rounded-md object-cover"
                             width={30}
                             height={30}
-                            // layout="fill"
+                          // layout="fill"
                           />
                         </div>
                       )}
@@ -596,14 +679,14 @@ function DisplayOptions({ option, isEdit, isEditing }: any): any {
                               answer.img.startsWith("data:image") // Check if the image is base64 encoded
                                 ? answer.img // Use it directly
                                 : process.env.NEXT_PUBLIC_BE_URL +
-                                  "/storage/" +
-                                  answer.img // Otherwise, construct the full URL
+                                "/storage/" +
+                                answer.img // Otherwise, construct the full URL
                             }
                             alt="Your Image Description"
                             className="rounded-md object-cover"
                             width={30}
                             height={30}
-                            // layout="fill"
+                          // layout="fill"
                           />
                         </div>
                       )}
