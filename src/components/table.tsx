@@ -9,7 +9,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -46,7 +46,7 @@ export const columns: ColumnDef<Product>[] = [
   },
   {
     accessorKey: "cross_sell",
-    header: () => <div className="font-bold text-black">Cross-sells</div>,
+    header: () => <div className="font-bold text-black pl-2">Cross-sells</div>,
     cell: ({ row }) => <div>{row.getValue("cross_sell")}</div>,
   },
 ];
@@ -70,7 +70,7 @@ export function DataTableDemo() {
   };
 
   React.useEffect(() => {
-    fetchProducts();
+    // fetchProducts();
   }, []);
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -102,8 +102,8 @@ export function DataTableDemo() {
       ) : (
         <>
           <div className="rounded-md border">
-            
-            <div className="flex items-center py-4">
+
+            {/* <div className="flex items-center py-4">
               <div className="relative w-full max-w-sm pl-4">
                 <Input
                   placeholder="Search in products..."
@@ -130,7 +130,51 @@ export function DataTableDemo() {
                 New Product
               </Button>
 
+            </div> */}
+
+            <div className="flex items-center py-4 w-full">
+              <div className="relative flex-grow pr-4 ml-5">
+                <div className="relative w-1/2"> 
+                  <svg
+                    className="absolute left-3 top-2 h-5 w-5 text-gray-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <circle cx={10} cy={10} r={7} />
+                    <line x1={21} y1={21} x2={15} y2={15} />
+                  </svg>
+                  <Input
+                    placeholder="Search in products"
+                    value={searchQuery}
+                    onChange={(event) => setSearchQuery(event.target.value)}
+                    className="pl-10 pr-4 py-2 border rounded-full shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full"  // Adjusted padding
+                  />
+                </div>
+              </div>
+
+
+              <Button className="bg-[#2450e4] flex items-center rounded-full px-4 py-2 mr-5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+                New Product
+              </Button>
             </div>
+
 
 
 
@@ -176,13 +220,59 @@ export function DataTableDemo() {
                       colSpan={columns.length}
                       className="h-24 text-center"
                     >
-                      No results.
+                      {/* No results. */}
+                      <div className="grid grid-cols-[auto_1fr_auto_1fr_auto] items-center bg-white p-6 rounded-lg shadow-lg gap-x-6">
+                        {/* First Circular Image with Text */}
+                        <div className="flex items-center space-x-4">
+                          <img
+                            src="/images/profile-placeholder.png"
+                            alt="User Icon"
+                            className="w-12 h-12 rounded-full"
+                          />
+                          <span className="text-gray-800 text-lg font-semibold">
+                            Mike Neilson
+                          </span>
+                        </div>
+
+                        {/* Spacer between elements */}
+                        <div></div>
+
+                        {/*  More Circular Images */}
+                        <div className="flex space-x-4">
+                          <img
+                            src="/images/profile-placeholder.png"
+                            alt="User Icon 2"
+                            className="w-12 h-12 rounded-full"
+                          />
+                          <img
+                            src="/images/profile-placeholder.png"
+                            alt="User Icon 3"
+                            className="w-12 h-12 rounded-full"
+                          />
+                          <img
+                            src="/images/profile-placeholder.png"
+                            alt="User Icon 4"
+                            className="w-12 h-12 rounded-full"
+                          />
+                        </div>
+
+                        {/* Spacer before Pen Icon */}
+                        <div></div>
+
+                        {/* Pen Icon */}
+                        <button type="button">
+                          <Pencil />
+                        </button>
+                      </div>
+
+
                     </TableCell>
                   </TableRow>
                 )}
               </TableBody>
             </Table>
           </div>
+
           <div className="flex items-center justify-end space-x-2 py-4 p-4">
             <div className="flex-1 text-sm text-muted-foreground">
               {table.getFilteredSelectedRowModel().rows.length} of{" "}

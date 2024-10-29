@@ -615,40 +615,71 @@ function DisplayOptions({ option, isEdit, isEditing }: any): any {
             {option.answers.map((answer: any, index: any) => {
               const isLast = index === option.answers.length - 1;
               if (!isLast) {
+                // return (
+                //   <div
+                //     key={index}
+                //     className="flex justify-between items-center space-x-2"
+                //   >
+                //     <Label
+                //       className="font-sans font-normal text-base"
+                //       htmlFor="option-one"
+                //     >
+                //       {answer.ans}
+                //     </Label>
+                //     <div className="flex items-center gap-2">
+                //       {answer.img && (
+                //         <div className=" h-full">
+                //           <Image
+                //             src={
+                //               answer.img.startsWith("data:image") // Check if the image is base64 encoded
+                //                 ? answer.img // Use it directly
+                //                 : process.env.NEXT_PUBLIC_BE_URL +
+                //                 "/storage/" +
+                //                 answer.img // Otherwise, construct the full URL
+                //             }
+                //             alt="Your Image Description"
+                //             className="rounded-md object-cover"
+                //             width={30}
+                //             height={30}
+                //           // layout="fill"
+                //           />
+                //         </div>
+                //       )}
+                //       <RadioGroupItem value={answer.ans} id="option-one" />
+                //     </div>
+                //   </div>
+                // );
+               
+               
+
                 return (
-                  <div
-                    key={index}
-                    className="flex justify-between items-center space-x-2"
-                  >
+                  <div key={index} className="flex items-center space-x-2">
+                    <RadioGroupItem value={answer.ans} id="option-one" />
+                    {answer.img && (
+                      <div className="h-full">
+                        <Image
+                          src={
+                            answer.img.startsWith("data:image") 
+                              ? answer.img 
+                              : process.env.NEXT_PUBLIC_BE_URL + "/storage/" + answer.img
+                          }
+                          alt="Your Image Description"
+                          className="rounded-full object-cover"
+                          width={30}
+                          height={30}
+                        />
+                      </div>
+                    )}
                     <Label
                       className="font-sans font-normal text-base"
                       htmlFor="option-one"
                     >
                       {answer.ans}
                     </Label>
-                    <div className="flex items-center gap-2">
-                      {answer.img && (
-                        <div className=" h-full">
-                          <Image
-                            src={
-                              answer.img.startsWith("data:image") // Check if the image is base64 encoded
-                                ? answer.img // Use it directly
-                                : process.env.NEXT_PUBLIC_BE_URL +
-                                "/storage/" +
-                                answer.img // Otherwise, construct the full URL
-                            }
-                            alt="Your Image Description"
-                            className="rounded-md object-cover"
-                            width={30}
-                            height={30}
-                          // layout="fill"
-                          />
-                        </div>
-                      )}
-                      <RadioGroupItem value={answer.ans} id="option-one" />
-                    </div>
                   </div>
                 );
+                
+                
               }
             })}
           </RadioGroup>
