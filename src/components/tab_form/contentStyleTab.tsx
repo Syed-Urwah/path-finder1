@@ -168,6 +168,15 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
                     <ChevronDown className="w-4 h-4 text-black" />
                   </button>
 
+                  {/*Settings Button */}
+
+                  <button
+                    className="p-1.5 border-none rounded-full bg-gray-200 text-white cursor-pointer w-8 h-8 flex items-center justify-center"
+
+                  >
+                    <Settings className="w-4 h-4 text-black" />
+                  </button>
+
                   {/* Duplicate Button */}
                   <button
                     className="p-1.5 border-none rounded-full bg-gray-200 text-white cursor-pointer w-8 h-8 flex items-center justify-center"
@@ -175,6 +184,8 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
                   >
                     <Copy className="w-4 h-4 text-black" />
                   </button>
+
+
 
                   {/* Delete Button */}
                   <button
@@ -188,10 +199,7 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
 
               {/* Card with Content */}
               <Card
-                // className="shadow-2xl w-full "
-                 className="shadow-2xl w-[800px]"
-                //  className="shadow-2xl w-[800px] h-[600px]"
-                
+                className="shadow-2xl w-[800px]"
                 style={{
                   borderColor: style.border_color || "#000000",
                   borderRadius: style.border_radius || "0px",
@@ -211,15 +219,13 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
                       />
                     </div>
 
-                    {/* Second div for the content */}
-                    <div className="flex-1  w-full max-w-full h-[500px]  max-h-[500px] mt-2">
+                    <div className="flex-1 w-full max-w-full h-[300px] max-h-[500px] mt-2">
                       <Card
-                        className="w-full max-w-full h-[500px] max-h-[500px] overflow-y-auto"
+                        className="w-full max-w-full h-full overflow-y-auto"
                         style={{
                           borderRadius: style.border_radius || "0px",
                           borderWidth: style.border_line || "1px",
-                          borderStyle:
-                            style.border_line === "none" ? "none" : "solid",
+                          borderStyle: style.border_line === "none" ? "none" : "solid",
                         }}
                       >
                         <CardContent
@@ -234,7 +240,7 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
                               <div key={index}>
                                 <div className="flex justify-between mt-4 mb-3">
                                   <Label
-                                    className={`font-bold  ${style.text_size} ${style.text_font}`}
+                                    className={`font-bold ${style.text_size} ${style.text_font}`}
                                   >
                                     {question.name}
                                   </Label>
@@ -245,7 +251,7 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
                                 </div>
                                 {question && question.desc_status ? (
                                   <Label
-                                    className="text "
+                                    className="text"
                                     style={{
                                       fontFamily: style.text_font,
                                       fontSize: style.text_size,
@@ -257,103 +263,88 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
 
                                 <RadioGroup defaultValue="option-one">
                                   <div className="flex flex-col space-y-2">
-                                    {question.answers?.map(
-                                      (answer: any, index: number) => {
-                                        return (
-                                          <div
-                                            key={index}
-                                            className="p-3 rounded-lg border border-gray-300 flex items-center justify-between"
-                                          >
-                                            {/* Image in front of Answer A */}
-                                            <div className="flex items-center space-x-2">
-                                              <RadioGroupItem
-                                                value={answer.ans}
-                                                id={`option-${index}`}
-                                              />
-                                              <Label
-                                                htmlFor={`option-${index}`}
-                                                style={{
-                                                  fontFamily: style.text_font,
-                                                  fontSize: style.text_size,
-                                                }}
-                                              >
-                                                {answer.ans}
-                                              </Label>
-                                            </div>
-                                            {answer.img && (
-                                              <img
-                                                src={answer.img}
-                                                alt=""
-                                                className="w-6 h-6 object-contain"
-                                              />
-                                            )}
+                                    {question.answers?.map((answer: any, index: number) => {
+                                      return (
+                                        <div
+                                          key={index}
+                                          className="p-3 rounded-lg border border-gray-300 flex items-center justify-between"
+                                        >
+                                          <div className="flex items-center space-x-2">
+                                            <RadioGroupItem
+                                              value={answer.ans}
+                                              id={`option-${index}`}
+                                            />
+                                            <Label
+                                              htmlFor={`option-${index}`}
+                                              style={{
+                                                fontFamily: style.text_font,
+                                                fontSize: style.text_size,
+                                              }}
+                                            >
+                                              {answer.ans}
+                                            </Label>
                                           </div>
-                                        );
-                                      }
-                                    )}
+                                          {answer.img && (
+                                            <img
+                                              src={answer.img}
+                                              alt=""
+                                              className="w-6 h-6 object-contain"
+                                            />
+                                          )}
+                                        </div>
+                                      );
+                                    })}
                                   </div>
                                 </RadioGroup>
                               </div>
                             );
                           })}
                         </CardContent>
-                        <CardFooter className="flex justify-between mt-9">
-                          <Button
-                            className={`bg-white hover:bg-gray-100 ${style.button_color
-                                ? `text-[${style.button_color}]`
-                                : "text-black"
-                              } rounded-full w-10 h-10 flex items-center justify-center border-2  cursor-pointer ${style.text_size
-                              } ${style.text_font}`}
-                            style={{
-                              // borderColor: style.button_color || "black",
-                              // borderRadius: style.border_radius || "0px",
-                              borderColor: style.button_color || "black",
-                              borderRadius: "50%",
-                              width: "48px",
-                              height: "48px",
-                            }}
-                          >
-                            <div>
-                              <ArrowLeft
-                                style={{
-                                  color: style.button_text || "black",
-                                }}
-                                className="w-4 h-4 font-bold text-white"
-                              />
-                            </div>
-                          </Button>
-
-                          <Button
-                            className={`bg-black ${style.button_text
-                                ? `text-${style.button_text}`
-                                : "text-white"
-                              } rounded-2xl py-2 px-4 border-none cursor-pointer flex items-center`}
-                            style={{
-                              backgroundColor: style.button_color || "black",
-                            }}
-                          >
-                            <span
-                              className={`mr-2 ${style.text_size} ${style.text_font}`}
-                              style={{
-                                borderRadius: style.border_radius || "0px",
-                                color: style.button_text || "white",
-                              }}
-                            >
-                              Next
-                            </span>
-                            <ArrowRight
-                              style={{
-                                color: style.button_text || "white",
-                              }}
-                              className="w-4 h-4 font-bold text-white"
-                            />
-                          </Button>
-                        </CardFooter>
                       </Card>
                     </div>
                   </div>
                 </CardContent>
+
+                <CardFooter className="flex justify-between p-4 bg-gray-100 rounded-b-md">
+                  <Button
+                    className={`${style.button_text ? `text-${style.button_text}` : "text-black"
+                      } rounded-full py-2 px-4 border border-black cursor-pointer flex items-center`}
+                    style={{
+                      backgroundColor: style.button_color || "transparent", // Keep background transparent
+                    }}
+                  >
+                    <span
+                      className={`mr-2 ${style.text_size} ${style.text_font}`}
+                      style={{
+                        color: style.button_text || "black", // Ensure text color is black
+                      }}
+                    >
+                      <span className="mr-1 text-black">{'<'}</span> {/* Left icon in black */}
+                      Previous
+                    </span>
+                  </Button>
+
+                  <Button
+                    className={`rounded-full py-2 px-4 border-none cursor-pointer flex items-center ${style.button_text ? `text-${style.button_text}` : "text-white"
+                      } bg-black`}
+                    style={{
+                      backgroundColor: style.button_color || "black",
+                    }}
+                  >
+                    <span
+                      className={`mr-2 ${style.text_size} ${style.text_font} ${style.text_size}`} // Ensuring text size matches the previous button
+                      style={{
+                        color: style.button_text || "white",
+                      }}
+                    >
+                      Next
+                      <span className="ml-1">{'>'}</span> {/* Right icon */}
+                    </span>
+                  </Button>
+
+                </CardFooter>
               </Card>
+
             </div>
           ))}
 
@@ -362,7 +353,7 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
             {/* <div className=" flex flex-col w-full  bg-white box-border items-center justify-center p-5 rounded-lg">
              */}
             <div className=" flex flex-col w-full box-border items-center justify-center p-5 rounded-lg">
-              <div className="flex flex-col items-center justify-center text-center">
+              {/* <div className="flex flex-col items-center justify-center text-center">
                 <span className="text-xs">Add Page</span>
                 <button
                   onClick={addPage}
@@ -384,7 +375,56 @@ export function ContentStyleTab({ pages, setPages, style, setStyle }: any) {
                     />
                   </svg>
                 </button>
+              </div> */}
+              <div className="flex flex-col items-center justify-center text-center">
+                <div className="flex items-center">
+
+                  {/* <button
+                    onClick={addPage}
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-white p-2 cursor-pointer border-2 border-black"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="plus"
+                      className="svg-inline--fa fa-plus fa-lg w-6 h-6 fill-current"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                      />
+                    </svg>
+                  </button> */}
+                  
+                  <button
+                    onClick={addPage}
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-300 p-2 cursor-pointer" // Changed to grey background and removed border
+                  >
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="plus"
+                      className="svg-inline--fa fa-plus fa-lg w-6 h-6 fill-current"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                      />
+                    </svg>
+                  </button>
+
+                  <span className=" ml-2 text-base ">Add Page</span>
+                </div>
               </div>
+
             </div>
           </div>
         </div>

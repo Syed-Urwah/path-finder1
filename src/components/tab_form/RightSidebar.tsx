@@ -228,7 +228,7 @@ export default function RightSidebar({
         <TabsContent value="content">
           <div className="w-full border-b px-4 flex flex-col gap-5 pb-4 mt-2">
             <div className="flex flex-col gap-1">
-              <p className="font-medium">Type</p>
+              <p className="font-medium">Question Type</p>
               <Modal
                 button={
                   <Button className="bg-white text-black border border-light-grey hover:bg-light-grey flex items-center gap-2 transition-colors duration-200 px-2 py-1">
@@ -252,10 +252,24 @@ export default function RightSidebar({
               />
             </div>
 
+            <div className="flex items-center mt-2 space-x-2">
+              <Switch
+                checked={question?.require || false}
+                onCheckedChange={(checked) => {
+                  const updatedPages = [...pages];
+                  updatedPages[pageIndex].questions[questionIndex].require =
+                    checked;
+                  setPages(updatedPages);
+                }}
+              />
+              <p className="font-medium">Required</p>
+            </div>
+
             <div className="flex flex-col gap-1">
-              <p className="font-medium">Questions</p>
+              <p className="font-medium">Question</p>
               <div className="flex items-center gap-2">
                 <Input
+                className="rounded-lg" 
                   onChange={handleQuestionChange}
                   value={question?.name || ""}
                 />
@@ -303,17 +317,17 @@ export default function RightSidebar({
               ) : null}
             </div>
 
-            <div className="flex items-center space-x-2">
-              <Switch
-                checked={question?.require || false}
-                onCheckedChange={(checked) => {
-                  const updatedPages = [...pages];
-                  updatedPages[pageIndex].questions[questionIndex].require =
-                    checked;
-                  setPages(updatedPages);
-                }}
+
+            <div className="mt-2">
+              <Label htmlFor="description" className="block text-sm font-bold text-gray-700">
+                Description
+              </Label>
+              <textarea
+                id="description"
+                name="description"
+                className="bg-white mt-1 block w-full h-32 rounded-xl border border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                required
               />
-              <p className="font-medium">Required</p>
             </div>
 
             <div className="flex flex-col gap-3">
@@ -350,7 +364,7 @@ export default function RightSidebar({
                           ].answers[ansIndex].ans = e.target.value;
                           setPages(updatedPages);
                         }}
-                        className="p-2 border border-gray-300 rounded-md w-full"
+                        className="p-2 border border-gray-300 rounded-lg w-full"
                       />
                     </div>
 
@@ -415,7 +429,7 @@ export default function RightSidebar({
                 </div>
               ))}
 
-              <div className="flex-grow">
+              <div className="flex-grow rounded-lg">
                 <Input
                   placeholder="Add another answer"
                   value={newAnswer}
@@ -423,6 +437,31 @@ export default function RightSidebar({
                   onBlur={handleAddAnswer}
                 />
               </div>
+            </div>
+
+            <div className="flex items-center">
+              <button
+
+                className="flex items-center justify-center w-10 h-10 rounded-full p-2 cursor-pointer" // Changed to grey background and removed border
+              >
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fas"
+                  data-icon="plus"
+                  className="svg-inline--fa fa-plus fa-lg w-6 h-6 fill-current"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                  />
+                </svg>
+              </button>
+
+              <span className=" ml-2 ">Add Option</span>
             </div>
           </div>
         </TabsContent>
