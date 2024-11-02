@@ -42,12 +42,58 @@ export const columns: ColumnDef<Product>[] = [
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
-    cell: ({ row }) => <div>{row.getValue("product_name")}</div>,
+    cell: ({ row }) => (
+      <div className="flex items-center space-x-4">
+        <img
+          src="/images/profile-placeholder.png"
+          alt="User Icon"
+          className="w-12 h-12 rounded-full"
+        />
+        <span className="text-gray-800 text-lg font-semibold">
+          {row.getValue("product_name")}
+        </span>
+      </div>
+    ),
   },
   {
     accessorKey: "cross_sell",
     header: () => <div className="font-bold text-black pl-2">Cross-sells</div>,
-    cell: ({ row }) => <div>{row.getValue("cross_sell")}</div>,
+    cell: ({ row }) => (
+      <div className="flex space-x-4">
+        <img
+          src="/images/profile-placeholder.png"
+          alt="User Icon 2"
+          className="w-12 h-12 rounded-full"
+        />
+        <img
+          src="/images/profile-placeholder.png"
+          alt="User Icon 3"
+          className="w-12 h-12 rounded-full"
+        />
+        <img
+          src="/images/profile-placeholder.png"
+          alt="User Icon 4"
+          className="w-12 h-12 rounded-full"
+        />
+      </div>
+    ),
+  },
+  {
+    accessorKey: "action",
+    header: () => <div className="font-bold text-black pl-2">Cross-sells</div>,
+    cell: ({ row }) => (
+      <Link
+        key={row.id}
+        href={`${process.env.NEXT_PUBLIC_FE_URL}/dashboard/product/edit/${row.original.id}`}
+      >
+        <button
+          type="button"
+          className="text-gray-600 hover:text-blue-600" // Button color on hover
+        >
+          <Pencil />
+        </button>
+      </Link>
+    ),
   },
 ];
 
@@ -70,7 +116,7 @@ export function DataTableDemo() {
   };
 
   React.useEffect(() => {
-    // fetchProducts();
+    fetchProducts();
   }, []);
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -102,7 +148,6 @@ export function DataTableDemo() {
       ) : (
         <>
           <div className="rounded-md border">
-
             {/* <div className="flex items-center py-4">
               <div className="relative w-full max-w-sm pl-4">
                 <Input
@@ -134,7 +179,7 @@ export function DataTableDemo() {
 
             <div className="flex items-center py-4 w-full">
               <div className="relative flex-grow pr-4 ml-5">
-                <div className="relative w-1/2"> 
+                <div className="relative w-1/2">
                   <svg
                     className="absolute left-3 top-2 h-5 w-5 text-gray-500"
                     xmlns="http://www.w3.org/2000/svg"
@@ -150,33 +195,31 @@ export function DataTableDemo() {
                     placeholder="Search in products"
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
-                    className="pl-10 pr-4 py-2 border rounded-full shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full"  // Adjusted padding
+                    className="pl-10 pr-4 py-2 border rounded-full shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full" // Adjusted padding
                   />
                 </div>
               </div>
 
-
-              <Button className="bg-[#2450e4] flex items-center rounded-full px-4 py-2 mr-5">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 4v16m8-8H4"
-                  />
-                </svg>
-                New Product
-              </Button>
+              <Link href="/dashboard/product/create">
+                <Button className="bg-[#2450e4] flex items-center rounded-full px-4 py-2 mr-5">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                  New Product
+                </Button>
+              </Link>
             </div>
-
-
-
 
             <Table>
               <TableHeader>
@@ -187,9 +230,9 @@ export function DataTableDemo() {
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
                       </TableHead>
                     ))}
                   </TableRow>
@@ -198,19 +241,17 @@ export function DataTableDemo() {
               <TableBody>
                 {table.getRowModel().rows?.length ? (
                   table.getRowModel().rows.map((row) => (
-                    <TableRow key={row.id} style={{ cursor: "pointer" }}>
+                    <TableRow
+                      key={row.id}
+                      className="hover:bg-gray-100 cursor-pointer" // Add hover effect to entire row
+                    >
                       {row.getVisibleCells().map((cell) => (
-                        <Link
-                          key={cell.id}
-                          href={`${process.env.NEXT_PUBLIC_FE_URL}/dashboard/product/edit/${row.original.id}`}
-                        >
-                          <TableCell key={cell.id}>
-                            {flexRender(
-                              cell.column.columnDef.cell,
-                              cell.getContext()
-                            )}
-                          </TableCell>
-                        </Link>
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
                       ))}
                     </TableRow>
                   ))
@@ -220,52 +261,7 @@ export function DataTableDemo() {
                       colSpan={columns.length}
                       className="h-24 text-center"
                     >
-                      {/* No results. */}
-                      <div className="grid grid-cols-[auto_1fr_auto_1fr_auto] items-center bg-white p-6 rounded-lg shadow-lg gap-x-6">
-                        {/* First Circular Image with Text */}
-                        <div className="flex items-center space-x-4">
-                          <img
-                            src="/images/profile-placeholder.png"
-                            alt="User Icon"
-                            className="w-12 h-12 rounded-full"
-                          />
-                          <span className="text-gray-800 text-lg font-semibold">
-                            Mike Neilson
-                          </span>
-                        </div>
-
-                        {/* Spacer between elements */}
-                        <div></div>
-
-                        {/*  More Circular Images */}
-                        <div className="flex space-x-4">
-                          <img
-                            src="/images/profile-placeholder.png"
-                            alt="User Icon 2"
-                            className="w-12 h-12 rounded-full"
-                          />
-                          <img
-                            src="/images/profile-placeholder.png"
-                            alt="User Icon 3"
-                            className="w-12 h-12 rounded-full"
-                          />
-                          <img
-                            src="/images/profile-placeholder.png"
-                            alt="User Icon 4"
-                            className="w-12 h-12 rounded-full"
-                          />
-                        </div>
-
-                        {/* Spacer before Pen Icon */}
-                        <div></div>
-
-                        {/* Pen Icon */}
-                        <button type="button">
-                          <Pencil />
-                        </button>
-                      </div>
-
-
+                      No results.
                     </TableCell>
                   </TableRow>
                 )}
@@ -327,7 +323,6 @@ export function DataTableDemo() {
                 </svg>
               </Button>
             </div>
-
           </div>
         </>
       )}
