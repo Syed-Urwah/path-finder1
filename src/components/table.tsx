@@ -80,7 +80,7 @@ export const columns: ColumnDef<Product>[] = [
   },
   {
     accessorKey: "action",
-    header: () => <div className="font-bold text-black pl-2">Cross-sells</div>,
+    header: () => <div className="font-bold text-black pl-2"></div>,
     cell: ({ row }) => (
       <Link
         key={row.id}

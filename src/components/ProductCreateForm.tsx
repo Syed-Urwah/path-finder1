@@ -219,7 +219,7 @@ export default function ProductCreateForm({ product }: any) {
   return (
     <div className="flex justify-center items-start min-h-screen bg-gray-100 p-4">
       {/* Existing Form Container */}
-      <Card className="w-[500px] bg-white rounded-xl shadow-md">
+      <Card className="w-[700px] bg-white rounded-xl shadow-md">
         <CardContent className="p-6">
           <form onSubmit={formik.handleSubmit}>
             {/* <div className="mb-4">
@@ -458,9 +458,10 @@ export default function ProductCreateForm({ product }: any) {
       {/* New Additional Container with Gray Background and White Inner Container */}
       <div
         id="product_form"
-        className="w-[500px] h-[800px]  mx-4 flex flex-col  "
+        className="w-[700px] h-[800px]  mx-4 flex flex-col"
+        // className="bg-white w-[700px] h-[800px]  mx-4 flex flex-col  "
       >
-        <div className=" border-4 border-gray-200 p-4 rounded-xl w-[500px] ">
+        <div className=" border-4 border-gray-200 p-4 rounded-xl w-[700px] ">
           <div className="bg-white p-4 rounded-lg">
             <AspectRatio ratio={16 / 9} className="w-full h-full">
               {mainImage && (
@@ -493,6 +494,7 @@ export default function ProductCreateForm({ product }: any) {
           })}
         </div>
       </div>
+
     </div>
   );
 }

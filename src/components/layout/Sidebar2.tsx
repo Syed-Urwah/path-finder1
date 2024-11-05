@@ -6,8 +6,10 @@ import {
   Package,
   Users,
   LineChart,
+  Settings,
   BookCopy,
 } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -75,9 +77,8 @@ export default function Sidebar2() {
               >
                 <motion.div
                   className={`flex items-center gap-3 rounded-r-3xl px-2 lg:px-4 py-2 transition-all text-base relative overflow-hidden 
-            ${
-              item.isActive ? "text-green-500" : "text-gray-400"
-            } hover:text-black`}
+            ${item.isActive ? "text-green-500" : "text-gray-400"
+                    } hover:text-black`}
                 >
                   <item.icon className="h-6 w-6" />
                   {/* Show badge if there are notifications */}
@@ -93,7 +94,7 @@ export default function Sidebar2() {
 
           {/* DropdownMenu - positioned at the bottom */}
           <div className="flex flex-col items-center mb-4">
-            <DropdownMenu>
+            {/* <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="z-10 h-[40px] w-[40px] text-[18px] items-center hover:cursor-pointer">
                   <svg
@@ -121,7 +122,26 @@ export default function Sidebar2() {
                   Relaties
                 </DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenu> */}
+            {/*Settings Button */}
+
+            <button
+              className="p-1.5 border-none rounded-full mb-6  text-white cursor-pointer w-8 h-8 flex items-center justify-center"
+            >
+              <Settings className="w-24 h-24 text-black" />
+            </button>
+
+
+            {/* <div className="w-12 h-12 rounded-full overflow-hidden cursor-pointer hover:scale-110 transition-transform">
+              <img src="/images/profile-placeholder.png" className="w-full h-full object-cover" />
+            </div> */}
+
+            <button className="w-12 h-12 rounded-full overflow-hidden cursor-pointer hover:scale-110 transition-transform">
+              <img src="/images/profile-placeholder.png" className="w-full h-full object-cover" />
+            </button>
+
+
+
           </div>
         </div>
       </div>

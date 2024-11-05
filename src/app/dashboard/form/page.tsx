@@ -72,7 +72,9 @@ export default function Page() {
 
   return (
     <main className="flex flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-      <div className="rounded-md border bg-white">
+    <h1 className="text-3xl font-bold -mt-10 ml-3">Forms</h1>
+   
+      <div className="rounded-md border bg-white ">
         <div className="flex items-center py-4 w-full">
           <div className="relative flex-grow pr-4 ml-5">
             <div className="relative w-1/2">
@@ -271,5 +273,8 @@ export default function Page() {
         </div>
       </div>
     </main>
+
+
+
   );
 }

@@ -79,8 +79,11 @@ export default function Header({ setToogleSidebar }: any) {
   return (
     <>
       <header
-        className="bg-white rounded-2xl flex justify-between m-4 p-4 drop-shadow-md fixed z-40"
-        style={{ width: "calc(100vw - 114px)" }}
+        //  className="bg-white flex justify-between m-4 p-4 drop-shadow-md fixed z-40 w-full"
+        //   className="bg-white flex justify-between p-2 drop-shadow-md fixed z-40 w-full ml-2.5"
+        //  style={{ left: "57px" }} 
+        className="bg-white flex justify-between p-2 drop-shadow-md fixed z-40 w-full"
+        style={{ left: "68px" }} 
       >
         <div id="left" className="flex items-center">
           <NavigationMenu className="z-50">
@@ -229,7 +232,7 @@ export default function Header({ setToogleSidebar }: any) {
             </DropdownMenu>
           </div>
 
-          <div id="profile" className="flex items-center gap-2">
+          <div id="profile" className="flex items-center gap-2 mr-4">
             <Image
               src={ProfileImage}
               alt="profile"
@@ -237,7 +240,7 @@ export default function Header({ setToogleSidebar }: any) {
               className="rounded-full"
             />
             <div id="name">
-              <h2>Mike Nielsen</h2>
+              {/* <h2>Mike Nielsen</h2> */}
               <p>admin</p>
             </div>
           </div>
