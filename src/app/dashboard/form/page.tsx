@@ -157,7 +157,7 @@ export default function Page() {
                   d="M12 4v16m8-8H4"
                 />
               </svg>
-              New Product
+              Add New Form
             </Button>
           </Link>
         </div>
